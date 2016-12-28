@@ -1,0 +1,10 @@
+Alex|Allard|Hombre|Saravena|Liberal|null|0
+Américo|Cerquera|Hombre|Rozo|Mira|null|0
+Calixto|Arismendi|Hombre|Rozo|Mira|null|0
+Benjamín|Barazar|Hombre|Tulua|Polo Democratico|null|0
+Baltasar|Cuervo|Hombre|Zipaquirá|Cambio Radical|null|0
+Bautista|Aquininista|Hombre|Armenia|Mira|null|0
+Aitor|Cifuentes|Hombre|Cartagena|Liberal|null|0
+Álvaro|Britel|Hombre|Cartagena|Polo Democratico|null|0
+Alejandro|Brauer|Hombre|Buga|Conservador|null|0
+Aarón|Cazar|Hombre|Calarcá|Conservador|null|0
