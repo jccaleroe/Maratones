@@ -4,18 +4,11 @@ import java.io.*;
 import java.util.*;
 
 public class MyFilesClass {
-    public static void main(String[] args) {
-        ArrayList<String> lines = readFile("entrada.txt");
-        for (String string : lines) {
-            System.out.println(string);
-        }
-        writeFile(lines, "salida.txt");
-    }
 
     private static void writeFile(ArrayList<String> lines, String fileName) {
         BufferedWriter wr;
         File file = new File(fileName);
-        if (file.exists() == false) {
+        if ( !file.exists()) {
             System.err.println("Archivo " + fileName + " no existe");
             return;
         }
@@ -36,11 +29,11 @@ public class MyFilesClass {
     }
 
     private static ArrayList<String> readFile(String fileName) {
-        ArrayList<String> answer = new ArrayList<String>();
+        ArrayList<String> answer = new ArrayList<>();
 
         BufferedReader br = null;
         File file = new File(fileName);
-        if (file.exists() == false) {
+        if ( !file.exists()) {
             System.err.println("Archivo " + fileName + " no existe");
             return answer;
         }
@@ -58,7 +51,14 @@ public class MyFilesClass {
             System.err.println("Ups, un error: IOException ");
             e.printStackTrace();
         }
-
         return answer;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<String> lines = readFile("entrada.txt");
+        for (String string : lines)
+            System.out.println(string);
+
+        writeFile(lines, "salida.txt");
     }
 }
