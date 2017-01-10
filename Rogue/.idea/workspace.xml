@@ -2,10 +2,73 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80fd8994-4d6b-47b6-98ab-87d7214a4f59" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bonus/Data/emails.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/CuriousFleas.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Keys.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/Partido.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/entrada.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/gender.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/salida.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/BirthDay.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema10.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema5.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema7.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema9.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Client.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Movies.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Names.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Surnames.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/data.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/emails.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Bonus/Data/Partido.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Bonus/Data/entrada.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Bonus/Data/gender.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Bonus/Data/salida.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Administrator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Card.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Chair.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Cinema.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Client.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Controller.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Function.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/GUI.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Movie.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/MyDatabase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Person.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema10.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema4.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema5.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema6.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema7.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema8.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema9.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Client.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Names.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/data.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/emails.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/utilities/datesCreator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/utilities/emailsCreator.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Cinema/data/BirthDay.txt" afterPath="$PROJECT_DIR$/src/Bonus/Data/BirthDay.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Cinema/data/Movies.txt" afterPath="$PROJECT_DIR$/src/Bonus/Data/Movies.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Cinema/data/Surnames.txt" afterPath="$PROJECT_DIR$/src/Bonus/Data/Surnames.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bonus/MyFilesClass.java" afterPath="$PROJECT_DIR$/src/Bonus/MyFilesClass.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../input.txt" afterPath="$PROJECT_DIR$/../input.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/Names.txt" afterPath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/Names.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/Person.txt" afterPath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/Person.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Rogue/input.txt" afterPath="$PROJECT_DIR$/out/production/Rogue/input.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bonus/Data/Names.txt" afterPath="$PROJECT_DIR$/src/Bonus/Data/Names.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bonus/Data/Person.txt" afterPath="$PROJECT_DIR$/src/Bonus/Data/Person.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SevenSeas.java" afterPath="$PROJECT_DIR$/src/SevenSeas.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/input.txt" afterPath="$PROJECT_DIR$/src/input.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,25 +84,41 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MyFilesClass.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Bonus/MyFilesClass.java">
+      <file leaf-file-name="CuriousFleas.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CuriousFleas.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
-              <caret line="27" column="9" lean-forward="false" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-              <folding />
+              <caret line="122" column="0" lean-forward="true" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SevenSeas.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/SevenSeas.java">
+      <file leaf-file-name="Keys.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Keys.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="107" column="13" lean-forward="true" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
+            <state relative-caret-position="244">
+              <caret line="225" column="13" lean-forward="true" selection-start-line="225" selection-start-column="13" selection-end-line="225" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#704#705#0" expanded="true" />
-                <element signature="e#750#751#0" expanded="true" />
+                <element signature="e#1281#1282#0" expanded="true" />
+                <element signature="e#1340#1341#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="70" column="17" lean-forward="true" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1281#1282#0" expanded="true" />
+                <element signature="e#1340#1341#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,8 +127,8 @@
       <file leaf-file-name="input.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/input.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="1000" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1000" selection-end-column="0" />
+            <state relative-caret-position="289">
+              <caret line="23" column="1" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -74,6 +153,8 @@
       <find>import unal.applications.*;</find>
       <find>import unal.datastructures.*;</find>
       <find>SevenSeas</find>
+      <find>CuriousFleas</find>
+      <find>Keys</find>
     </findStrings>
     <replaceStrings>
       <replace>dog</replace>
@@ -131,8 +212,10 @@
         <option value="$PROJECT_DIR$/src/DataStructures/unal/datastructures/ArrayLinearListTaller1.java" />
         <option value="$PROJECT_DIR$/src/DataStructures/Nonameble.java" />
         <option value="$PROJECT_DIR$/src/Bonus/MyFilesClass.java" />
-        <option value="$PROJECT_DIR$/src/input.txt" />
         <option value="$PROJECT_DIR$/src/SevenSeas.java" />
+        <option value="$PROJECT_DIR$/src/CuriousFleas.java" />
+        <option value="$PROJECT_DIR$/src/input.txt" />
+        <option value="$PROJECT_DIR$/src/Keys.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
@@ -166,9 +249,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -195,26 +275,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rogue" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rogue" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bonus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -230,10 +295,55 @@
       <recent name="$PROJECT_DIR$/src/Cinema/data" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SevenSeas">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="SevenSeas" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="SevenSeas" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Rogue" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="CuriousFleas" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="CuriousFleas" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Rogue" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Rogue" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Keys" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="Keys" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -626,17 +736,26 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <list size="1">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Application.SevenSeas" />
+      <item index="1" class="java.lang.String" itemvalue="Application.CuriousFleas" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="3" class="java.lang.String" itemvalue="Application.Keys" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Application.SevenSeas" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Keys" />
+        <item index="2" class="java.lang.String" itemvalue="Application.CuriousFleas" />
+        <item index="3" class="java.lang.String" itemvalue="Application.SevenSeas" />
       </list>
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -649,11 +768,16 @@
       <workItem from="1482939084837" duration="51000" />
       <workItem from="1482939212488" duration="3417000" />
       <workItem from="1482954144097" duration="14825000" />
+      <workItem from="1483027962862" duration="7355000" />
+      <workItem from="1483035335328" duration="1384000" />
+      <workItem from="1483040613835" duration="5611000" />
+      <workItem from="1483548991923" duration="3349000" />
+      <workItem from="1483557907430" duration="14891000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21695000" />
+    <option name="totallyTimeSpent" value="54285000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -671,26 +795,26 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32817337" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.504644" sideWeight="0.5030303" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35448918" sideWeight="0.4969697" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36687306" sideWeight="0.4969697" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24772727" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26742426" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3993808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -714,9 +838,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Recreational Programming/Admin.java" />
-    <entry file="file://$PROJECT_DIR$/src/Recreational Programming/Arithmetic.java" />
-    <entry file="file://$PROJECT_DIR$/src/Recreational Programming/Assembler.java" />
     <entry file="file://$PROJECT_DIR$/src/Recreational Programming/Assembly" />
     <entry file="file://$PROJECT_DIR$/src/Sockets/rps/Client.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -911,38 +1032,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/input.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="1000" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1000" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Bonus/MyFilesClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
+        <state relative-caret-position="390">
           <caret line="27" column="9" lean-forward="false" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SevenSeas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="107" column="13" lean-forward="true" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
+        <state relative-caret-position="15">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#704#705#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/jdk1.8.0_111/src.zip!/java/util/function/Function.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="48" column="6" lean-forward="false" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CuriousFleas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="122" column="0" lean-forward="true" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/input.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="23" column="1" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Keys.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="225" column="13" lean-forward="true" selection-start-line="225" selection-start-column="13" selection-end-line="225" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1281#1282#0" expanded="true" />
+            <element signature="e#1340#1341#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="70" column="17" lean-forward="true" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1281#1282#0" expanded="true" />
+            <element signature="e#1340#1341#0" expanded="true" />
           </folding>
         </state>
       </provider>

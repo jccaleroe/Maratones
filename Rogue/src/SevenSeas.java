@@ -106,16 +106,6 @@ public class SevenSeas implements Comparable<SevenSeas>{
                     r2 += aux2;
                 }
             }
-//            if ( !ships2.add(tmp2) ) {
-//                crashes.add(tmp2);
-//                ships2.remove(tmp2);
-//            } else {
-//                aux2 = distance(tmp2);
-//                if (aux2 != 0)
-//                    r2 += aux2;
-//                else
-//                    ships2.remove(tmp2);
-//            }
         }
         ships = ships2;
         heuristic = r2;

@@ -2,13 +2,40 @@
 
 using namespace std;
 
-bool comparison(int a, int b){
-    return a >= b;
-}
+int v[6];
+int v2[6][2];
 
 int main(){
-    priority_queue<int, comparison> q;
-    q.push(10);
-    q.push(4);
-    q.push(8);
+    v2 = v;
+    v[0][0] = 1;
+    v[1][0] = 1;
+    v[2][0] = 1;
+    v[3][0] = 1;
+    v[4][0] = 1;
+    v[5][0] = 1;
+    v[0][1] = 10;
+    v[1][1] = 10;
+    v[2][1] = 10;
+    v[3][1] = 10;
+    v[4][1] = 10;
+    v[5][1] = 10;
+
+    v2[0][1] = 2;
+    v2[1][1] = 3;
+    v2[2][1] = 4;
+    v2[3][1] = 4;
+    v2[4][1] = 5;
+    v2[5][1] = 7;
+
+    for ( int i = 0; i < 6; i++)
+        cout << v[i][0] << " " << v[i][0] << " " << v[i][1] << " " << v[i][1] << " " << endl;
+
+    cout << endl;
+    for ( int i = 0; i < 6; i++)
+        cout << v2[i][0] << " " << v2[i][0] << " " << v2[i][1] << " " << v2[i][1]  << " " << endl;
+
+    cout << endl;
+    for ( int i = 0; i < 6; i++)
+        cout << v[i][0] << " " << v[i][0] << " " << v[i][1] << " " << v[i][1] << " " << endl;
+
 }
