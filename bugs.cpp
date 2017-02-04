@@ -2,43 +2,34 @@
 
 using namespace std;
 
-int bugs;
+vector< vector<int> > graph;
+bool seen[2000];
+bool colors[2000];
 
-vector<vector<int>> matrix (2000, vector<int> (2000));
+bool dfs (int source){
+    if ( seen[source] )
+        return true;
 
-bool disjunction(int I, int J){
-    for (int i = 0; i < bugs; i++){
-        if ( matrix[I][i] == 1 && matrix[J][i] == 1)
-            return false;
+    stack<int> s;
+    s.push(source);
+    seen[source] = 1;
+    int u, neighbor;
+    bool color = 0;
+    colors[source] = color;
 
-        if ( matrix[I][i] == 1)
-            matrix[J][i] = -1;
-
-        if ( matrix[J][i] == 1)
-            matrix[I][i] = -1;
-    }
-
-    return true;
-}
-
-bool disjunction2(int I, int J){
-    for (int i = 0; i < bugs; i++)
-        if ( matrix[I][i] == -matrix[J][i] && matrix[I][i] != 0)
-            return false;
-    return true;
-}
-
-bool inference(){
-    for (int i = 0; i < bugs; i++){
-        for (int j = i+1; j < bugs; j++){
-            if ( matrix[i][j] == 1){
-                if ( !disjunction(i, j) )
-                    return false;
+    while ( !s.empty() ){
+        u = s.top();
+        s.pop();
+        for ( int i = 0; i < graph[u].size(); i++ ){
+            neighbor = graph[u][i];
+            if ( !seen[neighbor] ){
+                seen[neighbor] = 1;
+                colors[neighbor] = !colors[u];
+                s.push( neighbor );
             }
-            if ( matrix[i][j] == -1){
-                if ( !disjunction2(i, j) )
+            else
+                if ( colors[neighbor] == colors[u] )
                     return false;
-            }
         }
     }
     return true;
@@ -51,35 +42,38 @@ int main(){
         freopen("input.txt", "r", stdin);
     #endif // LOCAL
 
-    int cases, I = 1, interactions, a, b, i, j;
+    int T, I = 1, bugs, interactions, a, b;
 
-    cin >> cases;
-    while (true){
+    cin >> T;
+    while (T > 0){
+        T--;
         cin >> bugs >> interactions;
-        for (i = 0; i < interactions; i++){
+        graph.assign(bugs, vector<int>());
+
+        for ( int i = 0; i < bugs; i++ ){
+            seen[i] = 0;
+            colors[i] = 0;
+        }
+
+        for ( int i = 0; i < interactions; i++ ){
             cin >> a >> b;
-            matrix[a-1][b-1] = 1;
-            matrix[b-1][a-1] = 1;
+            graph[a-1].push_back(b-1);
+            graph[b-1].push_back(a-1);
+        }
+
+        bool flag = true;
+        for ( int i = 0; i < bugs; i++ ){
+            if ( !dfs(i) ){
+                flag = false;
+                break;
+            }
         }
 
         cout << "Scenario #" << I << ":\n";
-        if ( inference() )
+        if ( flag )
             cout << "No suspicious bugs found!\n";
         else
             cout << "Suspicious bugs found!\n";
-
-//        for (int i = 0; i < bugs; i++){
-//            for (int j = 0; j < bugs; j++){
-//                cout << matrix[i][j] << " ";
-//            }
-//            cout << endl;
-//        }
-        I += 1;
-        if ( I > cases )
-            break;
-
-        for (i = 0; i < bugs; i++)
-            for (j = 0; j < bugs; j++)
-                matrix[i][j] = 0;
+        I++;
     }
 }

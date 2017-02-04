@@ -1,75 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="80fd8994-4d6b-47b6-98ab-87d7214a4f59" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Bonus/Data/emails.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/CuriousFleas.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Keys.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/Partido.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/entrada.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/gender.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/salida.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/BirthDay.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema10.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema6.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema7.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema8.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Cinema9.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Client.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Movies.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Names.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/Surnames.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/data.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/Cinema/data/emails.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Bonus/Data/Partido.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Bonus/Data/entrada.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Bonus/Data/gender.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Bonus/Data/salida.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Administrator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Card.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Chair.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Cinema.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Client.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Controller.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Function.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/GUI.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Movie.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/MyDatabase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/classProject/Person.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema10.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema6.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema7.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema8.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Cinema9.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Client.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/Names.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/data.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/data/emails.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/utilities/datesCreator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Cinema/utilities/emailsCreator.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Cinema/data/BirthDay.txt" afterPath="$PROJECT_DIR$/src/Bonus/Data/BirthDay.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Cinema/data/Movies.txt" afterPath="$PROJECT_DIR$/src/Bonus/Data/Movies.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Cinema/data/Surnames.txt" afterPath="$PROJECT_DIR$/src/Bonus/Data/Surnames.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/Names.txt" afterPath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/Names.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/Person.txt" afterPath="$PROJECT_DIR$/out/production/Rogue/Bonus/Data/Person.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Rogue/input.txt" afterPath="$PROJECT_DIR$/out/production/Rogue/input.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bonus/Data/Names.txt" afterPath="$PROJECT_DIR$/src/Bonus/Data/Names.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bonus/Data/Person.txt" afterPath="$PROJECT_DIR$/src/Bonus/Data/Person.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SevenSeas.java" afterPath="$PROJECT_DIR$/src/SevenSeas.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/input.txt" afterPath="$PROJECT_DIR$/src/input.txt" />
-    </list>
+    <list default="true" id="80fd8994-4d6b-47b6-98ab-87d7214a4f59" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -87,8 +19,8 @@
       <file leaf-file-name="CuriousFleas.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CuriousFleas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="122" column="0" lean-forward="true" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+            <state relative-caret-position="1755">
+              <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,8 +31,8 @@
       <file leaf-file-name="Keys.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Keys.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="225" column="13" lean-forward="true" selection-start-line="225" selection-start-column="13" selection-end-line="225" selection-end-column="13" />
+            <state relative-caret-position="3330">
+              <caret line="225" column="13" lean-forward="false" selection-start-line="225" selection-start-column="13" selection-end-line="225" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1281#1282#0" expanded="true" />
@@ -114,7 +46,7 @@
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
-              <caret line="70" column="17" lean-forward="true" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+              <caret line="70" column="17" lean-forward="false" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1281#1282#0" expanded="true" />
@@ -127,8 +59,8 @@
       <file leaf-file-name="input.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/input.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="23" column="1" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
+            <state relative-caret-position="345">
+              <caret line="23" column="1" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -249,6 +181,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -277,9 +212,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -773,11 +705,12 @@
       <workItem from="1483040613835" duration="5611000" />
       <workItem from="1483548991923" duration="3349000" />
       <workItem from="1483557907430" duration="14891000" />
+      <workItem from="1486048661186" duration="7000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54285000" />
+    <option name="totallyTimeSpent" value="54292000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -790,12 +723,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32817337" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -807,7 +739,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26742426" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2719697" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -819,6 +751,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32817337" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1053,14 +986,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
           <caret line="48" column="6" lean-forward="false" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CuriousFleas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="122" column="0" lean-forward="true" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+        <state relative-caret-position="1755">
+          <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1069,16 +1001,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/input.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="23" column="1" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
+        <state relative-caret-position="345">
+          <caret line="23" column="1" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Keys.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="225" column="13" lean-forward="true" selection-start-line="225" selection-start-column="13" selection-end-line="225" selection-end-column="13" />
+        <state relative-caret-position="3330">
+          <caret line="225" column="13" lean-forward="false" selection-start-line="225" selection-start-column="13" selection-end-line="225" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1281#1282#0" expanded="true" />
@@ -1090,7 +1022,7 @@
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="70" column="17" lean-forward="true" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+          <caret line="70" column="17" lean-forward="false" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1281#1282#0" expanded="true" />
