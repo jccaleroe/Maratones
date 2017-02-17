@@ -1,24 +1,4 @@
-ab
-bc
-aA
-aN
-Rb
-cB
-0
-aA
-bB
-Cc
-0
-aA
-aZ
-0
-aA
-bB
-cC
-xX
-yY
-ax
-xb
-by
-yc
-0
+3
+1033 8179
+1373 8017
+1033 1033
