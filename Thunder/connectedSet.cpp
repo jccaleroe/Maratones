@@ -64,13 +64,13 @@ void Graph::fillOrder(int v, bool visited[], stack<int> &Stack) {
 
 void Graph::printSCCs() {
     stack<int> Stack;
-
     bool *visited = new bool[V];
+
     for(int i = 0; i < V; i++)
         visited[i] = false;
 
     for(int i = 0; i < V; i++)
-        if(visited[i] == false)
+        if(!visited[i])
             fillOrder(i, visited, Stack);
 
     Graph gr = getTranspose();
@@ -78,12 +78,12 @@ void Graph::printSCCs() {
     for(int i = 0; i < V; i++)
         visited[i] = false;
 
-    while (Stack.empty() == false) {
+    while (!Stack.empty()) {
 
         int v = Stack.top();
         Stack.pop();
 
-        if (visited[v] == false) {
+        if (!visited[v]) {
             gr.DFSUtil(v, visited);
             cout << endl;
         }
