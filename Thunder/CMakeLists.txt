@@ -3,5 +3,5 @@ project(Thunder)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES Westeros.cpp)
+set(SOURCE_FILES FunnyGame.cpp)
 add_executable(Thunder ${SOURCE_FILES})
