@@ -3,5 +3,5 @@ project(Thunder)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES FunnyGame.cpp)
+set(SOURCE_FILES )
 add_executable(Thunder ${SOURCE_FILES})
