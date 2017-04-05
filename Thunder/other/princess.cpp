@@ -5,9 +5,6 @@ using namespace std;
 typedef pair<long long, bool> lb;
 
 int main(){
-    #ifdef LOCAL
-    freopen("input.txt", "r", stdin);
-    #endif
     cin.tie(0);
     ios_base::sync_with_stdio(0);
     int T;

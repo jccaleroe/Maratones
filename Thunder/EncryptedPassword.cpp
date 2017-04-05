@@ -20,16 +20,6 @@ bool isEqual(){
     return true;
 }
 
-//void printA(){
-//    for(int i = 0; i < MAX; i++)
-//        cout << countP[i] << " ";
-//    cout << endl;
-//
-//    for(int i = 0; i < MAX; i++)
-//        cout << countW[i] << " ";
-//    cout << endl;
-//}
-
 bool check(){
     if(isEqual())
         return true;

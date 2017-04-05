@@ -1,4 +1,3 @@
-//You are given an array of N elements, which are initially all 0. After that you will be given C commands. They are:
 //0 p q v - you have to add v to all numbers in the range of p to q (inclusive), where p and q are two indexes of the array.
 //1 p q - output a line containing a single integer which is the sum of all the array elements between p and q (inclusive)
 

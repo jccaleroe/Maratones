@@ -7,7 +7,6 @@ const double EPS = 10e-10;
 double fabs( const double x ){
    if( x >= 0 )
        return x;
-
    return -x;
 }
 
