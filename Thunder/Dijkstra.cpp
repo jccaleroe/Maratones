@@ -50,7 +50,7 @@ void shortestPath(int src){
             }
         }
     }
-    printf("Vertex   Distance from Source\n");
+    printf("Vertex Distance from Source\n");
     for (int i = 0; i < 9; ++i)
         printf("%d \t\t %d\n", i, dist[i]);
 }
@@ -73,7 +73,7 @@ int main(){
 
     shortestPath(0);
 
-    priority_queue<int, vector<int>, MyComparator > pq(MyComparator(false));
+    priority_queue<int, vector<int>, MyComparator > pq(MyComparator(true));
     //priority_queue<int, vector<int>, grater<int> > pq;
     pq.push(4);
     pq.push(8);

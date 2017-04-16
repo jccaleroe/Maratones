@@ -48,7 +48,6 @@ int main(){
             q.pop();
 
             if (visited.count(u)) continue;
-
             visited.insert(u);
             total += w;
             vector<edge> &vecinos = g[u];
