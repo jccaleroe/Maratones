@@ -14,7 +14,7 @@ void multiply(ll F[2][2], ll M[2][2]){
     F[1][1] = w;
 }
 
-void power(ll F[2][2], int n){
+void power(ll F[2][2], ll n){
     if(n == 0 || n == 1)
         return;
     power(F, n/2);
@@ -24,7 +24,7 @@ void power(ll F[2][2], int n){
         multiply(F, M);
 }
 
-ll fibbo(int n){
+ll fibbo(ll n){
     if(n == 0)
         return 0;
     if(n == 1)

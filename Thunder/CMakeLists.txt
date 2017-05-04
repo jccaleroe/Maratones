@@ -3,5 +3,5 @@ project(Thunder)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES other/GinkoNumbers.cpp)
+set(SOURCE_FILES other/Boredom.cpp)
 add_executable(Thunder ${SOURCE_FILES})

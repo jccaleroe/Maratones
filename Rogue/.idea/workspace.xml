@@ -2,20 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80fd8994-4d6b-47b6-98ab-87d7214a4f59" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/PancakeFlipper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Thunder/other/Boredom.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Thunder/other/Exams.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Thunder/other/Team.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Thunder/other/TidyNumbers.cpp" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Rogue/input.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Adventure.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/input.txt" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Template.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Thunder/FindAPath.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Thunder/GameOfLife.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Thunder/PartnersAndTasks.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SevenSeas.java" afterPath="$PROJECT_DIR$/src/SevenSeas.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Thunder/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Thunder/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Thunder/CMakeLists.txt" afterPath="$PROJECT_DIR$/../Thunder/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Thunder/Dijkstra.cpp" afterPath="$PROJECT_DIR$/../Thunder/Dijkstra.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Thunder/MaximumBipartiteMatching.cpp" afterPath="$PROJECT_DIR$/../Thunder/MaximumBipartiteMatching.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Thunder/other/TangledInCables.cpp" afterPath="$PROJECT_DIR$/../Thunder/other/TangledInCables.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,18 +28,18 @@
       <file leaf-file-name="CuriousFleas.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CuriousFleas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1965">
+            <state relative-caret-position="15">
               <caret line="136" column="31" lean-forward="false" selection-start-line="136" selection-start-column="31" selection-end-line="136" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PancakeFlipper.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/PancakeFlipper.java">
+      <file leaf-file-name="Template.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Template.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="13" column="58" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -56,9 +50,11 @@
       <file leaf-file-name="SevenSeas.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SevenSeas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2775">
-              <caret line="188" column="46" lean-forward="false" selection-start-line="183" selection-start-column="8" selection-end-line="188" selection-end-column="46" />
-              <folding />
+            <state relative-caret-position="22">
+              <caret line="182" column="65" lean-forward="false" selection-start-line="182" selection-start-column="47" selection-end-line="182" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -167,7 +163,6 @@
         <option value="$PROJECT_DIR$/src/DataStructures/unal/datastructures/ArrayLinearListTaller1.java" />
         <option value="$PROJECT_DIR$/src/DataStructures/Nonameble.java" />
         <option value="$PROJECT_DIR$/src/Bonus/MyFilesClass.java" />
-        <option value="$PROJECT_DIR$/src/SevenSeas.java" />
         <option value="$PROJECT_DIR$/src/CuriousFleas.java" />
         <option value="$PROJECT_DIR$/src/Keys.java" />
         <option value="$PROJECT_DIR$/src/PrimePath.java" />
@@ -177,6 +172,8 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/CanYouDoIt.java" />
         <option value="$PROJECT_DIR$/src/PancakeFlipper.java" />
+        <option value="$PROJECT_DIR$/src/Template.java" />
+        <option value="$PROJECT_DIR$/src/SevenSeas.java" />
       </list>
     </option>
   </component>
@@ -209,8 +206,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -240,6 +235,8 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -768,11 +765,12 @@
       <workItem from="1491626702976" duration="878000" />
       <workItem from="1491662382847" duration="1980000" />
       <workItem from="1492217838546" duration="661000" />
+      <workItem from="1492541690000" duration="2958000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88519000" />
+    <option name="totallyTimeSpent" value="91477000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -801,7 +799,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22121212" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.225" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -836,7 +834,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Recreational Programming/data" />
     <entry file="file://$PROJECT_DIR$/src/Recreational Programming/CajeroV.java" />
     <entry file="file://$PROJECT_DIR$/src/Recreational Programming/DiscreteMathematics.java" />
     <entry file="file://$PROJECT_DIR$/src/Recreational Programming/Exam2.java" />
@@ -1069,26 +1066,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SevenSeas.java">
+    <entry file="file://$PROJECT_DIR$/src/PancakeFlipper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2775">
-          <caret line="188" column="46" lean-forward="false" selection-start-line="183" selection-start-column="8" selection-end-line="188" selection-end-column="46" />
-          <folding />
+        <state relative-caret-position="292">
+          <caret line="48" column="31" lean-forward="true" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CuriousFleas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1965">
+        <state relative-caret-position="15">
           <caret line="136" column="31" lean-forward="false" selection-start-line="136" selection-start-column="31" selection-end-line="136" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PancakeFlipper.java">
+    <entry file="file://$PROJECT_DIR$/src/SevenSeas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="22">
+          <caret line="182" column="65" lean-forward="false" selection-start-line="182" selection-start-column="47" selection-end-line="182" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="58" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
