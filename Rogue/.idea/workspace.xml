@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80fd8994-4d6b-47b6-98ab-87d7214a4f59" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Wooombat/list_igac.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Wooombat/list_locations1.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Wooombat/list_locations2.txt" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Wooombat/City.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Wooombat/CityMatcher.java" afterPath="$PROJECT_DIR$/src/Wooombat/CityMatcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Wooombat/Hungarian.java" afterPath="$PROJECT_DIR$/src/Wooombat/Hungarian.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Wooombat/list_igac.txt" afterPath="$PROJECT_DIR$/src/Wooombat/list_igac.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Wooombat/list_locations1.txt" afterPath="$PROJECT_DIR$/src/Wooombat/list_locations1.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,10 +25,12 @@
       <file leaf-file-name="CityMatcher.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Wooombat/CityMatcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="68" column="84" lean-forward="false" selection-start-line="68" selection-start-column="84" selection-end-line="68" selection-end-column="84" />
+            <state relative-caret-position="-433">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#29013#29014#0" expanded="true" />
+                <element signature="e#29053#29054#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -38,8 +39,18 @@
       <file leaf-file-name="list_locations1.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Wooombat/list_locations1.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+            <state relative-caret-position="0">
+              <caret line="0" column="13290" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="13290" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list_igac.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Wooombat/list_igac.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="13939" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="13939" />
               <folding />
             </state>
           </provider>
@@ -48,53 +59,8 @@
       <file leaf-file-name="Hungarian.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Wooombat/Hungarian.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2190">
-              <caret line="146" column="0" lean-forward="false" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyFilesClass.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Bonus/MyFilesClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="43" column="32" lean-forward="false" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="City.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Wooombat/City.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-              <folding>
-                <element signature="e#153#154#0" expanded="true" />
-                <element signature="e#178#179#0" expanded="true" />
-                <element signature="e#230#231#0" expanded="true" />
-                <element signature="e#265#266#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="input.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/input.txt">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="9" selection-end-column="8" />
+              <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -125,6 +91,11 @@
       <find>Main</find>
       <find>max</find>
       <find>min</find>
+      <find>san an</find>
+      <find>Zona Bananera (PRADO - SEVILLA)</find>
+      <find>|||</find>
+      <find>Zona Bananera (PRADO - SEVILLA)</find>
+      <find>\n</find>
     </findStrings>
     <replaceStrings>
       <replace>dog</replace>
@@ -201,6 +172,8 @@
         <option value="$PROJECT_DIR$/src/Other/CityPosLocator.java" />
         <option value="$PROJECT_DIR$/src/Other/CityMatcher.java" />
         <option value="$PROJECT_DIR$/src/Wooombat/Hungarian.java" />
+        <option value="$PROJECT_DIR$/src/Wooombat/list_locations1.txt" />
+        <option value="$PROJECT_DIR$/src/Wooombat/list_igac.txt" />
         <option value="$PROJECT_DIR$/src/Wooombat/CityMatcher.java" />
       </list>
     </option>
@@ -854,12 +827,12 @@
       <workItem from="1491662382847" duration="1980000" />
       <workItem from="1492217838546" duration="661000" />
       <workItem from="1492541690000" duration="2958000" />
-      <workItem from="1497630534225" duration="11278000" />
+      <workItem from="1497630534225" duration="13779000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102755000" />
+    <option name="totallyTimeSpent" value="105256000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -882,13 +855,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.504644" sideWeight="0.5030303" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="1.0" sideWeight="0.4969697" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35897437" sideWeight="0.4969697" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32852563" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23257576" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23257576" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32852563" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1093,14 +1066,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/input.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="9" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Adventure.java" />
     <entry file="file://$PROJECT_DIR$/src/CanYouDoIt.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1161,12 +1126,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-          <folding>
-            <element signature="e#153#154#0" expanded="true" />
-            <element signature="e#178#179#0" expanded="true" />
-            <element signature="e#230#231#0" expanded="true" />
-            <element signature="e#265#266#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1174,14 +1134,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
           <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Wooombat/Hungarian.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2190">
-          <caret line="146" column="0" lean-forward="false" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1212,14 +1164,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Wooombat/list_igac.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Wooombat/list_locations2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1228,20 +1172,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/input.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="9" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Wooombat/Hungarian.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Wooombat/list_locations1.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        <state relative-caret-position="0">
+          <caret line="0" column="13290" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="13290" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Wooombat/list_igac.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="13939" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="13939" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Wooombat/CityMatcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="68" column="84" lean-forward="false" selection-start-line="68" selection-start-column="84" selection-end-line="68" selection-end-column="84" />
+        <state relative-caret-position="-433">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#29013#29014#0" expanded="true" />
+            <element signature="e#29053#29054#0" expanded="true" />
           </folding>
         </state>
       </provider>

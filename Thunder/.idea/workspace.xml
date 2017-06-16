@@ -12,10 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1147d587-b061-43ae-be7a-802eb8178ff6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Rogue/.idea/libraries/fuzzywuzzy_1_1_7.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Rogue/.idea/libraries/fuzzywuzzy_1_1_7_javadoc.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Rogue/src/Wooombat/City.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Rogue/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Rogue/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Rogue/Rogue.iml" afterPath="$PROJECT_DIR$/../Rogue/Rogue.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Rogue/src/Wooombat/CityMatcher.java" afterPath="$PROJECT_DIR$/../Rogue/src/Wooombat/CityMatcher.java" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -539,12 +538,12 @@
       <workItem from="1493759870816" duration="7658000" />
       <workItem from="1493867903382" duration="1323000" />
       <workItem from="1493914793893" duration="4033000" />
-      <workItem from="1497648870805" duration="1780000" />
+      <workItem from="1497648870805" duration="2113000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="343472000" />
+    <option name="totallyTimeSpent" value="343805000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1366" height="772" extended-state="0" />
