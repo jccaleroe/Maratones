@@ -3,22 +3,21 @@ package Wooombat;
 
 import java.util.Arrays;
 
-public class Hungarian {
+class Hungarian {
 
-    private final int N = 2000;
+    private static final int N = 2000;
+    private static int[][] cost = new int[N][N]; //cost matrix
+    private static int n, max_match; //n workers and n jobs
+    private static int[] lx = new int[N], ly = new int [N]; //labels of X and Y parts
+    private static int[] xy = new int[N]; //xy[x] - vertex that is matched with x,
+    private static int[] yx = new int[N]; //yx[y] - vertex that is matched with y
+    private static boolean[] S = new boolean[N], T = new boolean[N]; //sets S and T in algorithm
+    private static int[] slack = new int[N]; //as in the algorithm description
+    private static int[] slackx = new int[N]; //slackx[y] such a vertex, that l(slackx[y]) + l(y) - w(slackx[y],y) = slack[y]
+    private static int[] previo = new int[N]; //array for memorizing alternating paths
 
-    int[][] cost = new int[N][N]; //cost matrix
-    int n, max_match; //n workers and n jobs
-    int[] lx = new int[N], ly = new int [N]; //labels of X and Y parts
-    int[] xy = new int[N]; //xy[x] - vertex that is matched with x,
-    int[] yx = new int[N]; //yx[y] - vertex that is matched with y
-    boolean[] S = new boolean[N], T = new boolean[N]; //sets S and T in algorithm
-    int[] slack = new int[N]; //as in the algorithm description
-    int[] slackx = new int[N]; //slackx[y] such a vertex, that l(slackx[y]) + l(y) - w(slackx[y],y) = slack[y]
-    int[] previo = new int[N]; //array for memorizing alternating paths
 
-
-    void initLabels() {
+    private static void initLabels() {
         Arrays.fill(lx, 0);
         Arrays.fill(ly, 0);
         for (int x = 0; x < n; x++)
@@ -26,7 +25,7 @@ public class Hungarian {
                 lx[x] = Math.max(lx[x], cost[x][y]);
     }
 
-    void updateLabels() {
+    private static void updateLabels() {
         int x, y, delta = Integer.MAX_VALUE; //init delta as infinity
         for (y = 0; y < n; y++) //calculate delta using slack
             if (!T[y])
@@ -42,7 +41,7 @@ public class Hungarian {
 
     //x - current vertex,prevx - vertex from X before x in the alternating path,
     //so we add edges (prevx, xy[x]), (xy[x], x)/
-    void add_to_tree(int x, int prevx) {
+    private static void add_to_tree(int x, int prevx) {
         S[x] = true; //add x to S
         previo[x] = prevx; //we need this when augmenting
         for (int y = 0; y < n; y++) //update slacks, because we add new vertex to S
@@ -52,7 +51,7 @@ public class Hungarian {
             }
     }
 
-    void augment() //main function of the algorithm
+    private static void augment() //main function of the algorithm
     {
         if (max_match == n) return; //check wether matching is already perfect
         int x, y, root = 0; //just counters and root vertex
@@ -138,19 +137,18 @@ public class Hungarian {
         }
     }//end of augment() function
 
-    int[][] hungarian() {
+    private static int[] hungarian() {
         //double ret = 1; //weight of the optimal matching
         max_match = 0; //number of vertices in current matching
         Arrays.fill(xy, -1);
         Arrays.fill(yx, -1);
         initLabels(); //step 0
         augment(); //steps 1-3
-        //for (int x = 0; x < n; x++) //forming answer there
-            //ret += cost[x][xy[x]];
-        return cost;
+
+        return xy;
     }
 
-    int[][] go(int[][] matrix){
+    static int[] go(int[][] matrix){
         n = matrix.length;
         for (int i = 0; i < n; i++)
             System.arraycopy(matrix[i], 0, cost[i], 0, n);
