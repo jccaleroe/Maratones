@@ -7,11 +7,14 @@
 #include <algorithm>
 #include <set>
 #include <map>
+
 using namespace std;
 
 vector<vector<pair<int, int> > > graph;
 vector<int> answer, disc, parent, low;
 vector<bool> visited;
+
+//These are for machete
 set<int> nodes;
 set<int> banned;
 map<int, int> m;
@@ -40,6 +43,7 @@ void dfs(int u) {
 
 int main(){
     cin.tie(0);
+	cout.tie(0);
     ios_base::sync_with_stdio(0);
     int T, a, b, tmp;
     cin >> T;
