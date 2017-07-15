@@ -1,5 +1,5 @@
 /**
- * Node class used by linked structures.
+ * JsonNode class used by linked structures.
  * This class and its fields are
  * visible only within the package dataStructures.
  */
