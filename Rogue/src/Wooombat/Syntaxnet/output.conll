@@ -1,73 +1,40 @@
-/usr/lib/jvm/jdk1.8.0_131/bin/java -javaagent:/home/juan/idea-IU-171.4694.23/lib/idea_rt.jar=39033:/home/juan/idea-IU-171.4694.23/bin -Dfile.encoding=UTF-8 -classpath /usr/lib/jvm/jdk1.8.0_131/jre/lib/charsets.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/deploy.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/ext/cldrdata.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/ext/dnsns.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/ext/jaccess.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/ext/jfxrt.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/ext/localedata.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/ext/nashorn.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/ext/sunec.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/ext/sunjce_provider.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/ext/sunpkcs11.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/ext/zipfs.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/javaws.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/jce.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/jfr.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/jfxswt.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/jsse.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/management-agent.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/plugin.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/resources.jar:/usr/lib/jvm/jdk1.8.0_131/jre/lib/rt.jar:/home/juan/Documents/Maratones/Rogue/out/production/Rogue:/home/juan/other/fuzzywuzzy-1.1.7.jar:/home/juan/other/json-20170516.jar:/home/juan/other/gson-2.8.1.jar Wooombat.Syntaxnet.Syntaxnet
-1	Hola	_	ADJ	_	fPOS=ADP++	2	amod	_	_
-2	mundo	_	NOUN	_	Gender=Masc|Number=Sing|fPOS=NOUN++	6	nmod	_	_
-3	.	_	PUNCT	_	fPOS=PUNCT++	2	punct	_	_
-4	La	_	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art|fPOS=DET++	5	det	_	_
-5	vaca	_	NOUN	_	Gender=Fem|Number=Sing|fPOS=NOUN++	6	nsubj	_	_
-6	juega	_	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=VERB++	0	ROOT	_	_
-7	futbol	_	NOUN	_	Gender=Masc|Number=Sing|fPOS=NOUN++	6	dobj	_	_
-8	y	_	CONJ	_	fPOS=CONJ++	6	cc	_	_
-9	se	_	PRON	_	Case=Acc,Dat|Person=3|PrepCase=Npr|PronType=Prs|Reflex=Yes|fPOS=PRON++	10	iobj	_	_
-10	lastima	_	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=VERB++	6	conj	_	_
-11	mientras	_	SCONJ	_	fPOS=SCONJ++	13	mark	_	_
-12	Anita	_	PROPN	_	fPOS=PROPN++	13	nsubj	_	_
-13	lava	_	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=VERB++	10	advcl	_	_
-14	la	_	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art|fPOS=DET++	15	det	_	_
-15	tina	_	NOUN	_	Gender=Fem|Number=Sing|fPOS=NOUN++	13	dobj	_	_
-16	.	_	PUNCT	_	fPOS=PUNCT++	6	punct	_	_
-17	Queremos	_	VERB	_	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin|fPOS=VERB++	6	parataxis	_	_
-18	que	_	SCONJ	_	fPOS=SCONJ++	22	mark	_	_
-19	la	_	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art|fPOS=DET++	20	det	_	_
-20	vaca	_	NOUN	_	Gender=Fem|Number=Sing|fPOS=NOUN++	22	nsubj	_	_
-21	se	_	PRON	_	Case=Acc,Dat|Person=3|PrepCase=Npr|PronType=Prs|Reflex=Yes|fPOS=PRON++	22	iobj	_	_
-22	mejore	_	VERB	_	VerbForm=Fin|fPOS=VERB++	17	ccomp	_	_
-23	y	_	CONJ	_	fPOS=CONJ++	22	cc	_	_
-24	Anita	_	PROPN	_	fPOS=PROPN++	26	nsubj	_	_
-25	le	_	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs|fPOS=PRON++	26	iobj	_	_
-26	ayude	_	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=VERB++	22	conj	_	_
-27	.	_	PUNCT	_	fPOS=PUNCT++	17	punct	_	_
-28	Se	_	PRON	_	Case=Acc,Dat|Person=3|PrepCase=Npr|PronType=Prs|Reflex=Yes|fPOS=PRON++	29	iobj	_	_
-29	espera	_	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=VERB++	17	parataxis	_	_
-30	que	_	SCONJ	_	fPOS=SCONJ++	34	mark	_	_
-31	la	_	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art|fPOS=DET++	32	det	_	_
-32	vaca	_	NOUN	_	Gender=Fem|Number=Sing|fPOS=NOUN++	34	nsubj	_	_
-33	vuelva	_	VERB	_	Mood=Sub|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=AUX++	34	aux	_	_
-34	jugar	_	VERB	_	VerbForm=Inf|fPOS=VERB++	29	csubj	_	_
-35	futbol	_	NOUN	_	Gender=Masc|Number=Sing|fPOS=NOUN++	34	dobj	_	_
-36	mundial	_	ADJ	_	Number=Sing|fPOS=ADJ++	35	amod	_	_
-37	.	_	PUNCT	_	fPOS=PUNCT++	17	punct	_	_
-38	La	_	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art|fPOS=DET++	39	det	_	_
-39	vaca	_	NOUN	_	Gender=Fem|Number=Sing|fPOS=NOUN++	40	nsubj	_	_
-40	juega	_	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=VERB++	17	parataxis	_	_
-41	futbol	_	NOUN	_	Gender=Masc|Number=Sing|fPOS=NOUN++	43	nsubj	_	_
-42	se	_	PRON	_	Case=Acc,Dat|Person=3|PrepCase=Npr|PronType=Prs|Reflex=Yes|fPOS=PRON++	43	iobj	_	_
-43	lastima	_	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=VERB++	40	xcomp	_	_
-44	mientras	_	SCONJ	_	fPOS=SCONJ++	45	mark	_	_
-45	anita	_	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=VERB++	43	advcl	_	_
-46	lava	_	VERB	_	Gender=Fem|Number=Sing|fPOS=NOUN++	45	xcomp	_	_
-47	la	_	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art|fPOS=DET++	48	det	_	_
-48	tina	_	NOUN	_	Gender=Fem|Number=Sing|fPOS=NOUN++	46	dobj	_	_
-49	.	_	PUNCT	_	fPOS=PUNCT++	17	punct	_	_
-50	Queremos	_	VERB	_	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin|fPOS=VERB++	17	parataxis	_	_
-51	que	_	SCONJ	_	fPOS=SCONJ++	55	mark	_	_
-52	la	_	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art|fPOS=DET++	53	det	_	_
-53	vaca	_	NOUN	_	Gender=Fem|Number=Sing|fPOS=NOUN++	55	nsubj	_	_
-54	se	_	PRON	_	Case=Acc,Dat|Person=3|PrepCase=Npr|PronType=Prs|Reflex=Yes|fPOS=PRON++	55	iobj	_	_
-55	mejore	_	VERB	_	VerbForm=Fin|fPOS=VERB++	50	ccomp	_	_
-56	y	_	CONJ	_	fPOS=CONJ++	55	cc	_	_
-57	anita	_	NOUN	_	Gender=Fem|Number=Sing|fPOS=NOUN++	59	nsubj	_	_
-58	le	_	PRON	_	Case=Dat|Number=Sing|Person=3|PronType=Prs|fPOS=PRON++	59	iobj	_	_
-59	ayude	_	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=VERB++	55	conj	_	_
-60	.	_	PUNCT	_	fPOS=PUNCT++	59	punct	_	_
-61	se	_	PRON	_	Case=Acc,Dat|Person=3|PrepCase=Npr|PronType=Prs|Reflex=Yes|fPOS=PRON++	62	iobj	_	_
-62	espera	_	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=VERB++	59	conj	_	_
-63	que	_	SCONJ	_	fPOS=SCONJ++	67	mark	_	_
-64	la	_	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art|fPOS=DET++	65	det	_	_
-65	vaca	_	NOUN	_	Gender=Fem|Number=Sing|fPOS=NOUN++	67	nsubj	_	_
-66	vuelva	_	VERB	_	Mood=Sub|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|fPOS=AUX++	67	aux	_	_
-67	jugar	_	VERB	_	VerbForm=Inf|fPOS=VERB++	62	csubj	_	_
-68	futbol	_	NOUN	_	Gender=Masc|Number=Sing|fPOS=NOUN++	67	dobj	_	_
-69	.	_	PUNCT	_	fPOS=PUNCT++	6	punct	_	_
-0
-
-Process finished with exit code 0
+acl Arg1:Span, Arg2:Span
+advcl Arg1:Span, Arg2:Span
+advmod Arg1:Span, Arg2:Span
+amod Arg1:Span, Arg2:Span
+appos Arg1:Span, Arg2:Span
+aux Arg1:Span, Arg2:Span
+auxpass Arg1:Span, Arg2:Span
+case Arg1:Span, Arg2:Span
+cc Arg1:Span, Arg2:Span
+ccomp Arg1:Span, Arg2:Span
+compound Arg1:Span, Arg2:Span
+conj Arg1:Span, Arg2:Span
+cop Arg1:Span, Arg2:Span
+csubj Arg1:Span, Arg2:Span
+csubjpass Arg1:Span, Arg2:Span
+dep Arg1:Span, Arg2:Span
+det Arg1:Span, Arg2:Span
+discourse Arg1:Span, Arg2:Span
+dislocated Arg1:Span, Arg2:Span
+dobj Arg1:Span, Arg2:Span
+expl Arg1:Span, Arg2:Span
+foreign Arg1:Span, Arg2:Span
+goeswith Arg1:Span, Arg2:Span
+iobj Arg1:Span, Arg2:Span
+list Arg1:Span, Arg2:Span
+mark Arg1:Span, Arg2:Span
+mwe Arg1:Span, Arg2:Span
+name Arg1:Span, Arg2:Span
+neg Arg1:Span, Arg2:Span
+nmod Arg1:Span, Arg2:Span
+nsubj Arg1:Span, Arg2:Span
+nsubjpass Arg1:Span, Arg2:Span
+nummod Arg1:Span, Arg2:Span
+parataxis Arg1:Span, Arg2:Span
+punct Arg1:Span, Arg2:Span
+remnant Arg1:Span, Arg2:Span
+reparandum Arg1:Span, Arg2:Span
+root Arg1:Span, Arg2:Span
+vocative Arg1:Span, Arg2:Span
+xcomp Arg1:Span, Arg2:Span
