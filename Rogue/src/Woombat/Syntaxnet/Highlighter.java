@@ -1,4 +1,4 @@
-package Wooombat.Syntaxnet;
+package Woombat.Syntaxnet;
 
 import java.awt.Color;
 import java.io.*;

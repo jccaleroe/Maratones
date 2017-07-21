@@ -1,4 +1,4 @@
-package Wooombat.Matcher;
+package Woombat.Matcher;
 
 //Package taken from https://github.com/xdrop/fuzzywuzzy
 import me.xdrop.fuzzywuzzy.FuzzySearch;

@@ -1,4 +1,4 @@
-package Wooombat.JSON;
+package Woombat.JSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
