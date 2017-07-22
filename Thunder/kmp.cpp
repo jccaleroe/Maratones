@@ -1,7 +1,7 @@
 //output the positions of each occurence
-//For the pattern “ABCDE”, lps[] is [0, 0, 0, 0, 0]
-//For the pattern “AAAAA”, lps[] is [0, 1, 2, 3, 4]
-//For the pattern “AAABAAA”, lps[] is [0, 1, 2, 0, 1, 2, 3]
+//For the pattern "ABCDE", lps[] is [0, 0, 0, 0, 0]
+//For the pattern "AAAAA", lps[] is [0, 1, 2, 3, 4]
+//For the pattern "AAABAAA", lps[] is [0, 1, 2, 0, 1, 2, 3]
 #include<bits/stdc++.h>
 
 using namespace std;

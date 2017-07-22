@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>topoSort.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,0); }
+.s1 { color: rgb(0,128,0); font-weight: bold; }
+.s2 { color: rgb(0,0,0); }
+.s3 { color: rgb(0,0,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+topoSort.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">#include</span><span class="s1">&lt;bits/stdc++.h&gt;</span><span class="s2"> 
+ 
+</span><span class="s3">using namespace </span><span class="s2">std; 
+ 
+vector&lt; vector &lt;</span><span class="s3">int</span><span class="s2">&gt; &gt; g(</span><span class="s4">6</span><span class="s2">, vector&lt;</span><span class="s3">int</span><span class="s2">&gt;()); 
+stack&lt;</span><span class="s3">int</span><span class="s2">&gt; s; 
+</span><span class="s3">bool </span><span class="s2">seen[</span><span class="s4">6</span><span class="s2">]; 
+ 
+</span><span class="s3">void </span><span class="s2">dfs (</span><span class="s3">int </span><span class="s2">u){ 
+    seen[u] = </span><span class="s3">true</span><span class="s2">; 
+    </span><span class="s3">for </span><span class="s2">( </span><span class="s3">int </span><span class="s2">i = </span><span class="s4">0</span><span class="s2">; i &lt; g[u].size(); i++) 
+        </span><span class="s3">if </span><span class="s2">( !seen[ g[u][i] ] ) 
+            dfs(g[u][i]); 
+    s.push(u); 
+} 
+ 
+</span><span class="s3">int </span><span class="s2">main(){ 
+    g[</span><span class="s4">2</span><span class="s2">].push_back(</span><span class="s4">3</span><span class="s2">); 
+    g[</span><span class="s4">3</span><span class="s2">].push_back(</span><span class="s4">1</span><span class="s2">); 
+    g[</span><span class="s4">4</span><span class="s2">].push_back(</span><span class="s4">1</span><span class="s2">); 
+    g[</span><span class="s4">4</span><span class="s2">].push_back(</span><span class="s4">0</span><span class="s2">); 
+    g[</span><span class="s4">5</span><span class="s2">].push_back(</span><span class="s4">0</span><span class="s2">); 
+    g[</span><span class="s4">5</span><span class="s2">].push_back(</span><span class="s4">2</span><span class="s2">); 
+ 
+    </span><span class="s3">for </span><span class="s2">( </span><span class="s3">int </span><span class="s2">i = </span><span class="s4">0</span><span class="s2">; i &lt; </span><span class="s4">6</span><span class="s2">; i++) 
+        </span><span class="s3">if </span><span class="s2">( !seen[i] ) 
+            dfs(i); 
+ 
+ 
+    </span><span class="s3">while </span><span class="s2">(!s.empty()){ 
+        </span><span class="s3">int </span><span class="s2">a = s.top(); 
+        s.pop(); 
+        cout &lt;&lt; a &lt;&lt; </span><span class="s1">&quot; &quot;</span><span class="s2">; 
+    } 
+    cout &lt;&lt; endl; 
+} 
+</span></pre>
+</body>
+</html>

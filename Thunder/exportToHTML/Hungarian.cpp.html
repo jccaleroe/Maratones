@@ -1,0 +1,189 @@
+<html>
+<head>
+<title>Hungarian.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(128,128,0); }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+.s5 { color: rgb(0,0,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Hungarian.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">//</span><span class="s1"> 
+</span><span class="s0">// Created by juan on 15/04/17.</span><span class="s1"> 
+</span><span class="s0">//</span><span class="s1"> 
+ 
+</span><span class="s2">#define </span><span class="s1">N </span><span class="s3">25 </span><span class="s0">//max number of vertices in one part</span><span class="s1"> 
+</span><span class="s2">#define </span><span class="s1">INF </span><span class="s3">100000000 </span><span class="s0">//just infinity</span><span class="s1"> 
+ 
+</span><span class="s2">#include </span><span class="s4">&lt;iostream&gt;</span><span class="s1"> 
+</span><span class="s2">#include </span><span class="s4">&lt;string.h&gt;</span><span class="s1"> 
+</span><span class="s2">#include </span><span class="s4">&lt;iomanip&gt;</span><span class="s1"> 
+ 
+</span><span class="s5">using namespace </span><span class="s1">std; 
+ 
+</span><span class="s5">int </span><span class="s1">cost[N][N]; </span><span class="s0">//cost matrix</span><span class="s1"> 
+</span><span class="s5">int </span><span class="s1">n, max_match; </span><span class="s0">//n workers and n jobs</span><span class="s1"> 
+</span><span class="s5">int </span><span class="s1">lx[N], ly[N]; </span><span class="s0">//labels of X and Y parts</span><span class="s1"> 
+</span><span class="s5">int </span><span class="s1">xy[N]; </span><span class="s0">//xy[x] - vertex that is matched with x,</span><span class="s1"> 
+</span><span class="s5">int </span><span class="s1">yx[N]; </span><span class="s0">//yx[y] - vertex that is matched with y</span><span class="s1"> 
+</span><span class="s5">bool </span><span class="s1">S[N], T[N]; </span><span class="s0">//sets S and T in algorithm</span><span class="s1"> 
+</span><span class="s5">int </span><span class="s1">slack[N]; </span><span class="s0">//as in the algorithm description</span><span class="s1"> 
+</span><span class="s5">int </span><span class="s1">slackx[N]; </span><span class="s0">//slackx[y] such a vertex, that l(slackx[y]) + l(y) - w(slackx[y],y) = slack[y]</span><span class="s1"> 
+</span><span class="s5">int </span><span class="s1">previo[N]; </span><span class="s0">//array for memorizing alternating paths</span><span class="s1"> 
+ 
+ 
+</span><span class="s5">void </span><span class="s1">init_labels() { 
+    memset(lx, </span><span class="s3">0</span><span class="s1">, </span><span class="s5">sizeof</span><span class="s1">(lx)); 
+    memset(ly, </span><span class="s3">0</span><span class="s1">, </span><span class="s5">sizeof</span><span class="s1">(ly)); 
+    </span><span class="s5">for </span><span class="s1">(</span><span class="s5">int </span><span class="s1">x = </span><span class="s3">0</span><span class="s1">; x &lt; n; x++) 
+        </span><span class="s5">for </span><span class="s1">(</span><span class="s5">int </span><span class="s1">y = </span><span class="s3">0</span><span class="s1">; y &lt; n; y++) 
+            lx[x] = max(lx[x], cost[x][y]); 
+} 
+ 
+</span><span class="s5">void </span><span class="s1">update_labels() { 
+    </span><span class="s5">int </span><span class="s1">x, y, delta = INF; </span><span class="s0">//init delta as infinity</span><span class="s1"> 
+    </span><span class="s5">for </span><span class="s1">(y = </span><span class="s3">0</span><span class="s1">; y &lt; n; y++) </span><span class="s0">//calculate delta using slack</span><span class="s1"> 
+        </span><span class="s5">if </span><span class="s1">(!T[y]) 
+            delta = min(delta, slack[y]); 
+    </span><span class="s5">for </span><span class="s1">(x = </span><span class="s3">0</span><span class="s1">; x &lt; n; x++) </span><span class="s0">//update X labels</span><span class="s1"> 
+        </span><span class="s5">if </span><span class="s1">(S[x]) lx[x] -= delta; 
+    </span><span class="s5">for </span><span class="s1">(y = </span><span class="s3">0</span><span class="s1">; y &lt; n; y++) </span><span class="s0">//update Y labels</span><span class="s1"> 
+        </span><span class="s5">if </span><span class="s1">(T[y]) ly[y] += delta; 
+    </span><span class="s5">for </span><span class="s1">(y = </span><span class="s3">0</span><span class="s1">; y &lt; n; y++) </span><span class="s0">//update slack array</span><span class="s1"> 
+        </span><span class="s5">if </span><span class="s1">(!T[y]) 
+            slack[y] -= delta; 
+} 
+ 
+</span><span class="s5">void </span><span class="s1">add_to_tree(</span><span class="s5">int </span><span class="s1">x, </span><span class="s5">int </span><span class="s1">prevx) 
+</span><span class="s0">//x - current vertex,prevx - vertex from X before x in the alternating path,</span><span class="s1"> 
+</span><span class="s0">//so we add edges (prevx, xy[x]), (xy[x], x)</span><span class="s1"> 
+{ 
+    S[x] = </span><span class="s5">true</span><span class="s1">; </span><span class="s0">//add x to S</span><span class="s1"> 
+    previo[x] = prevx; </span><span class="s0">//we need this when augmenting</span><span class="s1"> 
+    </span><span class="s5">for </span><span class="s1">(</span><span class="s5">int </span><span class="s1">y = </span><span class="s3">0</span><span class="s1">; y &lt; n; y++) </span><span class="s0">//update slacks, because we add new vertex to S</span><span class="s1"> 
+        </span><span class="s5">if </span><span class="s1">(lx[x] + ly[y] - cost[x][y] &lt; slack[y]) { 
+            slack[y] = lx[x] + ly[y] - cost[x][y]; 
+            slackx[y] = x; 
+        } 
+} 
+ 
+</span><span class="s5">void </span><span class="s1">augment() </span><span class="s0">//main function of the algorithm</span><span class="s1"> 
+{ 
+    </span><span class="s5">if </span><span class="s1">(max_match == n) </span><span class="s5">return</span><span class="s1">; </span><span class="s0">//check wether matching is already perfect</span><span class="s1"> 
+    </span><span class="s5">int </span><span class="s1">x, y, root = </span><span class="s3">0</span><span class="s1">; </span><span class="s0">//just counters and root vertex</span><span class="s1"> 
+    </span><span class="s5">int </span><span class="s1">q[N], wr = </span><span class="s3">0</span><span class="s1">, rd = </span><span class="s3">0</span><span class="s1">; </span><span class="s0">//q - queue for bfs, wr,rd - write and read</span><span class="s1"> 
+    </span><span class="s0">//pos in queue</span><span class="s1"> 
+    memset(S, </span><span class="s5">false</span><span class="s1">, </span><span class="s5">sizeof</span><span class="s1">(S)); </span><span class="s0">//init set S</span><span class="s1"> 
+    memset(T, </span><span class="s5">false</span><span class="s1">, </span><span class="s5">sizeof</span><span class="s1">(T)); </span><span class="s0">//init set T</span><span class="s1"> 
+    memset(previo, -</span><span class="s3">1</span><span class="s1">, </span><span class="s5">sizeof</span><span class="s1">(previo)); </span><span class="s0">//init set previo - for the alternating tree</span><span class="s1"> 
+    </span><span class="s5">for </span><span class="s1">(x = </span><span class="s3">0</span><span class="s1">; x &lt; n; x++) </span><span class="s0">//finding root of the tree</span><span class="s1"> 
+        </span><span class="s5">if </span><span class="s1">(xy[x] == -</span><span class="s3">1</span><span class="s1">) { 
+            q[wr++] = root = x; 
+            previo[x] = -</span><span class="s3">2</span><span class="s1">; 
+            S[x] = </span><span class="s5">true</span><span class="s1">; 
+            </span><span class="s5">break</span><span class="s1">; 
+        } 
+ 
+    </span><span class="s5">for </span><span class="s1">(y = </span><span class="s3">0</span><span class="s1">; y &lt; n; y++) </span><span class="s0">//initializing slack array</span><span class="s1"> 
+    { 
+        slack[y] = lx[root] + ly[y] - cost[root][y]; 
+        slackx[y] = root; 
+    } 
+ 
+    </span><span class="s0">//second part of augment() function</span><span class="s1"> 
+    </span><span class="s5">while </span><span class="s1">(</span><span class="s5">true</span><span class="s1">) </span><span class="s0">//main cycle</span><span class="s1"> 
+    { 
+        </span><span class="s5">while </span><span class="s1">(rd &lt; wr) </span><span class="s0">//building tree with bfs cycle</span><span class="s1"> 
+        { 
+            x = q[rd++]; </span><span class="s0">//current vertex from X part</span><span class="s1"> 
+            </span><span class="s5">for </span><span class="s1">(y = </span><span class="s3">0</span><span class="s1">; y &lt; n; y++) </span><span class="s0">//iterate through all edges in equality graph</span><span class="s1"> 
+                </span><span class="s5">if </span><span class="s1">(cost[x][y] == lx[x] + ly[y] &amp;&amp; !T[y]) { 
+                    </span><span class="s5">if </span><span class="s1">(yx[y] == -</span><span class="s3">1</span><span class="s1">) </span><span class="s5">break</span><span class="s1">; </span><span class="s0">//an exposed vertex in Y found, so</span><span class="s1"> 
+                    </span><span class="s0">//augmenting path exists!</span><span class="s1"> 
+                    T[y] = </span><span class="s5">true</span><span class="s1">; </span><span class="s0">//else just add y to T,</span><span class="s1"> 
+                    q[wr++] = yx[y]; </span><span class="s0">//add vertex yx[y], which is matched</span><span class="s1"> 
+                    </span><span class="s0">//with y, to the queue</span><span class="s1"> 
+                    add_to_tree(yx[y], x); </span><span class="s0">//add edges (x,y) and (y,yx[y]) to the tree</span><span class="s1"> 
+                } 
+            </span><span class="s5">if </span><span class="s1">(y &lt; n) </span><span class="s5">break</span><span class="s1">; </span><span class="s0">//augmenting path found!</span><span class="s1"> 
+        } 
+        </span><span class="s5">if </span><span class="s1">(y &lt; n) </span><span class="s5">break</span><span class="s1">; </span><span class="s0">//augmenting path found!</span><span class="s1"> 
+ 
+        update_labels(); </span><span class="s0">//augmenting path not found, so improve labeling</span><span class="s1"> 
+        wr = rd = </span><span class="s3">0</span><span class="s1">; 
+        </span><span class="s5">for </span><span class="s1">(y = </span><span class="s3">0</span><span class="s1">; y &lt; n; y++) 
+            </span><span class="s0">//in this cycle we add edges that were added to the equality graph as a</span><span class="s1"> 
+            </span><span class="s0">//result of improving the labeling, we add edge (slackx[y], y) to the tree if</span><span class="s1"> 
+            </span><span class="s0">//and only if !T[y] &amp;&amp; slack[y] == 0, also with this edge we add another one</span><span class="s1"> 
+            </span><span class="s0">//(y, yx[y]) or augment the matching, if y was exposed</span><span class="s1"> 
+            </span><span class="s5">if </span><span class="s1">(!T[y] &amp;&amp; slack[y] == </span><span class="s3">0</span><span class="s1">) 
+            { 
+                </span><span class="s5">if </span><span class="s1">(yx[y] == -</span><span class="s3">1</span><span class="s1">) </span><span class="s0">//exposed vertex in Y found - augmenting path exists!</span><span class="s1"> 
+                { 
+                    x = slackx[y]; 
+                    </span><span class="s5">break</span><span class="s1">; 
+                } 
+                </span><span class="s5">else</span><span class="s1"> 
+                { 
+                    T[y] = </span><span class="s5">true</span><span class="s1">; </span><span class="s0">//else just add y to T,</span><span class="s1"> 
+                    </span><span class="s5">if </span><span class="s1">(!S[yx[y]]) 
+                    { 
+                        q[wr++] = yx[y]; </span><span class="s0">//add vertex yx[y], which is matched with</span><span class="s1"> 
+                        </span><span class="s0">//y, to the queue</span><span class="s1"> 
+                        add_to_tree(yx[y], slackx[y]); </span><span class="s0">//and add edges (x,y) and (y,</span><span class="s1"> 
+                        </span><span class="s0">//yx[y]) to the tree</span><span class="s1"> 
+                    } 
+                } 
+            } 
+        </span><span class="s5">if </span><span class="s1">(y &lt; n) </span><span class="s5">break</span><span class="s1">; </span><span class="s0">//augmenting path found!</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s5">if </span><span class="s1">(y &lt; n) </span><span class="s0">//we found augmenting path!</span><span class="s1"> 
+    { 
+        max_match++; </span><span class="s0">//increment matching</span><span class="s1"> 
+        </span><span class="s0">//in this cycle we inverse edges along augmenting path</span><span class="s1"> 
+        </span><span class="s5">for </span><span class="s1">(</span><span class="s5">int </span><span class="s1">cx = x, cy = y, ty; cx != -</span><span class="s3">2</span><span class="s1">; cx = previo[cx], cy = ty) 
+        { 
+            ty = xy[cx]; 
+            yx[cy] = cx; 
+            xy[cx] = cy; 
+        } 
+        augment(); </span><span class="s0">//recall function, go to step 1 of the algorithm</span><span class="s1"> 
+    } 
+}</span><span class="s0">//end of augment() function</span><span class="s1"> 
+ 
+</span><span class="s5">double </span><span class="s1">hungarian() { 
+    </span><span class="s5">double </span><span class="s1">ret = </span><span class="s3">1</span><span class="s1">; </span><span class="s0">//weight of the optimal matching</span><span class="s1"> 
+    max_match = </span><span class="s3">0</span><span class="s1">; </span><span class="s0">//number of vertices in current matching</span><span class="s1"> 
+    memset(xy, -</span><span class="s3">1</span><span class="s1">, </span><span class="s5">sizeof</span><span class="s1">(xy)); 
+    memset(yx, -</span><span class="s3">1</span><span class="s1">, </span><span class="s5">sizeof</span><span class="s1">(yx)); 
+    init_labels(); </span><span class="s0">//step 0</span><span class="s1"> 
+    augment(); </span><span class="s0">//steps 1-3</span><span class="s1"> 
+    </span><span class="s5">for </span><span class="s1">(</span><span class="s5">int </span><span class="s1">x = </span><span class="s3">0</span><span class="s1">; x &lt; n; x++) </span><span class="s0">//forming answer there</span><span class="s1"> 
+        ret *= </span><span class="s3">1.0</span><span class="s1">*cost[x][xy[x]]/</span><span class="s3">100</span><span class="s1">; 
+    </span><span class="s5">return </span><span class="s1">ret; 
+} 
+ 
+</span><span class="s5">int </span><span class="s1">main(){ 
+    cin.tie(</span><span class="s3">0</span><span class="s1">); 
+    ios_base::sync_with_stdio(</span><span class="s3">0</span><span class="s1">); 
+    cin &gt;&gt; n; 
+    </span><span class="s5">for </span><span class="s1">(</span><span class="s5">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s1">; i &lt; n; i++) 
+        </span><span class="s5">for </span><span class="s1">(</span><span class="s5">int </span><span class="s1">j = </span><span class="s3">0</span><span class="s1">; j &lt; n; j++) 
+            cin &gt;&gt; cost[i][j]; 
+    </span><span class="s5">double </span><span class="s1">ans = hungarian() * </span><span class="s3">100</span><span class="s1">; 
+    cout &lt;&lt; fixed &lt;&lt; setprecision(</span><span class="s3">6</span><span class="s1">) &lt;&lt; ans; 
+}</span></pre>
+</body>
+</html>

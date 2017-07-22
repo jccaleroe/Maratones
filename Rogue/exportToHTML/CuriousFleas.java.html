@@ -1,0 +1,213 @@
+<html>
+<head>
+<title>CuriousFleas.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+.s4 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+CuriousFleas.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">import </span><span class="s1">java.io.*; 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList; 
+</span><span class="s0">import </span><span class="s1">java.util.HashSet; 
+</span><span class="s0">import </span><span class="s1">java.util.PriorityQueue; 
+ 
+</span><span class="s0">public class </span><span class="s1">CuriousFleas </span><span class="s0">implements </span><span class="s1">Comparable&lt;CuriousFleas&gt; { 
+ 
+    </span><span class="s0">private static int</span><span class="s1">[] xAxis = {</span><span class="s2">1</span><span class="s1">, </span><span class="s2">0</span><span class="s1">, -</span><span class="s2">1</span><span class="s1">, </span><span class="s2">0</span><span class="s1">}; 
+    </span><span class="s0">private static int</span><span class="s1">[] yAxis = {</span><span class="s2">0</span><span class="s1">, </span><span class="s2">1</span><span class="s1">, </span><span class="s2">0</span><span class="s1">, -</span><span class="s2">1</span><span class="s1">}; 
+    </span><span class="s0">private </span><span class="s1">ArrayList&lt;Integer&gt; fleas; 
+    </span><span class="s0">private int </span><span class="s1">die, diePos; 
+    </span><span class="s0">private int </span><span class="s1">fleasTaken, depth; 
+ 
+    </span><span class="s0">private </span><span class="s1">CuriousFleas(ArrayList&lt;Integer&gt; fleas, </span><span class="s0">int </span><span class="s1">die, </span><span class="s0">int </span><span class="s1">diePos, </span><span class="s0">int </span><span class="s1">fleasTaken) { 
+        </span><span class="s0">this</span><span class="s1">.fleas = fleas; 
+        </span><span class="s0">this</span><span class="s1">.die = die; 
+        </span><span class="s0">this</span><span class="s1">.diePos = diePos; 
+        </span><span class="s0">this</span><span class="s1">.fleasTaken = fleasTaken; 
+        depth = </span><span class="s2">0</span><span class="s1">; 
+    } 
+ 
+    </span><span class="s0">private </span><span class="s1">CuriousFleas(CuriousFleas curiousFleas) { 
+        fleas = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;( curiousFleas.fleas ); 
+        die = curiousFleas.die; 
+        diePos = curiousFleas.diePos; 
+        fleasTaken = curiousFleas.fleasTaken; 
+        depth = curiousFleas.depth; 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public int </span><span class="s1">compareTo( CuriousFleas cf ){ 
+        </span><span class="s0">return </span><span class="s1">depth + fleas.size() - ( cf.fleas.size() + cf.depth ); 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">equals(Object o) { 
+        </span><span class="s0">if </span><span class="s1">(</span><span class="s0">this </span><span class="s1">== o) </span><span class="s0">return true</span><span class="s1">; 
+        </span><span class="s0">if </span><span class="s1">(o == </span><span class="s0">null </span><span class="s1">|| getClass() != o.getClass()) </span><span class="s0">return false</span><span class="s1">; 
+ 
+        CuriousFleas that = (CuriousFleas) o; 
+ 
+        </span><span class="s0">if </span><span class="s1">(die != that.die) </span><span class="s0">return false</span><span class="s1">; 
+        </span><span class="s0">if </span><span class="s1">(diePos != that.diePos) </span><span class="s0">return false</span><span class="s1">; 
+        </span><span class="s0">if </span><span class="s1">(fleasTaken != that.fleasTaken) </span><span class="s0">return false</span><span class="s1">; 
+        </span><span class="s0">return </span><span class="s1">fleas != </span><span class="s0">null </span><span class="s1">? fleas.equals(that.fleas) : that.fleas == </span><span class="s0">null</span><span class="s1">; 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public int </span><span class="s1">hashCode() { 
+        </span><span class="s0">int </span><span class="s1">result = fleas != </span><span class="s0">null </span><span class="s1">? fleas.hashCode() : </span><span class="s2">0</span><span class="s1">; 
+        result = </span><span class="s2">31 </span><span class="s1">* result + die; 
+        result = </span><span class="s2">31 </span><span class="s1">* result + diePos; 
+        result = </span><span class="s2">31 </span><span class="s1">* result + fleasTaken; 
+        </span><span class="s0">return </span><span class="s1">result; 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">updateMap(){ 
+        ArrayList&lt;Integer&gt; fleas2 = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;(); 
+        </span><span class="s0">int </span><span class="s1">side = </span><span class="s2">7 </span><span class="s1">- ( die &amp; </span><span class="s2">7 </span><span class="s1">); 
+        </span><span class="s0">int </span><span class="s1">aux = (</span><span class="s0">int</span><span class="s1">) Math.pow( </span><span class="s2">2</span><span class="s1">, side - </span><span class="s2">1 </span><span class="s1">); 
+ 
+        </span><span class="s0">if </span><span class="s1">( ( ( fleasTaken &gt;&gt;&gt; ( side - </span><span class="s2">1</span><span class="s1">) ) &amp; </span><span class="s2">1 </span><span class="s1">) != </span><span class="s2">0</span><span class="s1">) { 
+            fleas2.add(diePos); 
+            fleasTaken -= aux; 
+        } 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">tmp : fleas) { 
+            </span><span class="s0">if </span><span class="s1">(tmp == diePos) 
+                fleasTaken += aux; 
+            </span><span class="s0">else</span><span class="s1"> 
+                fleas2.add( tmp ); 
+        } 
+        fleas = fleas2; 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">move(</span><span class="s0">int </span><span class="s1">xDir, </span><span class="s0">int </span><span class="s1">yDir){ 
+        </span><span class="s0">if </span><span class="s1">( xDir == -</span><span class="s2">1 </span><span class="s1">){ 
+            </span><span class="s0">int </span><span class="s1">side2 = die &amp; </span><span class="s2">7</span><span class="s1">; 
+            </span><span class="s0">int </span><span class="s1">side1 = </span><span class="s2">7 </span><span class="s1">- ( (die &gt;&gt;&gt; </span><span class="s2">3</span><span class="s1">) &amp; </span><span class="s2">7 </span><span class="s1">); 
+            </span><span class="s0">int </span><span class="s1">side3 = die &gt;&gt;&gt; </span><span class="s2">6</span><span class="s1">; 
+            die = side1 + </span><span class="s2">8 </span><span class="s1">* side2 + </span><span class="s2">64 </span><span class="s1">* side3; 
+        } 
+        </span><span class="s0">else if </span><span class="s1">( xDir == </span><span class="s2">1 </span><span class="s1">){ 
+            </span><span class="s0">int </span><span class="s1">side2 = </span><span class="s2">7 </span><span class="s1">- ( die &amp; </span><span class="s2">7 </span><span class="s1">); 
+            </span><span class="s0">int </span><span class="s1">side1 = (die &gt;&gt;&gt; </span><span class="s2">3</span><span class="s1">) &amp; </span><span class="s2">7</span><span class="s1">; 
+            </span><span class="s0">int </span><span class="s1">side3 = die &gt;&gt;&gt; </span><span class="s2">6</span><span class="s1">; 
+            die = side1 + </span><span class="s2">8 </span><span class="s1">* side2 + </span><span class="s2">64 </span><span class="s1">* side3; 
+        } 
+        </span><span class="s0">else if </span><span class="s1">( yDir == </span><span class="s2">1 </span><span class="s1">){ 
+            </span><span class="s0">int </span><span class="s1">side1 = </span><span class="s2">7 </span><span class="s1">- (die &gt;&gt;&gt; </span><span class="s2">6</span><span class="s1">); 
+            </span><span class="s0">int </span><span class="s1">side2 = (die &gt;&gt;&gt; </span><span class="s2">3</span><span class="s1">) &amp; </span><span class="s2">7</span><span class="s1">; 
+            </span><span class="s0">int </span><span class="s1">side3 = die &amp; </span><span class="s2">7</span><span class="s1">; 
+            die = side1 + </span><span class="s2">8 </span><span class="s1">* side2 + </span><span class="s2">64 </span><span class="s1">* side3; 
+        } 
+        </span><span class="s0">else if </span><span class="s1">( yDir == -</span><span class="s2">1 </span><span class="s1">){ 
+            </span><span class="s0">int </span><span class="s1">side1 = die &gt;&gt;&gt; </span><span class="s2">6</span><span class="s1">; 
+            </span><span class="s0">int </span><span class="s1">side2 = (die &gt;&gt;&gt; </span><span class="s2">3</span><span class="s1">) &amp; </span><span class="s2">7</span><span class="s1">; 
+            </span><span class="s0">int </span><span class="s1">side3 = </span><span class="s2">7 </span><span class="s1">- ( die &amp; </span><span class="s2">7 </span><span class="s1">); 
+            die = side1 + </span><span class="s2">8 </span><span class="s1">* side2 + </span><span class="s2">64 </span><span class="s1">* side3; 
+        } 
+        depth++; 
+        updateMap(); 
+    } 
+ 
+    </span><span class="s0">static void </span><span class="s1">printMap(CuriousFleas s){ 
+        </span><span class="s0">char</span><span class="s1">[][] map = </span><span class="s0">new char</span><span class="s1">[</span><span class="s2">4</span><span class="s1">][</span><span class="s2">4</span><span class="s1">]; 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; </span><span class="s2">4</span><span class="s1">; i++) 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">0</span><span class="s1">; j &lt; </span><span class="s2">4</span><span class="s1">; j++) 
+                map[i][j] = </span><span class="s3">'.'</span><span class="s1">; 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">tmp : s.fleas){ 
+            </span><span class="s0">int </span><span class="s1">a = tmp &gt;&gt;&gt; </span><span class="s2">2</span><span class="s1">; 
+            </span><span class="s0">int </span><span class="s1">b = tmp &amp; </span><span class="s2">3</span><span class="s1">; 
+            map[a][b] = </span><span class="s3">'#'</span><span class="s1">; 
+        } 
+        </span><span class="s0">int </span><span class="s1">a = s.diePos &gt;&gt;&gt; </span><span class="s2">2</span><span class="s1">; 
+        </span><span class="s0">int </span><span class="s1">b = s.diePos &amp; </span><span class="s2">3</span><span class="s1">; 
+        map[a][b] = </span><span class="s3">'D'</span><span class="s1">; 
+ 
+        System.out.println( </span><span class="s2">7 </span><span class="s1">- (s.die &amp; </span><span class="s2">7</span><span class="s1">) ); 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; </span><span class="s2">4</span><span class="s1">; i++) { 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">0</span><span class="s1">; j &lt; </span><span class="s2">4</span><span class="s1">; j++) { 
+                System.out.print(map[i][j]); 
+            } 
+            System.out.println(); 
+        } 
+        System.out.println(); 
+    } 
+ 
+    </span><span class="s0">static int </span><span class="s1">search(CuriousFleas fleas){ 
+        HashSet&lt;CuriousFleas&gt; hashSet = </span><span class="s0">new </span><span class="s1">HashSet&lt;&gt;(); 
+        PriorityQueue&lt;CuriousFleas&gt; priorityQueue = </span><span class="s0">new </span><span class="s1">PriorityQueue&lt;&gt;(); 
+        priorityQueue.add(fleas); 
+        </span><span class="s0">while </span><span class="s1">( !priorityQueue.isEmpty() ){ 
+            CuriousFleas u = priorityQueue.poll(); 
+            </span><span class="s0">if </span><span class="s1">( u.fleas.size() == </span><span class="s2">0</span><span class="s1">) 
+                </span><span class="s0">return </span><span class="s1">u.depth; 
+            </span><span class="s4">//CuriousFleas.printMap(u);</span><span class="s1"> 
+            </span><span class="s0">int </span><span class="s1">x = u.diePos &gt;&gt;&gt; </span><span class="s2">2</span><span class="s1">; 
+            </span><span class="s0">int </span><span class="s1">y = u.diePos &amp; </span><span class="s2">3</span><span class="s1">; 
+            </span><span class="s0">int </span><span class="s1">a, b; 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; </span><span class="s2">4</span><span class="s1">; i++){ 
+                a = x + xAxis[i]; 
+                b = y + yAxis[i]; 
+                </span><span class="s0">if </span><span class="s1">( a &lt; </span><span class="s2">4 </span><span class="s1">&amp;&amp; a &gt;= </span><span class="s2">0 </span><span class="s1">&amp;&amp; b &lt; </span><span class="s2">4 </span><span class="s1">&amp;&amp; b &gt;= </span><span class="s2">0</span><span class="s1">){ 
+                    CuriousFleas cf = </span><span class="s0">new </span><span class="s1">CuriousFleas( u ); 
+                    cf.diePos = a * </span><span class="s2">4 </span><span class="s1">+ b; 
+                    cf.move( xAxis[i], yAxis[i] ); 
+                    </span><span class="s0">if </span><span class="s1">( hashSet.add(cf) ) 
+                        priorityQueue.add(cf); 
+                } 
+            } 
+        } 
+        </span><span class="s0">return </span><span class="s1">-</span><span class="s2">1</span><span class="s1">; 
+    } 
+ 
+    </span><span class="s0">public static void </span><span class="s1">main(String[] args) </span><span class="s0">throws </span><span class="s1">IOException{ 
+        </span><span class="s4">//BufferedReader br = new BufferedReader ( new InputStreamReader ( System.in ) );</span><span class="s1"> 
+        BufferedReader br = </span><span class="s0">new </span><span class="s1">BufferedReader( </span><span class="s0">new </span><span class="s1">FileReader( 
+              </span><span class="s0">new </span><span class="s1">File( </span><span class="s3">&quot;/home/juan/Documents/Maratones/Rogue/src/input.txt&quot; </span><span class="s1">) ) ); 
+        </span><span class="s0">int </span><span class="s1">T = Integer.parseInt( br.readLine() ); 
+        br.readLine(); 
+        </span><span class="s0">char</span><span class="s1">[][] map = </span><span class="s0">new char</span><span class="s1">[</span><span class="s2">4</span><span class="s1">][</span><span class="s2">4</span><span class="s1">]; 
+        ArrayList&lt;Integer&gt; fleas = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;(</span><span class="s2">6</span><span class="s1">); 
+        </span><span class="s0">int </span><span class="s1">diePos = </span><span class="s2">0</span><span class="s1">, die = </span><span class="s2">1 </span><span class="s1">+ </span><span class="s2">8 </span><span class="s1">* </span><span class="s2">2 </span><span class="s1">+ </span><span class="s2">64 </span><span class="s1">* </span><span class="s2">3</span><span class="s1">; 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">c = </span><span class="s2">0</span><span class="s1">; c &lt; T; c++){ 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; </span><span class="s2">4</span><span class="s1">; i++) 
+                map[i] = br.readLine().toCharArray(); 
+            br.readLine(); 
+ 
+            fleas.clear(); 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; </span><span class="s2">4</span><span class="s1">; i++) { 
+                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">0</span><span class="s1">; j &lt; </span><span class="s2">4</span><span class="s1">; j++) { 
+                    </span><span class="s0">if </span><span class="s1">(map[i][j] == </span><span class="s3">'X'</span><span class="s1">) 
+                        fleas.add(i * </span><span class="s2">4 </span><span class="s1">+ j); 
+                    </span><span class="s0">else if </span><span class="s1">(map[i][j] == </span><span class="s3">'D'</span><span class="s1">) 
+                        diePos = i * </span><span class="s2">4 </span><span class="s1">+ j; 
+                } 
+            } 
+ 
+            CuriousFleas curiousFleas = </span><span class="s0">new </span><span class="s1">CuriousFleas(fleas, die, diePos, </span><span class="s2">0</span><span class="s1">); 
+ 
+            </span><span class="s0">int </span><span class="s1">r = CuriousFleas.search(curiousFleas); 
+            </span><span class="s0">if </span><span class="s1">( r != -</span><span class="s2">1 </span><span class="s1">) 
+                System.out.println(r); 
+            </span><span class="s0">else</span><span class="s1"> 
+                System.out.println(</span><span class="s3">&quot;impossible&quot;</span><span class="s1">); 
+        } 
+    } 
+} 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>CanYouDoIt.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+CanYouDoIt.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">import </span><span class="s1">java.io.BufferedReader; 
+</span><span class="s0">import </span><span class="s1">java.io.IOException; 
+</span><span class="s0">import </span><span class="s1">java.io.InputStreamReader; 
+</span><span class="s0">import </span><span class="s1">java.math.BigInteger; 
+ 
+</span><span class="s2">/** 
+ * Created by juan on 14/03/17. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">CanYouDoIt { 
+ 
+    </span><span class="s0">static int </span><span class="s1">low = </span><span class="s3">0</span><span class="s1">; 
+    </span><span class="s0">static int </span><span class="s1">high = </span><span class="s3">350</span><span class="s1">, mid; 
+    </span><span class="s0">static </span><span class="s1">BigInteger tmp, k, N; 
+ 
+    </span><span class="s0">static int </span><span class="s1">find(){ 
+        </span><span class="s0">while </span><span class="s1">(high &gt;= low) { 
+            mid = (high + low) / </span><span class="s3">2</span><span class="s1">; 
+            tmp = k.pow(mid); 
+            </span><span class="s0">if </span><span class="s1">(tmp.equals(N)) 
+                </span><span class="s0">return </span><span class="s1">mid; 
+            </span><span class="s0">else if</span><span class="s1">(tmp.compareTo(N) &gt; </span><span class="s3">0</span><span class="s1">){ 
+                high = mid - </span><span class="s3">1</span><span class="s1">; 
+            } 
+            </span><span class="s0">else</span><span class="s1">{ 
+                low = mid + </span><span class="s3">1</span><span class="s1">; 
+            } 
+        } 
+        </span><span class="s0">return </span><span class="s1">-</span><span class="s3">1</span><span class="s1">; 
+    } 
+ 
+    </span><span class="s0">public static void </span><span class="s1">main(String[] args) </span><span class="s0">throws </span><span class="s1">IOException{ 
+        BufferedReader br = </span><span class="s0">new </span><span class="s1">BufferedReader( </span><span class="s0">new </span><span class="s1">InputStreamReader( System.in ) ); 
+        </span><span class="s0">int </span><span class="s1">T; 
+        T = Integer.parseInt(br.readLine()); 
+        </span><span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">c = </span><span class="s3">0</span><span class="s1">; c &lt; T; c++){ 
+            String[] s = br.readLine().split(</span><span class="s4">&quot; &quot;</span><span class="s1">); 
+            high = </span><span class="s3">350</span><span class="s1">; 
+            low  = </span><span class="s3">0</span><span class="s1">; 
+            </span><span class="s0">switch </span><span class="s1">(s[</span><span class="s3">0</span><span class="s1">]){ 
+                </span><span class="s0">case </span><span class="s4">&quot;2&quot;</span><span class="s1">: 
+                    high = </span><span class="s3">336</span><span class="s1">; 
+                    </span><span class="s0">break</span><span class="s1">; 
+                </span><span class="s0">case </span><span class="s4">&quot;3&quot;</span><span class="s1">: 
+                    high = </span><span class="s3">215</span><span class="s1">; 
+                    </span><span class="s0">break</span><span class="s1">; 
+                </span><span class="s0">case </span><span class="s4">&quot;4&quot;</span><span class="s1">: 
+                    high = </span><span class="s3">170</span><span class="s1">; 
+                    </span><span class="s0">break</span><span class="s1">; 
+                </span><span class="s0">case </span><span class="s4">&quot;5&quot;</span><span class="s1">: 
+                    high = </span><span class="s3">145</span><span class="s1">; 
+                    </span><span class="s0">break</span><span class="s1">; 
+                </span><span class="s0">case </span><span class="s4">&quot;6&quot;</span><span class="s1">: 
+                    high = </span><span class="s3">130</span><span class="s1">; 
+                    </span><span class="s0">break</span><span class="s1">; 
+                </span><span class="s0">case </span><span class="s4">&quot;7&quot;</span><span class="s1">: 
+                    high = </span><span class="s3">120</span><span class="s1">; 
+                    </span><span class="s0">break</span><span class="s1">; 
+                </span><span class="s0">case </span><span class="s4">&quot;8&quot;</span><span class="s1">: 
+                    high = </span><span class="s3">112</span><span class="s1">; 
+                    </span><span class="s0">break</span><span class="s1">; 
+                </span><span class="s0">case </span><span class="s4">&quot;9&quot;</span><span class="s1">: 
+                    high = </span><span class="s3">106</span><span class="s1">; 
+                    </span><span class="s0">break</span><span class="s1">; 
+                </span><span class="s0">case </span><span class="s4">&quot;10&quot;</span><span class="s1">: 
+                    high = </span><span class="s3">100</span><span class="s1">; 
+                    </span><span class="s0">break</span><span class="s1">; 
+            } 
+            k = </span><span class="s0">new </span><span class="s1">BigInteger(s[</span><span class="s3">0</span><span class="s1">]); 
+            N = </span><span class="s0">new </span><span class="s1">BigInteger(s[</span><span class="s3">1</span><span class="s1">]); 
+            System.out.println(find()); 
+        } 
+    } 
+} 
+</span></pre>
+</body>
+</html>

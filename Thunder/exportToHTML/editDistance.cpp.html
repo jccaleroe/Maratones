@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>editDistance.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,0); }
+.s1 { color: rgb(0,128,0); font-weight: bold; }
+.s2 { color: rgb(0,0,0); }
+.s3 { color: rgb(0,0,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+.s5 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+editDistance.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">#include</span><span class="s1">&lt;bits/stdc++.h&gt;</span><span class="s2"> 
+ 
+</span><span class="s3">using namespace </span><span class="s2">std; 
+ 
+</span><span class="s3">char </span><span class="s2">str1[</span><span class="s4">2001</span><span class="s2">]; 
+</span><span class="s3">char </span><span class="s2">str2[</span><span class="s4">2001</span><span class="s2">]; 
+ 
+</span><span class="s3">int </span><span class="s2">dp[</span><span class="s4">2001</span><span class="s2">][</span><span class="s4">2001</span><span class="s2">]; 
+ 
+</span><span class="s3">int </span><span class="s2">main(){ 
+    cin.tie(</span><span class="s4">0</span><span class="s2">); 
+    ios_base::sync_with_stdio(</span><span class="s4">0</span><span class="s2">); 
+    </span><span class="s0">#ifdef </span><span class="s2">LOCAL 
+        freopen(</span><span class="s1">&quot;input.txt&quot;</span><span class="s2">, </span><span class="s1">&quot;r&quot;</span><span class="s2">, stdin); 
+    </span><span class="s0">#endif </span><span class="s5">// LOCAL</span><span class="s2"> 
+ 
+    </span><span class="s3">int </span><span class="s2">t; 
+    cin&gt;&gt;t; 
+    </span><span class="s3">while</span><span class="s2">(t--){ 
+        cin&gt;&gt;str1&gt;&gt;str2; 
+        </span><span class="s3">int </span><span class="s2">d1, d2, d3, i, len1, len2; 
+        len1 = strlen(str1); 
+        len2 = strlen(str2); 
+ 
+        </span><span class="s3">for</span><span class="s2">(i = </span><span class="s4">0</span><span class="s2">; i &lt;= len1; i++) 
+            dp[i][</span><span class="s4">0</span><span class="s2">] = i; 
+        </span><span class="s3">for</span><span class="s2">(i = </span><span class="s4">1</span><span class="s2">; i &lt;= len2; i++) 
+            dp[</span><span class="s4">0</span><span class="s2">][i] = i; 
+ 
+        </span><span class="s3">for</span><span class="s2">(i = </span><span class="s4">1</span><span class="s2">; i &lt;= len1; i++){ 
+            </span><span class="s3">for</span><span class="s2">(</span><span class="s3">int </span><span class="s2">j = </span><span class="s4">1</span><span class="s2">; j &lt;= len2; j++){ 
+                d1 = (str1[i-</span><span class="s4">1</span><span class="s2">] == str2[j-</span><span class="s4">1</span><span class="s2">] ? </span><span class="s4">0</span><span class="s2">:</span><span class="s4">1</span><span class="s2">) + dp[i-</span><span class="s4">1</span><span class="s2">][j-</span><span class="s4">1</span><span class="s2">]; </span><span class="s5">//Substitution</span><span class="s2"> 
+ 
+                d2 = dp[i][j-</span><span class="s4">1</span><span class="s2">]+</span><span class="s4">1</span><span class="s2">; </span><span class="s5">//Insertion</span><span class="s2"> 
+ 
+                d3 = dp[i-</span><span class="s4">1</span><span class="s2">][j]+</span><span class="s4">1</span><span class="s2">; </span><span class="s5">//Deletion</span><span class="s2"> 
+ 
+                dp[i][j] = min(d1, min(d2, d3)); 
+            } 
+        } 
+        cout &lt;&lt; dp[len1][len2] &lt;&lt; endl; 
+    } 
+} 
+</span></pre>
+</body>
+</html>

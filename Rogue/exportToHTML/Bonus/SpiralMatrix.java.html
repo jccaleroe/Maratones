@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>SpiralMatrix.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+SpiralMatrix.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">Bonus; 
+ 
+</span><span class="s0">public class </span><span class="s1">SpiralMatrix { 
+    </span><span class="s0">int </span><span class="s1">rows; 
+    </span><span class="s0">int </span><span class="s1">cols; 
+    </span><span class="s0">char</span><span class="s1">[][] spiral; 
+ 
+    </span><span class="s0">public </span><span class="s1">SpiralMatrix(</span><span class="s0">int </span><span class="s1">Rows, </span><span class="s0">int </span><span class="s1">Cols) { 
+        rows = Rows; 
+        cols = Cols; 
+        spiral = </span><span class="s0">new char</span><span class="s1">[rows][cols]; 
+    } 
+ 
+    </span><span class="s0">public boolean </span><span class="s1">is_in(</span><span class="s0">int </span><span class="s1">r, </span><span class="s0">int </span><span class="s1">c) { 
+        </span><span class="s0">return </span><span class="s1">r &gt;= </span><span class="s2">0 </span><span class="s1">&amp;&amp; c &gt;= </span><span class="s2">0 </span><span class="s1">&amp;&amp; r &lt; rows &amp;&amp; c &lt; cols; 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">FillMatrix() { 
+        </span><span class="s0">int</span><span class="s1">[] DR = {</span><span class="s2">0</span><span class="s1">, </span><span class="s2">1</span><span class="s1">, </span><span class="s2">0</span><span class="s1">, -</span><span class="s2">1</span><span class="s1">}; 
+        </span><span class="s0">int</span><span class="s1">[] DC = {</span><span class="s2">1</span><span class="s1">, </span><span class="s2">0</span><span class="s1">, -</span><span class="s2">1</span><span class="s1">, </span><span class="s2">0</span><span class="s1">}; 
+ 
+        </span><span class="s0">boolean</span><span class="s1">[][] used = </span><span class="s0">new boolean</span><span class="s1">[rows][cols]; 
+ 
+        </span><span class="s0">int </span><span class="s1">dir = </span><span class="s2">0</span><span class="s1">, r = </span><span class="s2">0</span><span class="s1">, c = </span><span class="s2">0</span><span class="s1">, k = </span><span class="s2">0</span><span class="s1">; 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; rows; i++) { 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">0</span><span class="s1">; j &lt; cols; j++) { 
+                used[i][j] = </span><span class="s0">false</span><span class="s1">; 
+            } 
+        } 
+ 
+        String text = </span><span class="s3">&quot;Bonus.SpiralMatrix&quot;</span><span class="s1">; 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">1</span><span class="s1">; i &lt;= cols * rows; i++) { 
+            spiral[r][c] = text.charAt(k); 
+            used[r][c] = </span><span class="s0">true</span><span class="s1">; 
+            k = (k + </span><span class="s2">1</span><span class="s1">) % text.length(); 
+            r += DR[dir]; 
+            c += DC[dir]; 
+            </span><span class="s0">if </span><span class="s1">(!is_in(r, c) || used[r][c]) { 
+                r -= DR[dir]; 
+                c -= DC[dir]; 
+                dir = (dir + </span><span class="s2">1</span><span class="s1">) % </span><span class="s2">4</span><span class="s1">; 
+                r += DR[dir]; 
+                c += DC[dir]; 
+            } 
+        } 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; rows; i++) { 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">0</span><span class="s1">; j &lt; cols; j++) { 
+                System.out.print(spiral[i][j] + </span><span class="s3">&quot; &quot;</span><span class="s1">); 
+            } 
+            System.out.println(); 
+        } 
+    } 
+ 
+    </span><span class="s0">public static void </span><span class="s1">main(String[] args) { 
+        SpiralMatrix sum = </span><span class="s0">new </span><span class="s1">SpiralMatrix(</span><span class="s2">4</span><span class="s1">, </span><span class="s2">6</span><span class="s1">); 
+        sum.FillMatrix(); 
+    } 
+}</span></pre>
+</body>
+</html>

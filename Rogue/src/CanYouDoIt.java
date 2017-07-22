@@ -32,10 +32,6 @@ public class CanYouDoIt {
         BufferedReader br = new BufferedReader( new InputStreamReader( System.in ) );
         int T;
         T = Integer.parseInt(br.readLine());
-        //BigInteger aux = new BigInteger("9");
-        //aux = aux.pow(106);
-        //System.out.println(aux);
-        //System.out.println("10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
         for(int c = 0; c < T; c++){
             String[] s = br.readLine().split(" ");
             high = 350;

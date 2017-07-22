@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>maxBPM.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,0); }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,128,0); font-weight: bold; }
+.s3 { color: rgb(0,0,128); font-weight: bold; }
+.s4 { color: rgb(128,128,128); font-style: italic; }
+.s5 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+maxBPM.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">#include </span><span class="s2">&lt;iostream&gt;</span><span class="s1"> 
+</span><span class="s0">#include </span><span class="s2">&lt;string.h&gt;</span><span class="s1"> 
+</span><span class="s3">using namespace </span><span class="s1">std; 
+ 
+</span><span class="s4">// M is number of applicants and N is number of jobs</span><span class="s1"> 
+</span><span class="s0">#define </span><span class="s1">M </span><span class="s5">6</span><span class="s1"> 
+</span><span class="s0">#define </span><span class="s1">N </span><span class="s5">6</span><span class="s1"> 
+ 
+</span><span class="s4">// A DFS based recursive function that returns true if a</span><span class="s1"> 
+</span><span class="s4">// matching for vertex u is possible</span><span class="s1"> 
+</span><span class="s3">bool </span><span class="s1">bpm(</span><span class="s3">bool </span><span class="s1">bpGraph[M][N], </span><span class="s3">int </span><span class="s1">u, </span><span class="s3">bool </span><span class="s1">seen[], </span><span class="s3">int </span><span class="s1">matchR[]) { 
+    </span><span class="s4">// Try every job one by one</span><span class="s1"> 
+    </span><span class="s3">for </span><span class="s1">(</span><span class="s3">int </span><span class="s1">v = </span><span class="s5">0</span><span class="s1">; v &lt; N; v++)  { 
+        </span><span class="s4">// If applicant u is interested in job v and v is</span><span class="s1"> 
+        </span><span class="s4">// not visited</span><span class="s1"> 
+        </span><span class="s3">if </span><span class="s1">(bpGraph[u][v] &amp;&amp; !seen[v]) { 
+            seen[v] = </span><span class="s3">true</span><span class="s1">; </span><span class="s4">// Mark v as visited</span><span class="s1"> 
+ 
+            </span><span class="s3">if </span><span class="s1">(matchR[v] &lt; </span><span class="s5">0 </span><span class="s1">|| bpm(bpGraph, matchR[v], seen, matchR)) { 
+                matchR[v] = u; 
+                </span><span class="s3">return true</span><span class="s1">; 
+            } 
+        } 
+    } 
+    </span><span class="s3">return false</span><span class="s1">; 
+} 
+ 
+</span><span class="s4">// Returns maximum number of matching from M to N</span><span class="s1"> 
+</span><span class="s3">int </span><span class="s1">maxBPM(</span><span class="s3">bool </span><span class="s1">bpGraph[M][N]) { 
+ 
+    </span><span class="s3">int </span><span class="s1">matchR[N]; 
+ 
+    memset(matchR, -</span><span class="s5">1</span><span class="s1">, </span><span class="s3">sizeof</span><span class="s1">(matchR)); 
+ 
+    </span><span class="s3">int </span><span class="s1">result = </span><span class="s5">0</span><span class="s1">; </span><span class="s4">// Count of jobs assigned to applicants</span><span class="s1"> 
+    </span><span class="s3">for </span><span class="s1">(</span><span class="s3">int </span><span class="s1">u = </span><span class="s5">0</span><span class="s1">; u &lt; M; u++) { 
+        </span><span class="s3">bool </span><span class="s1">seen[N]; 
+        memset(seen, </span><span class="s5">0</span><span class="s1">, </span><span class="s3">sizeof</span><span class="s1">(seen)); 
+ 
+        </span><span class="s4">// Find if the applicant 'u' can get a job</span><span class="s1"> 
+        </span><span class="s3">if </span><span class="s1">(bpm(bpGraph, u, seen, matchR)) 
+            result++; 
+    } 
+    </span><span class="s3">return </span><span class="s1">result; 
+} 
+ 
+</span><span class="s4">// Driver program to test above functions</span><span class="s1"> 
+</span><span class="s3">int </span><span class="s1">main() { 
+    </span><span class="s4">// Let us create a bpGraph shown in the above example</span><span class="s1"> 
+    </span><span class="s3">bool </span><span class="s1">bpGraph[M][N] = {  {</span><span class="s5">0</span><span class="s1">, </span><span class="s5">1</span><span class="s1">, </span><span class="s5">1</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">}, 
+                            {</span><span class="s5">1</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">1</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">}, 
+                            {</span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">1</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">}, 
+                            {</span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">1</span><span class="s1">, </span><span class="s5">1</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">}, 
+                            {</span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">}, 
+                            {</span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">0</span><span class="s1">, </span><span class="s5">1</span><span class="s1">} 
+    }; 
+ 
+    cout &lt;&lt; </span><span class="s2">&quot;Maximum number of applicants that can get job is &quot; </span><span class="s1">&lt;&lt; maxBPM(bpGraph); 
+ 
+    </span><span class="s3">return </span><span class="s5">0</span><span class="s1">; 
+}</span></pre>
+</body>
+</html>

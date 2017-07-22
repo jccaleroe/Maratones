@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>Binary.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Binary.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">Bonus; 
+ 
+</span><span class="s0">public class </span><span class="s1">Binary { 
+ 
+    </span><span class="s0">public void </span><span class="s1">ToBinary(</span><span class="s0">int </span><span class="s1">x) { 
+        </span><span class="s0">int </span><span class="s1">binary = </span><span class="s2">0</span><span class="s1">; 
+        </span><span class="s0">int </span><span class="s1">aux = </span><span class="s2">1</span><span class="s1">; 
+        </span><span class="s0">while </span><span class="s1">(x &gt; </span><span class="s2">0</span><span class="s1">) { 
+            </span><span class="s0">if </span><span class="s1">(x % </span><span class="s2">2 </span><span class="s1">== </span><span class="s2">1</span><span class="s1">) { 
+                binary += aux; 
+            } 
+            aux *= </span><span class="s2">10</span><span class="s1">; 
+            x /= </span><span class="s2">2</span><span class="s1">; 
+        } 
+        System.out.println(binary + </span><span class="s3">&quot; in binary&quot;</span><span class="s1">); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">ToBaseThree(</span><span class="s0">int </span><span class="s1">x) { 
+        </span><span class="s0">int </span><span class="s1">Three = </span><span class="s2">0</span><span class="s1">; 
+        </span><span class="s0">int </span><span class="s1">aux = </span><span class="s2">1</span><span class="s1">; 
+        </span><span class="s0">while </span><span class="s1">(x &gt; </span><span class="s2">0</span><span class="s1">) { 
+            Three += (x % </span><span class="s2">3</span><span class="s1">) * aux; 
+            aux *= </span><span class="s2">10</span><span class="s1">; 
+            x /= </span><span class="s2">3</span><span class="s1">; 
+        } 
+        System.out.println(Three + </span><span class="s3">&quot; in base three&quot;</span><span class="s1">); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">ToBaseFour(</span><span class="s0">int </span><span class="s1">x) { 
+        </span><span class="s0">int </span><span class="s1">Four = </span><span class="s2">0</span><span class="s1">; 
+        </span><span class="s0">int </span><span class="s1">aux = </span><span class="s2">1</span><span class="s1">; 
+        </span><span class="s0">while </span><span class="s1">(x &gt; </span><span class="s2">0</span><span class="s1">) { 
+            Four += (x % </span><span class="s2">4</span><span class="s1">) * aux; 
+            aux *= </span><span class="s2">10</span><span class="s1">; 
+            x /= </span><span class="s2">4</span><span class="s1">; 
+        } 
+        System.out.println(Four + </span><span class="s3">&quot; in base four&quot;</span><span class="s1">); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">ToBaseSix(</span><span class="s0">int </span><span class="s1">x) { 
+        </span><span class="s0">int </span><span class="s1">Six = </span><span class="s2">0</span><span class="s1">; 
+        </span><span class="s0">int </span><span class="s1">aux = </span><span class="s2">1</span><span class="s1">; 
+        </span><span class="s0">while </span><span class="s1">(x &gt; </span><span class="s2">0</span><span class="s1">) { 
+            Six += (x % </span><span class="s2">6</span><span class="s1">) * aux; 
+            aux *= </span><span class="s2">10</span><span class="s1">; 
+            x /= </span><span class="s2">6</span><span class="s1">; 
+        } 
+        System.out.println(Six + </span><span class="s3">&quot; in base six&quot;</span><span class="s1">); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">BinaryToDecimal(</span><span class="s0">int </span><span class="s1">x) { 
+        </span><span class="s0">int </span><span class="s1">tmp = x; 
+        </span><span class="s0">boolean </span><span class="s1">isBinary = </span><span class="s0">true</span><span class="s1">; 
+        </span><span class="s0">while </span><span class="s1">(tmp &gt; </span><span class="s2">0</span><span class="s1">) { 
+            </span><span class="s0">if </span><span class="s1">(tmp % </span><span class="s2">10 </span><span class="s1">&gt; </span><span class="s2">1</span><span class="s1">) { 
+                isBinary = </span><span class="s0">false</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            } 
+            tmp /= </span><span class="s2">10</span><span class="s1">; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(isBinary) { 
+            </span><span class="s0">int </span><span class="s1">exponent = </span><span class="s2">0</span><span class="s1">; 
+            </span><span class="s0">int </span><span class="s1">aux = </span><span class="s2">0</span><span class="s1">; 
+            </span><span class="s0">while </span><span class="s1">(x &gt; </span><span class="s2">0</span><span class="s1">) { 
+                tmp = x % </span><span class="s2">10</span><span class="s1">; 
+                </span><span class="s0">if </span><span class="s1">(tmp == </span><span class="s2">1</span><span class="s1">) { 
+                    tmp *= exponential(</span><span class="s2">2</span><span class="s1">, exponent); 
+                } 
+                exponent++; 
+                aux += tmp; 
+                x /= </span><span class="s2">10</span><span class="s1">; 
+            } 
+            System.out.println(aux + </span><span class="s3">&quot; from binary to decimal&quot;</span><span class="s1">); 
+        } 
+    } 
+ 
+    </span><span class="s0">public int </span><span class="s1">exponential(</span><span class="s0">int </span><span class="s1">a, </span><span class="s0">int </span><span class="s1">x) { 
+        </span><span class="s0">if </span><span class="s1">(x == </span><span class="s2">0</span><span class="s1">) { 
+            a = </span><span class="s2">1</span><span class="s1">; 
+            </span><span class="s0">return </span><span class="s1">a; 
+        } 
+        </span><span class="s0">int </span><span class="s1">aux = a; 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">1</span><span class="s1">; i &lt; x; i++) { 
+            a *= aux; 
+        } 
+        </span><span class="s0">return </span><span class="s1">a; 
+    } 
+ 
+    </span><span class="s0">public static void </span><span class="s1">main(String[] args) { 
+ 
+        Binary a = </span><span class="s0">new </span><span class="s1">Binary(); 
+        a.ToBinary(</span><span class="s2">2</span><span class="s1">); 
+        a.ToBaseThree(</span><span class="s2">3</span><span class="s1">); 
+        a.ToBaseFour(</span><span class="s2">4</span><span class="s1">); 
+        a.ToBaseSix(</span><span class="s2">6</span><span class="s1">); 
+        a.BinaryToDecimal(</span><span class="s2">1010</span><span class="s1">); 
+    } 
+}</span></pre>
+</body>
+</html>

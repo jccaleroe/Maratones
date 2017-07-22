@@ -5,13 +5,13 @@ import java.util.PriorityQueue;
 
 public class CuriousFleas implements Comparable<CuriousFleas> {
 
-    static int[] xAxis = {1, 0, -1, 0};
-    static int[] yAxis = {0, 1, 0, -1};
-    ArrayList<Integer> fleas;
-    int die, diePos;
-    int fleasTaken, depth;
+    private static int[] xAxis = {1, 0, -1, 0};
+    private static int[] yAxis = {0, 1, 0, -1};
+    private ArrayList<Integer> fleas;
+    private int die, diePos;
+    private int fleasTaken, depth;
 
-    CuriousFleas(ArrayList<Integer> fleas, int die, int diePos, int fleasTaken) {
+    private CuriousFleas(ArrayList<Integer> fleas, int die, int diePos, int fleasTaken) {
         this.fleas = fleas;
         this.die = die;
         this.diePos = diePos;
@@ -19,7 +19,7 @@ public class CuriousFleas implements Comparable<CuriousFleas> {
         depth = 0;
     }
 
-    CuriousFleas(CuriousFleas curiousFleas) {
+    private CuriousFleas(CuriousFleas curiousFleas) {
         fleas = new ArrayList<>( curiousFleas.fleas );
         die = curiousFleas.die;
         diePos = curiousFleas.diePos;

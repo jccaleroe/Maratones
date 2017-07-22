@@ -12,8 +12,7 @@ const int maxn = 1e6 + 10;
 const int inf = 1e18 ;
 int cnt[maxn];
 int dp[2][2],dp2[2][2];
-int32_t main()
-{
+int32_t main() {
     int n = in();
     for (int i = 0 ; i < n ; i ++) cnt[in()] ++ ;
     dp[0][0] = 0;

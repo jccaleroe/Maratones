@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>GCD.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(128,128,0); }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+.s4 { color: rgb(0,0,128); font-weight: bold; }
+.s5 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+GCD.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">//</span><span class="s1"> 
+</span><span class="s0">// Created by juan on 16/04/17.</span><span class="s1"> 
+</span><span class="s0">//</span><span class="s1"> 
+ 
+</span><span class="s2">#include </span><span class="s3">&lt;iostream&gt;</span><span class="s1"> 
+ 
+</span><span class="s4">using namespace </span><span class="s1">std; 
+ 
+</span><span class="s4">typedef long long </span><span class="s1">ll; 
+ 
+ll GCD(ll a,ll b) { 
+    </span><span class="s4">while </span><span class="s1">(b &gt; </span><span class="s5">0</span><span class="s1">) { 
+        a = a % b; 
+        a ^= b; 
+        b ^= a; 
+        a ^= b; 
+    } 
+    </span><span class="s4">return </span><span class="s1">a; 
+} 
+ 
+ll LCM(ll a, ll b){ 
+    ll t = a/GCD(a,b); 
+    </span><span class="s4">return </span><span class="s1">t*b; 
+} 
+ 
+</span><span class="s4">int </span><span class="s1">main() { 
+    cout &lt;&lt; GCD(</span><span class="s5">4</span><span class="s1">,</span><span class="s5">8</span><span class="s1">) &lt;&lt; endl; 
+    cout &lt;&lt; LCM(</span><span class="s5">4</span><span class="s1">,</span><span class="s5">8</span><span class="s1">) &lt;&lt; endl; 
+    </span><span class="s4">return </span><span class="s5">0</span><span class="s1">; 
+}</span></pre>
+</body>
+</html>
