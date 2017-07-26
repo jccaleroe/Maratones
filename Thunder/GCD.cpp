@@ -1,9 +1,5 @@
-//
-// Created by juan on 16/04/17.
-//
-
+#include <complex>
 #include <iostream>
-
 using namespace std;
 
 typedef long long ll;
@@ -26,5 +22,15 @@ ll LCM(ll a, ll b){
 int main() {
     cout << GCD(4,8) << endl;
     cout << LCM(4,8) << endl;
-    return 0;
+
+    while(cin >> R1 >> X1 >> Y1 >> R2 >> X2 >> Y2){
+        point a(X1, Y1);
+        point b(X2, Y2);
+
+        d = abs(a - b);
+        if (R1 >= d+R2)
+            cout << "RICO\n";
+        else
+            cout << "MORTO\n";
+    }
 }

@@ -6,9 +6,8 @@ public class Binary {
         int binary = 0;
         int aux = 1;
         while (x > 0) {
-            if (x % 2 == 1) {
+            if (x % 2 == 1)
                 binary += aux;
-            }
             aux *= 10;
             x /= 2;
         }
@@ -25,18 +24,6 @@ public class Binary {
         }
         System.out.println(Three + " in base three");
     }
-
-    public void ToBaseFour(int x) {
-        int Four = 0;
-        int aux = 1;
-        while (x > 0) {
-            Four += (x % 4) * aux;
-            aux *= 10;
-            x /= 4;
-        }
-        System.out.println(Four + " in base four");
-    }
-
     public void ToBaseSix(int x) {
         int Six = 0;
         int aux = 1;
@@ -63,36 +50,11 @@ public class Binary {
             int aux = 0;
             while (x > 0) {
                 tmp = x % 10;
-                if (tmp == 1) {
-                    tmp *= exponential(2, exponent);
-                }
+                if (tmp == 1)
+                    tmp *= Math.pow(2, exponent);
                 exponent++;
                 aux += tmp;
                 x /= 10;
             }
             System.out.println(aux + " from binary to decimal");
-        }
-    }
-
-    public int exponential(int a, int x) {
-        if (x == 0) {
-            a = 1;
-            return a;
-        }
-        int aux = a;
-        for (int i = 1; i < x; i++) {
-            a *= aux;
-        }
-        return a;
-    }
-
-    public static void main(String[] args) {
-
-        Binary a = new Binary();
-        a.ToBinary(2);
-        a.ToBaseThree(3);
-        a.ToBaseFour(4);
-        a.ToBaseSix(6);
-        a.BinaryToDecimal(1010);
-    }
-}
+        }}}

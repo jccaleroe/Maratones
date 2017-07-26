@@ -1,11 +1,4 @@
-//
-// Created by juan on 26/03/17.
-//
-
-#include <iostream>
-#include <queue>
-#include <climits>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 class MyComparator{
@@ -22,7 +15,6 @@ public:
 };
 
 typedef pair<int, int> iPair;
-
 vector<vector<iPair> > graph (9, vector<iPair>());
 
 void addEdge(int u, int v, int w){
@@ -47,41 +39,22 @@ void shortestPath(int src){
                 // Updating distance of v
                 dist[v] = dist[u] + w;
                 pq.push(make_pair(dist[v], v));
-            }
-        }
-    }
+            }}}
     printf("Vertex Distance from Source\n");
-    for (int i = 0; i < 9; ++i)
-        printf("%d \t\t %d\n", i, dist[i]);
+    for (int i = 0; i < 9; ++i) printf("%d \t\t %d\n", i, dist[i]);
 }
 
 int main(){
-    addEdge(0, 1, 4);
-    addEdge(0, 7, 8);
-    addEdge(1, 2, 8);
-    addEdge(1, 7, 11);
-    addEdge(2, 3, 7);
-    addEdge(2, 8, 2);
-    addEdge(2, 5, 4);
-    addEdge(3, 4, 9);
-    addEdge(3, 5, 14);
-    addEdge(4, 5, 10);
-    addEdge(5, 6, 2);
-    addEdge(6, 7, 1);
-    addEdge(6, 8, 6);
-    addEdge(7, 8, 7);
-
+    addEdge(0, 1, 4);addEdge(0, 7, 8);addEdge(1, 2, 8);addEdge(1, 7, 11);addEdge(2, 3, 7);
+    addEdge(2, 8, 2);addEdge(2, 5, 4);addEdge(3, 4, 9);addEdge(3, 5, 14);addEdge(4, 5, 10);
+    addEdge(5, 6, 2);addEdge(6, 7, 1);addEdge(6, 8, 6);addEdge(7, 8, 7);
     shortestPath(0);
-
     priority_queue<int, vector<int>, MyComparator > pq(MyComparator(true));
     //priority_queue<int, vector<int>, grater<int> > pq;
-    pq.push(4);
-    pq.push(8);
-    pq.push(2);
+    pq.push(4);pq.push(8);pq.push(2);
     while (!pq.empty()){
         int tmp = pq.top();
         pq.pop();
         cout << tmp << " ";
     }
-    cout << endl;
-}
+    cout << endl; }

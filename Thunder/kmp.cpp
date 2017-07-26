@@ -26,9 +26,7 @@ int LPSArray(char *pat, int *lps ){
                 lps[i] = 0;
                 i++;
             }
-        }
-    }
-}
+        }}}
 
 int main(){
     while(cin >> n){
@@ -57,6 +55,4 @@ int main(){
                     i++;
             }
         }
-        cout << endl;
-    }
-}
+        cout << endl; }}
