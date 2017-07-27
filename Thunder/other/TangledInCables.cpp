@@ -1,21 +1,9 @@
-//
-// Created by https://github.com/andmej
-//
-
-#include <stdio.h>
-#include <string>
-#include <set>
-#include <vector>
-#include <queue>
-#include <iostream>
-#include <map>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 typedef string node;
 typedef pair<double, node> edge;
 typedef map<node, vector<edge> > graph;
-
 
 int main(){
     double length;

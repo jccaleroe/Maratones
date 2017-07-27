@@ -1,7 +1,3 @@
-//
-// Created by juan on 13/03/17.
-//
-
 #include <complex>
 #include <iostream>
 

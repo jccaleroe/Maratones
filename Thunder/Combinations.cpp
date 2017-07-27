@@ -6,7 +6,6 @@
 
 using namespace std;
 
-/* Function to swap values at two pointers */
 void swap(char *x, char *y) {
     char temp;
     temp = *x;
@@ -15,7 +14,6 @@ void swap(char *x, char *y) {
 }
 
 /* Function to print permutations of string
-   This function takes three parameters:
    1. String
    2. Starting index of the string
    3. Ending index of the string. */
@@ -32,8 +30,7 @@ void permute(char *a, int l, int r) {
     }
 }
 
-vector<int> people;
-vector<int> combination;
+vector<int> people, combination;
 
 void pretty_print(const vector<int>& v) {
     static int count = 0;
@@ -55,8 +52,6 @@ void go(int offset, int k) {
 }
 
 int main() {
-
-
     char str[] = "ABC";
     int n = strlen(str);
     permute(str, 0, n-1);

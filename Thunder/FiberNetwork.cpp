@@ -1,27 +1,17 @@
-//
-// Created by juan on 10/04/17.
-//
-
 #include <iostream>
 #include <vector>
 #include <cstring>
-
 using namespace std;
 
 vector<vector<pair<int, string> > > v;
-bool seen[200];
-bool ans[26];
-
-
+bool seen[200], ans[26];
 int n, a, b;
 
 void search(int u, int mask){
-    //cout << u << " " << mask << endl;
     if (u == b){
         for (int j = 0; j < 26; j++){
             if ((mask >> j) & 1)
-                ans[j] = 1;
-        }
+                ans[j] = 1; }
         return;
     }
     seen[u] = 1;
@@ -31,16 +21,14 @@ void search(int u, int mask){
         if (!seen[v[u][i].first]){
             aux = v[u][i].second;
             tmp = 0;
-            for (int j = 0; j < aux.size(); j++){
+            for (int j = 0; j < aux.size(); j++)
                 if ((mask >> (aux[j]-'a')) & 1)
                     tmp += (1 << (aux[j]-'a'));
-            }
             search(v[u][i].first, tmp);
         }
     }
     seen[u] = 0;
 }
-
 void search(){
     seen[a] = 1;
     string aux;
@@ -50,15 +38,11 @@ void search(){
         mask = 0;
         for (int j = 0; j < aux.size(); j++)
             mask += (1 << (aux[j]-'a'));
-
         search(v[a][i].first, mask);
     }
     seen[a] = 0;
 }
-
 int main(){
-    cin.tie(0);
-    ios_base::sync_with_stdio(0);
     bool  flag;
     string comp;
     cin >> n;
@@ -72,8 +56,7 @@ int main(){
         }
         cin >> a >> b;
         while (a != 0 || b != 0){
-            a--;
-            b--;
+            a--; b--;
             memset(ans, 0, sizeof(ans));
             flag = false;
             search();
@@ -81,14 +64,11 @@ int main(){
                 if (ans[i]) {
                     flag = true;
                     cout << (char) (i + 'a');
-                }
-            }
+                }}
             if (!flag)
                 cout << '-';
             cout << endl;
             cin >> a >> b;
         }
         cout << endl;
-        cin >> n;
-    }
-}
+        cin >> n; }}

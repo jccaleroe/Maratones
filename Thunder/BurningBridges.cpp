@@ -1,7 +1,3 @@
-//
-// Created by juan on 1/05/17.
-//
-
 #include<iostream>
 #include <vector>
 #include <algorithm>
@@ -15,8 +11,7 @@ vector<int> answer, disc, parent, low;
 vector<bool> visited;
 
 //These are for machete
-set<int> nodes;
-set<int> banned;
+set<int> nodes, banned;
 map<int, int> m;
 
 int N, M, t;
@@ -42,9 +37,6 @@ void dfs(int u) {
 }
 
 int main(){
-    cin.tie(0);
-	cout.tie(0);
-    ios_base::sync_with_stdio(0);
     int T, a, b, tmp;
     cin >> T;
     for (int c = 1; c <= T; c++){
