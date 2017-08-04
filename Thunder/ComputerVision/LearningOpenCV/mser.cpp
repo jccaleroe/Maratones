@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < regions.size(); i++)
         rectangle(img, mser_bbox[i], CV_RGB(0, 255, 0));
 
-    imshow("mser", img);
+    imshow("TextRecognition", img);
     waitKey(0);
     return 0;
 }
