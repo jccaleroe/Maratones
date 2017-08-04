@@ -1,8 +1,6 @@
-//
-// Created by juan on 16/02/17.
-//
 
-#include	<opencv2/highgui/highgui.hpp>
+
+#include <opencv2/highgui/highgui.hpp>
 #include "iostream"
 
 using namespace cv;

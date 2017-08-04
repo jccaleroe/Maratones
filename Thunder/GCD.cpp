@@ -3,6 +3,7 @@
 using namespace std;
 
 typedef long long ll;
+typedef complex<double> point;
 
 ll GCD(ll a,ll b) {
     while (b > 0) {
@@ -22,7 +23,8 @@ ll LCM(ll a, ll b){
 int main() {
     cout << GCD(4,8) << endl;
     cout << LCM(4,8) << endl;
-
+    int R1, X1, Y1, R2, X2, Y2;
+    double d;
     while(cin >> R1 >> X1 >> Y1 >> R2 >> X2 >> Y2){
         point a(X1, Y1);
         point b(X2, Y2);
