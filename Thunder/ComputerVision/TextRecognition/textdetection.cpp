@@ -51,8 +51,7 @@ int main(int argc, const char * argv[])
     // Apply the default cascade classifier to each independent channel (could be done in parallel)
     cout << "Extracting Class Specific Extremal Regions from " << (int)channels.size() << " channels ..." << endl;
     cout << "    (...) this may take a while (...)" << endl << endl;
-    for (int c=0; c<(int)channels.size(); c++)
-    {
+    for (int c=0; c<(int)channels.size(); c++) {
         er_filter1->run(channels[c], regions[c]);
         er_filter2->run(channels[c], regions[c]);
     }
@@ -78,24 +77,19 @@ int main(int argc, const char * argv[])
     er_filter2.release();
     regions.clear();
     if (!groups_boxes.empty())
-    {
         groups_boxes.clear();
-    }
 }
 
 // helper functions
 
-void show_help_and_exit(const char *cmd)
-{
+void show_help_and_exit(const char *cmd) {
     cout << "    Usage: " << cmd << " <input_image> " << endl;
     cout << "    Default classifier files (trained_classifierNM*.xml) must be in current directory" << endl << endl;
     exit(-1);
 }
 
-void groups_draw(Mat &src, vector<Rect> &groups)
-{
-    for (int i=(int)groups.size()-1; i>=0; i--)
-    {
+void groups_draw(Mat &src, vector<Rect> &groups) {
+    for (int i=(int)groups.size()-1; i>=0; i--) {
         if (src.type() == CV_8UC3)
             rectangle(src,groups.at(i).tl(),groups.at(i).br(),Scalar( 0, 255, 255 ), 3, 8 );
         else
@@ -103,13 +97,10 @@ void groups_draw(Mat &src, vector<Rect> &groups)
     }
 }
 
-void er_show(vector<Mat> &channels, vector<vector<ERStat> > &regions)
-{
-    for (int c=0; c<(int)channels.size(); c++)
-    {
+void er_show(vector<Mat> &channels, vector<vector<ERStat> > &regions) {
+    for (int c=0; c<(int)channels.size(); c++) {
         Mat dst = Mat::zeros(channels[0].rows+2,channels[0].cols+2,CV_8UC1);
-        for (int r=0; r<(int)regions[c].size(); r++)
-        {
+        for (int r=0; r<(int)regions[c].size(); r++) {
             ERStat er = regions[c][r];
             if (er.parent != NULL) // deprecate the root region
             {

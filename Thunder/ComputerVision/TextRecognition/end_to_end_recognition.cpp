@@ -29,8 +29,7 @@ bool   sort_by_lenght(const string &a, const string &b);
 void   er_draw(vector<Mat> &channels, vector<vector<ERStat> > &regions, vector<Vec2i> group, Mat& segmentation);
 
 //Perform text detection and recognition and evaluate results using edit distance
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     cout << endl << argv[0] << endl << endl;
     cout << "A demo program of End-to-end Scene Text Detection and Recognition: " << endl;
     cout << "Shows the use of the Tesseract OCR API with the Extremal Region Filter algorithm described in:" << endl;
@@ -39,8 +38,7 @@ int main(int argc, char* argv[])
     Mat image;
     if(argc>1)
         image  = imread(argv[1]);
-    else
-    {
+    else {
         cout << "    Usage: " << argv[0] << " <input_image> [<gt_word1> ... <gt_wordN>]" << endl;
         return(0);
     }
@@ -67,8 +65,7 @@ int main(int argc, char* argv[])
 
     vector<vector<ERStat> > regions(channels.size());
     // Apply the default cascade classifier to each independent channel (could be done in parallel)
-    for (int c=0; c<(int)channels.size(); c++)
-    {
+    for (int c=0; c<(int)channels.size(); c++) {
         er_filter1->run(channels[c], regions[c]);
         er_filter2->run(channels[c], regions[c]);
     }
@@ -76,12 +73,10 @@ int main(int argc, char* argv[])
 
     Mat out_img_decomposition= Mat::zeros(image.rows+2, image.cols+2, CV_8UC1);
     vector<Vec2i> tmp_group;
-    for (int i=0; i<(int)regions.size(); i++)
-    {
+    for (int i=0; i<(int)regions.size(); i++) {
         for (int j=0; j<(int)regions[i].size();j++)
-        {
             tmp_group.push_back(Vec2i(i,j));
-        }
+
         Mat tmp= Mat::zeros(image.rows+2, image.cols+2, CV_8UC1);
         er_draw(channels, regions, tmp_group, tmp);
         if (i > 0)
@@ -96,8 +91,6 @@ int main(int argc, char* argv[])
     vector<Rect> nm_boxes;
     erGrouping(image, channels, regions, nm_region_groups, nm_boxes,ERGROUPING_ORIENTATION_HORIZ);
     cout << "TIME_GROUPING = " << ((double)getTickCount() - t_g)*1000/getTickFrequency() << endl;
-
-
 
     /*Text Recognition (OCR)*/
 
@@ -117,9 +110,7 @@ int main(int argc, char* argv[])
 
     t_r = (double)getTickCount();
 
-    for (int i=0; i<(int)nm_boxes.size(); i++)
-    {
-
+    for (int i=0; i<(int)nm_boxes.size(); i++) {
         rectangle(out_img_detection, nm_boxes[i].tl(), nm_boxes[i].br(), Scalar(0,255,255), 3);
 
         Mat group_img = Mat::zeros(image.rows+2, image.cols+2, CV_8UC1);
@@ -140,8 +131,7 @@ int main(int argc, char* argv[])
         if (output.size() < 3)
             continue;
 
-        for (int j=0; j<(int)boxes.size(); j++)
-        {
+        for (int j=0; j<(int)boxes.size(); j++) {
             boxes[j].x += nm_boxes[i].x-15;
             boxes[j].y += nm_boxes[i].y-15;
 
@@ -158,7 +148,6 @@ int main(int argc, char* argv[])
             putText(out_img, words[j], boxes[j].tl()-Point(1,1), FONT_HERSHEY_SIMPLEX, scale_font, Scalar(255,255,255),(int)(3*scale_font));
             out_img_segmentation = out_img_segmentation | group_segmentation;
         }
-
     }
 
     cout << "TIME_OCR = " << ((double)getTickCount() - t_r)*1000/getTickFrequency() << endl;
@@ -166,40 +155,32 @@ int main(int argc, char* argv[])
 
     /* Recognition evaluation with (approximate) Hungarian matching and edit distances */
 
-    if(argc>2)
-    {
+    if(argc>2) {
         int num_gt_characters   = 0;
         vector<string> words_gt;
-        for (int i=2; i<argc; i++)
-        {
+        for (int i=2; i<argc; i++) {
             string s = string(argv[i]);
-            if (s.size() > 0)
-            {
+            if (s.size() > 0) {
                 words_gt.push_back(string(argv[i]));
                 //cout << " GT word " << words_gt[words_gt.size()-1] << endl;
                 num_gt_characters += (int)(words_gt[words_gt.size()-1].size());
             }
         }
 
-        if (words_detection.empty())
-        {
+        if (words_detection.empty()) {
             //cout << endl << "number of characters in gt = " << num_gt_characters << endl;
             cout << "TOTAL_EDIT_DISTANCE = " << num_gt_characters << endl;
             cout << "EDIT_DISTANCE_RATIO = 1" << endl;
         }
-        else
-        {
-
+        else {
             sort(words_gt.begin(),words_gt.end(),sort_by_lenght);
 
             int max_dist=0;
             vector< vector<int> > assignment_mat;
-            for (int i=0; i<(int)words_gt.size(); i++)
-            {
+            for (int i=0; i<(int)words_gt.size(); i++) {
                 vector<int> assignment_row(words_detection.size(),0);
                 assignment_mat.push_back(assignment_row);
-                for (int j=0; j<(int)words_detection.size(); j++)
-                {
+                for (int j=0; j<(int)words_detection.size(); j++) {
                     assignment_mat[i][j] = (int)(edit_distance(words_gt[i],words_detection[j]));
                     max_dist = max(max_dist,assignment_mat[i][j]);
                 }
@@ -277,13 +258,11 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-size_t min(size_t x, size_t y, size_t z)
-{
+size_t min(size_t x, size_t y, size_t z) {
     return x < y ? min(x,z) : min(y,z);
 }
 
-size_t edit_distance(const string& A, const string& B)
-{
+size_t edit_distance(const string& A, const string& B) {
     size_t NA = A.size();
     size_t NB = B.size();
 

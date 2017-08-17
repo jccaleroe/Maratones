@@ -42,8 +42,8 @@ int main(int argc, char** argv){
         std:: cout << "Wrong argument";
         return -1;
     }
-    half(img);
+    //half(img);
     grayAndCanny(img);
-    smooth(img);
+    //smooth(img);
     return 0;
 }
