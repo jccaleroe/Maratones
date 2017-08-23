@@ -8,6 +8,6 @@
 
 #include "ccv.h"
 
-ccv_array_t* swt(char* file);
+ccv_array_t* swt(const char *file);
 
 #endif //THUNDER_SWTDETECT_H

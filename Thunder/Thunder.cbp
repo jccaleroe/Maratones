@@ -91,7 +91,7 @@
 		<Unit filename="/home/juan/Documents/Maratones/Thunder/ComputerVision/detectText.cpp">
 			<Option target="Thunder"/>
 		</Unit>
-		<Unit filename="/home/juan/Documents/Maratones/Thunder/ComputerVision/intersect.cpp">
+		<Unit filename="/home/juan/Documents/Maratones/Thunder/ComputerVision/filters.cpp">
 			<Option target="Thunder"/>
 		</Unit>
 		<Unit filename="/home/juan/Documents/Maratones/Thunder/ComputerVision/mser.cpp">
@@ -107,9 +107,6 @@
 			<Option target="Thunder"/>
 		</Unit>
 		<Unit filename="/home/juan/Documents/Maratones/Thunder/ComputerVision/textdetection.cpp">
-			<Option target="Thunder"/>
-		</Unit>
-		<Unit filename="/home/juan/Documents/Maratones/Thunder/ComputerVision/utils.h">
 			<Option target="Thunder"/>
 		</Unit>
 		<Unit filename="/home/juan/Documents/Maratones/Thunder/CMakeLists.txt">

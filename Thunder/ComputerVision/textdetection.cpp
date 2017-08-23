@@ -18,7 +18,7 @@ using namespace cv;
 using namespace cv::text;
 
 
-vector<Rect> extremal(char* file){
+vector<Rect> extremal(const char* file){
     Mat src = imread(file);
 
     // Extract channels to be processed individually

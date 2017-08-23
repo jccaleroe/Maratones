@@ -150,32 +150,32 @@ ComputerVision/detectText.cpp.s:
 	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/detectText.cpp.s
 .PHONY : ComputerVision/detectText.cpp.s
 
-ComputerVision/intersect.o: ComputerVision/intersect.cpp.o
+ComputerVision/filters.o: ComputerVision/filters.cpp.o
 
-.PHONY : ComputerVision/intersect.o
+.PHONY : ComputerVision/filters.o
 
 # target to build an object file
-ComputerVision/intersect.cpp.o:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/intersect.cpp.o
-.PHONY : ComputerVision/intersect.cpp.o
+ComputerVision/filters.cpp.o:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/filters.cpp.o
+.PHONY : ComputerVision/filters.cpp.o
 
-ComputerVision/intersect.i: ComputerVision/intersect.cpp.i
+ComputerVision/filters.i: ComputerVision/filters.cpp.i
 
-.PHONY : ComputerVision/intersect.i
+.PHONY : ComputerVision/filters.i
 
 # target to preprocess a source file
-ComputerVision/intersect.cpp.i:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/intersect.cpp.i
-.PHONY : ComputerVision/intersect.cpp.i
+ComputerVision/filters.cpp.i:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/filters.cpp.i
+.PHONY : ComputerVision/filters.cpp.i
 
-ComputerVision/intersect.s: ComputerVision/intersect.cpp.s
+ComputerVision/filters.s: ComputerVision/filters.cpp.s
 
-.PHONY : ComputerVision/intersect.s
+.PHONY : ComputerVision/filters.s
 
 # target to generate assembly for a file
-ComputerVision/intersect.cpp.s:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/intersect.cpp.s
-.PHONY : ComputerVision/intersect.cpp.s
+ComputerVision/filters.cpp.s:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/filters.cpp.s
+.PHONY : ComputerVision/filters.cpp.s
 
 ComputerVision/mser.o: ComputerVision/mser.cpp.o
 
@@ -270,9 +270,9 @@ help:
 	@echo "... ComputerVision/detectText.o"
 	@echo "... ComputerVision/detectText.i"
 	@echo "... ComputerVision/detectText.s"
-	@echo "... ComputerVision/intersect.o"
-	@echo "... ComputerVision/intersect.i"
-	@echo "... ComputerVision/intersect.s"
+	@echo "... ComputerVision/filters.o"
+	@echo "... ComputerVision/filters.i"
+	@echo "... ComputerVision/filters.s"
 	@echo "... ComputerVision/mser.o"
 	@echo "... ComputerVision/mser.i"
 	@echo "... ComputerVision/mser.s"

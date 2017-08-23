@@ -10,24 +10,39 @@ extern "C" {
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/opencv.hpp>
 #include "mser.h"
+#include "filters.h"
 #include "extremal.h"
-#include "utils.h"
 
 using namespace std;
 using namespace cv;
 
 vector<Rect> words, bbox, extremals;
+string a, b, c, d;
 
-void detectText(char* file){
-    words.clear();
-    ccv_array_t *sbox = swt(file);
-    bbox = mser(file);
-    extremals = extremal(file);
-
+void showImages(const char* file){
+    cout << words.size() << endl;
     Mat img = imread(file, 1);
-    //Mat img2 = imread(file, 1);
-    //Mat img3 = imread(file, 1);
+    for (const auto &a : words)
+        rectangle(img, a, CV_RGB(255, 255, 0));
 
+    imshow("Words", img);
+    waitKey(0);
+}
+
+void writeFile(int f){
+    string tmp;
+    tmp.append(c);
+    tmp.append(to_string(f));
+    tmp.append(d);
+    freopen(tmp.c_str(), "w", stdout);
+    for (auto &w : words)
+        cout << w.x << "," << w.y << "," << w.x+w.width << "," << w.y << "," << w.x+w.width << "," << w.y+w.height
+             << "," << w.x << "," << w.y+w.height << "," << 0.5 << "\n";
+}
+
+void swtHelper(const char* file){
+    ccv_array_t *sbox = swt(file);
+    //Mat img2 = imread(file, 1);
 
     if (sbox != nullptr) {
         for (int i = 0; i < sbox->rnum; i++) {
@@ -38,28 +53,56 @@ void detectText(char* file){
         }
         ccv_array_free(sbox);
     }
-
-    cout << words.size() << endl;
-
     //imshow("swt", img2);
+}
 
-    extremals = filterIntersections(extremals, 0.3, 4);
+void betaFilter(){
+    if (words.empty()) return;
+    vector<Rect> tmp_bbox;
+    const float alpha = 6;
+    const double beta = 1/6;
+    for (auto &i : bbox) {
+        double ratio = i.width / i.height;
+        if (!(ratio > alpha || ratio < beta))
+            tmp_bbox.push_back(i);
+    }
+    words.clear();
+    words.insert(words.end(), tmp_bbox.begin(), tmp_bbox.end());
+}
 
-    //for (const auto &a : extremals)
-        //rectangle(img3, a, CV_RGB(0, 255, 0));
-    //imshow("Extremals", img3);
+void detectText(const char* file, int f){
+    words.clear();
+    Mat img = imread(file, 1);
+    //swtHelper(file);
 
+    //extremals = extremal(file);
+    //extremals = filterIntersections(extremals, 0.1, 6);
+
+    bbox = mser(img);
 
     words.insert(words.end(), bbox.begin(), bbox.end());
     words.insert(words.end(), extremals.begin(), extremals.end());
+    words = filterWords(words, 0.8);
+    words = greatFilter(words, img.rows, img.cols, 0.3);
 
-    for (const auto &a : words)
-        rectangle(img, a, CV_RGB(0, 255, 0));
+    writeFile(f);
 
-    imshow("Words", img);
-    waitKey(0);
+    showImages(file);
+}
+
+void icadir(){
+    a = "images/img_", b = ".jpg", c = "res/res_img_", d = ".txt";
+    string tmp;
+    for (int i = 1; i <= 92; i++){
+        tmp.clear();
+        tmp.append(a);
+        tmp.append(to_string(i));
+        tmp.append(b);
+        detectText(tmp.c_str(), i);
+    }
 }
 
 int main(int argc, char* argv[]) {
-    detectText(argv[1]);
+    //detectText(argv[1], 0);
+    icadir();
 }

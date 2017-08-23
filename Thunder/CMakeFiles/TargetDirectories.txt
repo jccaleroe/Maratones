@@ -1,3 +1,0 @@
-/home/juan/Documents/Maratones/Thunder/CMakeFiles/rebuild_cache.dir
-/home/juan/Documents/Maratones/Thunder/CMakeFiles/edit_cache.dir
-/home/juan/Documents/Maratones/Thunder/CMakeFiles/Thunder.dir

@@ -7,6 +7,6 @@
 
 #include <opencv2/opencv.hpp>
 
-std::vector<cv::Rect> mser(char *file);
+std::vector<cv::Rect> mser(cv::Mat &img);
 
 #endif //THUNDER_MSER_H

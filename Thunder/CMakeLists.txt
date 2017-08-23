@@ -10,16 +10,14 @@ link_directories("ComputerVision/ccv/lib")
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories("ComputerVision/ccv/lib")
 
-set(SOURCE_FILES ComputerVision/mser.cpp ComputerVision/swtdetect.c ComputerVision/detectText.cpp ComputerVision/textdetection.cpp ComputerVision/intersect.cpp ComputerVision/utils.h)
+set(SOURCE_FILES ComputerVision/mser.cpp ComputerVision/swtdetect.c ComputerVision/detectText.cpp
+        ComputerVision/textdetection.cpp ComputerVision/filters.cpp)
 
-#set(SOURCE_FILES ComputerVision/ccv/bin/swtdetect.c ComputerVision/ccv/bin/msermatch.c)
-#set(SOURCE_FILES ComputerVision/mser.cpp ComputerVision/swtdetect.h ComputerVision/swtdetect.c)
-
+#set(SOURCE_FILES ComputerVision/swtdetect.c)
 #set(SOURCE_FILES ComputerVision/TextRecognition/segmented_word_recognition.cpp)
 #set(SOURCE_FILES ComputerVision/TextRecognition/end_to_end_recognition.cpp)
+#set(SOURCE_FILES ComputerVision/TextRecognition/textdetection.cpp)
 #set(SOURCE_FILES ComputerVision/LearningOpenCV/chap1/smoothImage.cpp)
-
-#set(SOURCE_FILES ComputerVision/LearningOpenCV/histSample.cpp)
 
 link_libraries("ccv" "m" "jpeg" "png")
 

@@ -7,6 +7,6 @@
 
 #include <opencv2/opencv.hpp>
 
-std::vector<cv::Rect> extremal(char* file);
+std::vector<cv::Rect> extremal(const char* file);
 
 #endif //THUNDER_EXTREMAL_H

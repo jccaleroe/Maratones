@@ -1,2 +1,8 @@
 .idea
 ComputerVision/ccv
+CMakeFiles
+cmake-build-debug
+images
+gt
+res
+testImages
