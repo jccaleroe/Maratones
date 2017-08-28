@@ -11,7 +11,7 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories("ComputerVision/ccv/lib")
 
 set(SOURCE_FILES ComputerVision/mser.cpp ComputerVision/swtdetect.c ComputerVision/detectText.cpp
-        ComputerVision/textdetection.cpp ComputerVision/filters.cpp)
+        ComputerVision/textdetection.cpp ComputerVision/filters.cpp ComputerVision/clustering.cpp)
 
 #set(SOURCE_FILES ComputerVision/swtdetect.c)
 #set(SOURCE_FILES ComputerVision/TextRecognition/segmented_word_recognition.cpp)

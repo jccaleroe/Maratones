@@ -14,9 +14,17 @@ vector<Rect> greatFilter(vector<Rect> &bbox, int &rows, int &cols, float alpha){
     double size = cols*rows;
     vector<Rect> tmp;
     for(auto &i : bbox)
-        if (!(i.area()/size >= alpha || 1.0*i.width/cols >= alpha || 1.0*i.height/rows >= alpha) )
+        if (!(i.area()/size >= alpha || 1.0*i.width/cols >= alpha || 1.0*i.height/rows >= alpha))
             tmp.push_back(i);
     return tmp;
+}
+
+Rect join(Rect &a, Rect &b){
+    int x = min(a.x, b.x);
+    int y = min(a.y, b.y);
+    int width = max(a.x + a.width, b.x + b.width) - x;
+    int height = max(a.y + a.height, b.y + b.height) - y;
+    return Rect(x, y, width, height);
 }
 
 Rect intersect(Rect &a, Rect &b){

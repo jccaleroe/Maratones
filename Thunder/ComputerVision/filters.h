@@ -11,5 +11,6 @@ double intersectRatio(cv::Rect &a, cv::Rect &b);
 std::vector<cv::Rect> filterIntersections(std::vector<cv::Rect> &bbox, double delta, int max_children);
 std::vector<cv::Rect> filterWords(std::vector<cv::Rect> &bbox, double simility);
 std::vector<cv::Rect> greatFilter(std::vector<cv::Rect> &bbox, int &rows, int &cols, float alpha);
+cv::Rect join(cv::Rect &a, cv::Rect &b);
 
 #endif //THUNDER_UTILS_H

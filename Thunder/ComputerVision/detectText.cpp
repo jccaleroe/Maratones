@@ -20,10 +20,10 @@ vector<Rect> words, bbox, extremals;
 string a, b, c, d;
 
 void showImages(const char* file){
-    cout << words.size() << endl;
+    //cout << words.size() << endl;
     Mat img = imread(file, 1);
     for (const auto &a : words)
-        rectangle(img, a, CV_RGB(255, 255, 0));
+        rectangle(img, a, CV_RGB(255, 0, 0));
 
     imshow("Words", img);
     waitKey(0);
@@ -56,20 +56,6 @@ void swtHelper(const char* file){
     //imshow("swt", img2);
 }
 
-void betaFilter(){
-    if (words.empty()) return;
-    vector<Rect> tmp_bbox;
-    const float alpha = 6;
-    const double beta = 1/6;
-    for (auto &i : bbox) {
-        double ratio = i.width / i.height;
-        if (!(ratio > alpha || ratio < beta))
-            tmp_bbox.push_back(i);
-    }
-    words.clear();
-    words.insert(words.end(), tmp_bbox.begin(), tmp_bbox.end());
-}
-
 void detectText(const char* file, int f){
     words.clear();
     Mat img = imread(file, 1);
@@ -80,17 +66,17 @@ void detectText(const char* file, int f){
 
     bbox = mser(img);
 
-    words.insert(words.end(), bbox.begin(), bbox.end());
     words.insert(words.end(), extremals.begin(), extremals.end());
+    //words = greatFilter(words, img.rows, img.cols, 0.3);
+    words.insert(words.end(), bbox.begin(), bbox.end());
     words = filterWords(words, 0.8);
-    words = greatFilter(words, img.rows, img.cols, 0.3);
 
-    writeFile(f);
+    //writeFile(f);
 
     showImages(file);
 }
 
-void icadir(){
+void icdar(){
     a = "images/img_", b = ".jpg", c = "res/res_img_", d = ".txt";
     string tmp;
     for (int i = 1; i <= 92; i++){
@@ -103,6 +89,6 @@ void icadir(){
 }
 
 int main(int argc, char* argv[]) {
-    //detectText(argv[1], 0);
-    icadir();
+    detectText(argv[1], 1);
+    icdar();
 }

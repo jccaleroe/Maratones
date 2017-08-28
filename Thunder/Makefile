@@ -123,6 +123,33 @@ Thunder/fast:
 	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/build
 .PHONY : Thunder/fast
 
+ComputerVision/clustering.o: ComputerVision/clustering.cpp.o
+
+.PHONY : ComputerVision/clustering.o
+
+# target to build an object file
+ComputerVision/clustering.cpp.o:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/clustering.cpp.o
+.PHONY : ComputerVision/clustering.cpp.o
+
+ComputerVision/clustering.i: ComputerVision/clustering.cpp.i
+
+.PHONY : ComputerVision/clustering.i
+
+# target to preprocess a source file
+ComputerVision/clustering.cpp.i:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/clustering.cpp.i
+.PHONY : ComputerVision/clustering.cpp.i
+
+ComputerVision/clustering.s: ComputerVision/clustering.cpp.s
+
+.PHONY : ComputerVision/clustering.s
+
+# target to generate assembly for a file
+ComputerVision/clustering.cpp.s:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/clustering.cpp.s
+.PHONY : ComputerVision/clustering.cpp.s
+
 ComputerVision/detectText.o: ComputerVision/detectText.cpp.o
 
 .PHONY : ComputerVision/detectText.o
@@ -267,6 +294,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Thunder"
+	@echo "... ComputerVision/clustering.o"
+	@echo "... ComputerVision/clustering.i"
+	@echo "... ComputerVision/clustering.s"
 	@echo "... ComputerVision/detectText.o"
 	@echo "... ComputerVision/detectText.i"
 	@echo "... ComputerVision/detectText.s"
