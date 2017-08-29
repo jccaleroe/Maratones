@@ -20,10 +20,10 @@ double _max_variation2 = 0.2;
 vector<vector<Point> > msers;
 vector<Rect> bbox1, bbox2, regions;
 
-void showmser(Mat img, vector<Rect> &v){
+void showmser(const char *s, Mat img, vector<Rect> &v){
     for (const auto &a : v)
         rectangle(img, a, CV_RGB(255, 0, 0));
-    imshow("mser", img);
+    imshow(s, img);
 }
 
 void mserNomal(Mat &img){
@@ -31,8 +31,10 @@ void mserNomal(Mat &img){
     msers.clear();
     bbox1.clear();
     ms->detectRegions(img, msers, bbox1);
-    bbox1 = filterWords(bbox1, 0.8);
+    //cout << "msers found: " << bbox1.size() << endl;
+    bbox1 = filterWords(bbox1, 0.7);
     bbox1 = filterIntersections(bbox1, 0.05, 6);
+    //cout << "msers after filters " << bbox1.size() << endl;
 }
 
 void mserMine(Mat img, int k){
@@ -51,45 +53,40 @@ void mserMine(Mat img, int k){
     }
 
     tmp = filterWords(tmp, 0.8);
-    tmp = filterIntersections(tmp, 0.05, 6);
+    tmp = filterIntersections(tmp, 0.05, 4);
     bbox2.insert(bbox2.end(), tmp.begin(), tmp.end());
 }
 
 vector<Rect> mser(Mat img){
     regions.clear();
     bbox2.clear();
-    Mat img2 = img;
+    Mat img2 = img.clone();
+    Mat img3 = img.clone();
     cvtColor(img, img, COLOR_BGR2GRAY);
 
-    //mserNomal(img);
+    mserNomal(img);
     //mserMine(img, 2);
     //mserMine(img, 3);
 
-    //showmser(img2, bbox1);
 
-    for (int i = 0; i < 4; i++)
-        bbox2.push_back(Rect(1+i*2, 1, 1, 1));
-    for (int i = 0; i < 6; i++)
-        bbox2.push_back(Rect(10+i*2, 1, 1, 1));
-    for (int i = 0; i < 2; i++)
-        bbox2.push_back(Rect(1+i*2, 4, 1, 1));
-    bbox2.push_back(Rect(6, 4, 1, 1));
-    for (int i = 0; i < 3; i++)
-        bbox2.push_back(Rect(9+i*2, 4, 1, 1));
+    //showmser("2", img3, bbox2);
+    //cout << "mine size: " << bbox2.size() << endl;
 
+    //vector<Rect> tmp = modeClustering(bbox1, 0.62, 0.6, 2);
+    //cout << "mode areas: " << tmp.size() << endl;
+    //bbox1 = group(3, bbox1);
+    //showmser("knn", img2, bbox1);
 
-    cout << bbox2.size() << endl;
-    bbox2 = modeClustering(bbox2, 1, 1);
-    //bbox2 = group(3, bbox2);
-    cout << bbox2.size() << endl;
-    for (auto &i : bbox2)
-        cout << i.x << " " << i.y << " " << i.width << " " << i.height << endl;
+    bbox1 = modeClustering(bbox1, 0.64, 0.6, 2);
+    //cout << "knn areas: " << bbox1.size() << endl;
+    //for (auto &i : bbox1)
+      //  cout << i.x << " " << i.y << " " << i.width << " " << i.height << endl;
 
     //vector<Rect> tmp = modeClustering(bbox1, 0.5, 0.5);
     //cout << tmp.size() << endl;
     //regions.insert(regions.end(), tmp.begin(), tmp.end());
     regions.insert(regions.end(), bbox1.begin(), bbox1.end());
-    regions.insert(regions.end(), bbox2.begin(), bbox2.end());
+    //regions.insert(regions.end(), bbox2.begin(), bbox2.end());
     //regions = filterIntersections(regions, 0.1, 6);
 
     return regions;

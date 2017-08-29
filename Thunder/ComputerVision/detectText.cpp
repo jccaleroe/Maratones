@@ -61,17 +61,17 @@ void detectText(const char* file, int f){
     Mat img = imread(file, 1);
     //swtHelper(file);
 
-    //extremals = extremal(file);
-    //extremals = filterIntersections(extremals, 0.1, 6);
+    extremals = extremal(file);
+    extremals = filterIntersections(extremals, 0.1, 6);
 
-    bbox = mser(img);
+    //bbox = mser(img);
 
     words.insert(words.end(), extremals.begin(), extremals.end());
     //words = greatFilter(words, img.rows, img.cols, 0.3);
     words.insert(words.end(), bbox.begin(), bbox.end());
     words = filterWords(words, 0.8);
 
-    //writeFile(f);
+    writeFile(f);
 
     showImages(file);
 }

@@ -35,6 +35,11 @@ Rect intersect(Rect &a, Rect &b){
     return Rect(x, y, width, height);
 }
 
+bool containsAny(Rect &a, Rect &b){
+    Rect tmp = intersect(a, b);
+    return tmp.area() == a.area() || tmp.area() == b.area();
+}
+
 double intersectRatio(Rect &a, Rect &b){
     Rect rect = intersect(a, b);
     return 1.0 * rect.area() / (a.area() + b.area() - rect.area());
