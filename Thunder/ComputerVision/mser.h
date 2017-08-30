@@ -8,5 +8,8 @@
 #include <opencv2/opencv.hpp>
 
 std::vector<cv::Rect> mser(cv::Mat img);
+std::vector<cv::Rect> cropAndKnnMser(std::vector<cv::Rect> &swts, std::vector<cv::Rect> &msers, cv::Mat &img);
+std::vector<cv::Rect> modeMser(std::vector<cv::Rect> &bbox, float alpha, float beta, float delta);
+int getMserMode();
 
 #endif //THUNDER_MSER_H

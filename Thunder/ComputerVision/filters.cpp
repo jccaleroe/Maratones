@@ -10,6 +10,14 @@ using namespace std;
 
 const double bravo = 0.8;
 
+vector<Rect> modeFilter(vector<Rect> &bbox, int mode, float alpha){
+    vector<Rect> tmp;
+    for (auto &i : bbox)
+        if (i.width >= alpha*mode)
+            tmp.push_back(i);
+    return tmp;
+}
+
 vector<Rect> greatFilter(vector<Rect> &bbox, int &rows, int &cols, float alpha){
     double size = cols*rows;
     vector<Rect> tmp;

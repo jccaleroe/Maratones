@@ -16,17 +16,16 @@ extern "C" {
 using namespace std;
 using namespace cv;
 
-vector<Rect> words, bbox, extremals;
+vector<Rect> words, extremals, swts;
 string a, b, c, d;
 
-void showImages(const char* file){
+void showImage(const char* file, string s){
     //cout << words.size() << endl;
     Mat img = imread(file, 1);
     for (const auto &a : words)
         rectangle(img, a, CV_RGB(255, 0, 0));
 
-    imshow("Words", img);
-    waitKey(0);
+    imshow(s, img);
 }
 
 void writeFile(int f){
@@ -40,40 +39,40 @@ void writeFile(int f){
              << "," << w.x << "," << w.y+w.height << "," << 0.5 << "\n";
 }
 
-void swtHelper(const char* file){
+vector<Rect> swtHelper(const char* file){
     ccv_array_t *sbox = swt(file);
-    //Mat img2 = imread(file, 1);
-
+    vector<Rect> bbox;
     if (sbox != nullptr) {
         for (int i = 0; i < sbox->rnum; i++) {
             auto *rect = (ccv_rect_t *) ccv_array_get(sbox, i);
             Rect h = Rect(rect->x, rect->y, rect->width, rect->height);
-            //rectangle(img2, h, CV_RGB(0, 255, 0));
-            words.push_back(h);
+            bbox.push_back(h);
         }
         ccv_array_free(sbox);
     }
-    //imshow("swt", img2);
+    return bbox;
 }
 
 void detectText(const char* file, int f){
     words.clear();
     Mat img = imread(file, 1);
-    //swtHelper(file);
+
+    swts = swtHelper(file);
 
     extremals = extremal(file);
-    extremals = filterIntersections(extremals, 0.1, 6);
+    extremals = filterIntersections(extremals, 0.05, 6);
 
-    //bbox = mser(img);
+    words = mser(img.clone());
+    vector<Rect> tmp = cropAndKnnMser(swts, extremals, img);
+    words.insert(words.end(), tmp.begin(), tmp.end());
 
-    words.insert(words.end(), extremals.begin(), extremals.end());
-    //words = greatFilter(words, img.rows, img.cols, 0.3);
-    words.insert(words.end(), bbox.begin(), bbox.end());
-    words = filterWords(words, 0.8);
+    words = filterWords(words, 0.7);
 
     writeFile(f);
 
-    showImages(file);
+    //cout << words.size() << endl;
+    //showImage(file, "words");
+    //waitKey(0);
 }
 
 void icdar(){
@@ -89,6 +88,6 @@ void icdar(){
 }
 
 int main(int argc, char* argv[]) {
-    detectText(argv[1], 1);
+    //detectText(argv[1], 1);
     icdar();
 }

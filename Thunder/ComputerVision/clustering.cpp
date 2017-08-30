@@ -122,7 +122,8 @@ Rect modeDFS(int index){
             d = max(aux.y, tmp.y);
             aux1 = b-a;
             aux2 = d-c;
-            if (aux1 <= modeWidth && (aux1 >= 0 || abs(aux1) < maxIntersec) && aux2 <= modeHeight && (aux2 >= 0 || abs(aux2) < maxIntersec)) {
+            if (aux1 <= modeWidth && (aux1 >= 0 || abs(aux1) < maxIntersec) && aux2 <= modeHeight &&
+                    (aux2 >= 0 || abs(aux2) < maxIntersec) && !containsAny(aux, tmp)) {
                 tmp = dfs(i);
                 u = join(u, tmp);
             }
@@ -131,14 +132,18 @@ Rect modeDFS(int index){
     return u;
 }
 
-vector<Rect> modeClustering(vector<Rect> &bbox, float alpha, float beta, float delta){
-    int mode = getMode(bbox);
+vector<Rect> modeClustering(vector<Rect> &bbox, int mode, float alpha, float beta, float delta){
+    if (mode == 0)
+        mode = getMode(bbox);
     //cout << "mode: " << mode << endl;
     modeWidth = alpha * mode;
     modeHeight = beta * mode;
     maxIntersec = delta * mode;
     graph = bbox;
-    visited.assign(graph.size(), false);
+    if (graph.size() > 0)
+        visited.assign(graph.size(), false);
+    else
+        visited.clear();
     vector<Rect> regions;
     Rect tmp;
     for (int i = 0; i < graph.size(); i++) {

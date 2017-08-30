@@ -1,5 +1,4 @@
 #include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/highgui/highgui.hpp>
 #include <opencv2/features2d/features2d.hpp>
 #include "mser.h"
 #include "filters.h"
@@ -17,24 +16,64 @@ int _delta2 = 2;
 int _min_area2 = 20;
 double _max_variation2 = 0.2;
 
+int mserMode, mserMode2;
 vector<vector<Point> > msers;
 vector<Rect> bbox1, bbox2, regions;
 
-void showmser(const char *s, Mat img, vector<Rect> &v){
-    for (const auto &a : v)
-        rectangle(img, a, CV_RGB(255, 0, 0));
-    imshow(s, img);
+int getMserMode(){
+    return mserMode;
 }
 
-void mserNomal(Mat &img){
+vector<Rect> getMser(Mat &img, bool setMode = false){
     Ptr<MSER> ms = MSER::create(_delta, _min_area, _max_area, _max_variation);
     msers.clear();
-    bbox1.clear();
-    ms->detectRegions(img, msers, bbox1);
-    //cout << "msers found: " << bbox1.size() << endl;
-    bbox1 = filterWords(bbox1, 0.7);
-    bbox1 = filterIntersections(bbox1, 0.05, 6);
-    //cout << "msers after filters " << bbox1.size() << endl;
+    vector<Rect> bbox;
+    ms->detectRegions(img, msers, bbox);
+    bbox = filterWords(bbox, 0.7);
+    bbox = filterIntersections(bbox, 0.05, 6);
+    if (setMode)
+        mserMode = getMode(bbox);
+    else
+        mserMode2 = getMode(bbox);
+    return bbox;
+}
+
+vector<Rect> mserKnn(Mat &img, int k, bool setMode = false){
+    vector<Rect> bbox = getMser(img, setMode);
+    bbox = group(k, bbox);
+    return bbox;
+}
+
+vector<Rect> knnMode(Mat &img, int k){
+    vector<Rect> bboxs = getMser(img), bbox, tmp;
+    bbox = group(k, bboxs);
+    tmp = modeClustering(bboxs, mserMode, 0.64, 0.64, 2.2);
+    bbox.insert(bbox.end(), tmp.begin(), tmp.end());
+    return bbox;
+}
+
+void insertRegions(vector<Rect> &bbox, vector<Rect> &regions, Mat &img){
+    Mat tmp;
+    vector<Rect> tmp2;
+    for (auto &i : regions){
+        //cout << img.cols << " " << img.rows << " " << i.x << " " << i.y << " " << i.width+i.x << " " << i.height + i.y << endl;
+
+        tmp = img(Rect(i.x, i.y, min(i.width+i.x, img.cols)-i.x, min(i.height+i.y, img.rows)-i.y));
+        tmp2 = knnMode(tmp, 3);
+        for (auto &j : tmp2)
+            if (j.width >= 2*mserMode2)
+                bbox.emplace_back(j.x + i.x, j.y + i.y, j.width, j.height);
+    }
+}
+
+vector<Rect> cropAndKnnMser(vector<Rect> &swts, vector<Rect> &extremals, Mat &img){
+    cvtColor(img, img, COLOR_BGR2GRAY);
+    vector<Rect> bbox;
+    insertRegions(bbox, swts, img);
+    insertRegions(bbox, extremals, img);
+    bbox = filterWords(bbox, 0.7);
+    bbox = filterIntersections(bbox, 0.01, 6);
+    return bbox;
 }
 
 void mserMine(Mat img, int k){
@@ -44,50 +83,30 @@ void mserMine(Mat img, int k){
         msers.clear();
         tmp.clear();
         ms->detectRegions(img, msers, tmp);
-
         if (i != 0)
-           tmp = greatFilter(tmp, img.rows, img.cols, 0.3);
+            tmp = greatFilter(tmp, img.rows, img.cols, 0.3);
 
         for (auto &h : tmp)
             rectangle(img, h, CV_FILLED, -1);
     }
 
-    tmp = filterWords(tmp, 0.8);
-    tmp = filterIntersections(tmp, 0.05, 4);
-    bbox2.insert(bbox2.end(), tmp.begin(), tmp.end());
+    tmp = filterWords(tmp, 0.7);
+    tmp = filterIntersections(tmp, 0.05, 6);
+    for (auto &i : tmp)
+        if (i.width >= 2*mserMode)
+            bbox2.push_back(i);
 }
 
 vector<Rect> mser(Mat img){
     regions.clear();
     bbox2.clear();
-    Mat img2 = img.clone();
-    Mat img3 = img.clone();
     cvtColor(img, img, COLOR_BGR2GRAY);
 
-    mserNomal(img);
-    //mserMine(img, 2);
-    //mserMine(img, 3);
+    bbox1 = mserKnn(img, 3, true);
+    mserMine(img, 3);
 
-
-    //showmser("2", img3, bbox2);
-    //cout << "mine size: " << bbox2.size() << endl;
-
-    //vector<Rect> tmp = modeClustering(bbox1, 0.62, 0.6, 2);
-    //cout << "mode areas: " << tmp.size() << endl;
-    //bbox1 = group(3, bbox1);
-    //showmser("knn", img2, bbox1);
-
-    bbox1 = modeClustering(bbox1, 0.64, 0.6, 2);
-    //cout << "knn areas: " << bbox1.size() << endl;
-    //for (auto &i : bbox1)
-      //  cout << i.x << " " << i.y << " " << i.width << " " << i.height << endl;
-
-    //vector<Rect> tmp = modeClustering(bbox1, 0.5, 0.5);
-    //cout << tmp.size() << endl;
-    //regions.insert(regions.end(), tmp.begin(), tmp.end());
     regions.insert(regions.end(), bbox1.begin(), bbox1.end());
-    //regions.insert(regions.end(), bbox2.begin(), bbox2.end());
-    //regions = filterIntersections(regions, 0.1, 6);
+    regions.insert(regions.end(), bbox2.begin(), bbox2.end());
 
     return regions;
 }

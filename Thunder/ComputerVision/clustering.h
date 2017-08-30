@@ -8,6 +8,7 @@
 #include <opencv2/opencv.hpp>
 
 std::vector<cv::Rect> group(int k, std::vector<cv::Rect> &bbox);
-std::vector<cv::Rect> modeClustering(std::vector<cv::Rect> &bbox, float alpha, float beta, float delta);
+std::vector<cv::Rect> modeClustering(std::vector<cv::Rect> &bbox, int mode, float alpha, float beta, float delta);
+int getMode(std::vector<cv::Rect> &bbox);
 
 #endif //THUNDER_CLUSTERING_H
