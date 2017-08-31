@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 11)
 
 find_package(OpenCV REQUIRED)
 
-
 link_directories("ComputerVision/ccv/lib")
+
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories("ComputerVision/ccv/lib")
 

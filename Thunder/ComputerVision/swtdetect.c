@@ -1,5 +1,6 @@
 #include "ccv.h"
 
+//calls ccv_swt_detect_words from liuliu library
 ccv_array_t* swt(const char *file){
     ccv_dense_matrix_t *image = 0;
     ccv_read(file, &image, CCV_IO_GRAY | CCV_IO_ANY_FILE);

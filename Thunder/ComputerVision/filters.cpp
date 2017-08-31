@@ -8,16 +8,7 @@
 using namespace cv;
 using namespace std;
 
-const double bravo = 0.8;
-
-vector<Rect> modeFilter(vector<Rect> &bbox, int mode, float alpha){
-    vector<Rect> tmp;
-    for (auto &i : bbox)
-        if (i.width >= alpha*mode)
-            tmp.push_back(i);
-    return tmp;
-}
-
+//drops rects thar are greater in alpha % in vertical or horizontal length according to the width or height of the image
 vector<Rect> greatFilter(vector<Rect> &bbox, int &rows, int &cols, float alpha){
     double size = cols*rows;
     vector<Rect> tmp;
@@ -27,6 +18,7 @@ vector<Rect> greatFilter(vector<Rect> &bbox, int &rows, int &cols, float alpha){
     return tmp;
 }
 
+//joins two rects
 Rect join(Rect &a, Rect &b){
     int x = min(a.x, b.x);
     int y = min(a.y, b.y);
@@ -35,6 +27,7 @@ Rect join(Rect &a, Rect &b){
     return Rect(x, y, width, height);
 }
 
+//return the intersection of two rects
 Rect intersect(Rect &a, Rect &b){
     int x = max(a.x, b.x);
     int y = max(a.y, b.y);
@@ -43,17 +36,21 @@ Rect intersect(Rect &a, Rect &b){
     return Rect(x, y, width, height);
 }
 
+//return if one rect is contained in another.
 bool containsAny(Rect &a, Rect &b){
     Rect tmp = intersect(a, b);
     return tmp.area() == a.area() || tmp.area() == b.area();
 }
 
+//returns how big is the intersection of two rects according to their union
 double intersectRatio(Rect &a, Rect &b){
     Rect rect = intersect(a, b);
     return 1.0 * rect.area() / (a.area() + b.area() - rect.area());
 }
 
+//removes rects that have too many similar rects or which have another too similar
 vector<Rect> filterIntersections(vector<Rect> &bbox, double delta, int max_children){
+    double bravo = 0.8;
     vector<Rect> tmp_bbox;
     if (bbox.empty()) return tmp_bbox;
 
@@ -78,6 +75,7 @@ vector<Rect> filterIntersections(vector<Rect> &bbox, double delta, int max_child
     return tmp_bbox;
 }
 
+//if two rects are too similar, removes one of them
 vector<Rect> filterWords(vector<Rect> &bbox, double simility){
     vector<Rect> tmp_bbox;
     if (bbox.empty()) return tmp_bbox;

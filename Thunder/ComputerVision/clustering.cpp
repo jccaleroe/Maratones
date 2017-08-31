@@ -14,6 +14,7 @@ vector<Rect> graph;
 double avg;
 double modeWidth, modeHeight, maxIntersec;
 
+//class to keep the distance from a specific node to another
 class Box{
 public:
     double distance;
@@ -27,6 +28,7 @@ public:
     }
 };
 
+//class to be used as a comparator for some ordering algorithm
 class MyComparator{
 public:
     bool operator()(Box &a, Box &b){
@@ -34,11 +36,13 @@ public:
     }
 };
 
+//return the distance from the centor of a rect to the center of another
 double getDistance(Rect &a, Rect&b){
     return sqrt(pow((a.x+a.width/2.0) - (b.x+b.width/2.0), 2) + pow((a.y+(a.height)/2.0) - (b.y+(b.height)/2.0), 2));
 }
 
-Rect dfs(int index){
+//dfs to join rects that are close according to some max distance using getDistance()
+Rect knndfs(int index){
     if (visited[index])
         return Rect(0,0,0,0);
     Rect u = graph[index], aux = graph[index], tmp;
@@ -46,7 +50,7 @@ Rect dfs(int index){
     for (int i = 0; i < graph.size(); i++){
         if (!visited[i]) {
             if (getDistance(aux, graph[i]) <= avg) {
-                tmp = dfs(i);
+                tmp = knndfs(i);
                 if (!tmp.empty())
                     u = join(u, tmp);
             }
@@ -55,7 +59,9 @@ Rect dfs(int index){
     return u;
 }
 
-vector<Rect> group(int k, vector<Rect> &bbox){
+//gets an avg distance from de average distances of the average distance of each node's knn
+// and calls knndfs with that average
+vector<Rect> knnClustering(int k, vector<Rect> &bbox){
     graph = bbox;
     avg = 0;
     double aux;
@@ -77,36 +83,34 @@ vector<Rect> group(int k, vector<Rect> &bbox){
         avg += aux;
     }
     avg /= graph.size();
-    //cout << "avg: " << avg << endl;
     visited.assign(graph.size(), false);
     vector<Rect> regions;
     Rect tmp;
     for (int i = 0; i < graph.size(); i++) {
-        tmp = dfs(i);
+        tmp = knndfs(i);
         if (!tmp.empty())
             regions.push_back(tmp);
     }
     return regions;
 }
 
+//returns the mode of the width of the rects
 int getMode(vector<Rect> &bbox){
     map<int, int> modes;
     for (auto &i : bbox)
         modes[i.width]++;
-    int tmp = 0;
-    int mode = 0;
-    //cout << "modes:\n";
+    int tmp = 0, mode = 0;
     for (auto &i : modes){
-        //cout << i.first << " " << i.second << endl;
         if (i.second > tmp) {
             tmp = i.second;
             mode = i.first;
         }
     }
-    //cout << endl;
     return mode;
 }
 
+//dfs to join rects that are close according to some vertical and horizontal distance from the closest sides of two rects.
+//if they intersect but if one is too big from the other, they do not join.
 Rect modeDFS(int index){
     if (visited[index])
         return Rect(0,0,0,0);
@@ -124,7 +128,7 @@ Rect modeDFS(int index){
             aux2 = d-c;
             if (aux1 <= modeWidth && (aux1 >= 0 || abs(aux1) < maxIntersec) && aux2 <= modeHeight &&
                     (aux2 >= 0 || abs(aux2) < maxIntersec) && !containsAny(aux, tmp)) {
-                tmp = dfs(i);
+                tmp = modeDFS(i);
                 u = join(u, tmp);
             }
         }
@@ -132,15 +136,15 @@ Rect modeDFS(int index){
     return u;
 }
 
+//gets the maximal vertical and horizontal distance to join rects in the modeDFS()
 vector<Rect> modeClustering(vector<Rect> &bbox, int mode, float alpha, float beta, float delta){
     if (mode == 0)
         mode = getMode(bbox);
-    //cout << "mode: " << mode << endl;
     modeWidth = alpha * mode;
     modeHeight = beta * mode;
     maxIntersec = delta * mode;
     graph = bbox;
-    if (graph.size() > 0)
+    if (!graph.empty())
         visited.assign(graph.size(), false);
     else
         visited.clear();

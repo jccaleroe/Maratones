@@ -17,17 +17,20 @@ using namespace std;
 using namespace cv;
 
 vector<Rect> words, extremals, swts;
+
+//used for ICDAR file format
 string a, b, c, d;
 
+//shows an image with bounding boxes of vector words
 void showImage(const char* file, string s){
-    //cout << words.size() << endl;
+    cout << words.size() << endl;
     Mat img = imread(file, 1);
     for (const auto &a : words)
         rectangle(img, a, CV_RGB(255, 0, 0));
-
     imshow(s, img);
 }
 
+//used for ICDAR format of rects
 void writeFile(int f){
     string tmp;
     tmp.append(c);
@@ -39,6 +42,7 @@ void writeFile(int f){
              << "," << w.x << "," << w.y+w.height << "," << 0.5 << "\n";
 }
 
+//calls liuliu swt and converts it to a vector<Rect>
 vector<Rect> swtHelper(const char* file){
     ccv_array_t *sbox = swt(file);
     vector<Rect> bbox;
@@ -53,6 +57,7 @@ vector<Rect> swtHelper(const char* file){
     return bbox;
 }
 
+//driver function
 void detectText(const char* file, int f){
     words.clear();
     Mat img = imread(file, 1);
@@ -68,11 +73,9 @@ void detectText(const char* file, int f){
 
     words = filterWords(words, 0.7);
 
-    writeFile(f);
-
-    //cout << words.size() << endl;
-    //showImage(file, "words");
-    //waitKey(0);
+    //writeFile(f);
+    showImage(file, "words");
+    waitKey(0);
 }
 
 void icdar(){
@@ -88,6 +91,6 @@ void icdar(){
 }
 
 int main(int argc, char* argv[]) {
-    //detectText(argv[1], 1);
-    icdar();
+    detectText(argv[1], 1);
+    //icdar();
 }
