@@ -123,167 +123,32 @@ Thunder/fast:
 	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/build
 .PHONY : Thunder/fast
 
-ComputerVision/clustering.o: ComputerVision/clustering.cpp.o
+Lothric/other/randomGraph.o: Lothric/other/randomGraph.cpp.o
 
-.PHONY : ComputerVision/clustering.o
-
-# target to build an object file
-ComputerVision/clustering.cpp.o:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/clustering.cpp.o
-.PHONY : ComputerVision/clustering.cpp.o
-
-ComputerVision/clustering.i: ComputerVision/clustering.cpp.i
-
-.PHONY : ComputerVision/clustering.i
-
-# target to preprocess a source file
-ComputerVision/clustering.cpp.i:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/clustering.cpp.i
-.PHONY : ComputerVision/clustering.cpp.i
-
-ComputerVision/clustering.s: ComputerVision/clustering.cpp.s
-
-.PHONY : ComputerVision/clustering.s
-
-# target to generate assembly for a file
-ComputerVision/clustering.cpp.s:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/clustering.cpp.s
-.PHONY : ComputerVision/clustering.cpp.s
-
-ComputerVision/detectText.o: ComputerVision/detectText.cpp.o
-
-.PHONY : ComputerVision/detectText.o
+.PHONY : Lothric/other/randomGraph.o
 
 # target to build an object file
-ComputerVision/detectText.cpp.o:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/detectText.cpp.o
-.PHONY : ComputerVision/detectText.cpp.o
+Lothric/other/randomGraph.cpp.o:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/Lothric/other/randomGraph.cpp.o
+.PHONY : Lothric/other/randomGraph.cpp.o
 
-ComputerVision/detectText.i: ComputerVision/detectText.cpp.i
+Lothric/other/randomGraph.i: Lothric/other/randomGraph.cpp.i
 
-.PHONY : ComputerVision/detectText.i
-
-# target to preprocess a source file
-ComputerVision/detectText.cpp.i:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/detectText.cpp.i
-.PHONY : ComputerVision/detectText.cpp.i
-
-ComputerVision/detectText.s: ComputerVision/detectText.cpp.s
-
-.PHONY : ComputerVision/detectText.s
-
-# target to generate assembly for a file
-ComputerVision/detectText.cpp.s:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/detectText.cpp.s
-.PHONY : ComputerVision/detectText.cpp.s
-
-ComputerVision/filters.o: ComputerVision/filters.cpp.o
-
-.PHONY : ComputerVision/filters.o
-
-# target to build an object file
-ComputerVision/filters.cpp.o:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/filters.cpp.o
-.PHONY : ComputerVision/filters.cpp.o
-
-ComputerVision/filters.i: ComputerVision/filters.cpp.i
-
-.PHONY : ComputerVision/filters.i
+.PHONY : Lothric/other/randomGraph.i
 
 # target to preprocess a source file
-ComputerVision/filters.cpp.i:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/filters.cpp.i
-.PHONY : ComputerVision/filters.cpp.i
+Lothric/other/randomGraph.cpp.i:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/Lothric/other/randomGraph.cpp.i
+.PHONY : Lothric/other/randomGraph.cpp.i
 
-ComputerVision/filters.s: ComputerVision/filters.cpp.s
+Lothric/other/randomGraph.s: Lothric/other/randomGraph.cpp.s
 
-.PHONY : ComputerVision/filters.s
-
-# target to generate assembly for a file
-ComputerVision/filters.cpp.s:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/filters.cpp.s
-.PHONY : ComputerVision/filters.cpp.s
-
-ComputerVision/mser.o: ComputerVision/mser.cpp.o
-
-.PHONY : ComputerVision/mser.o
-
-# target to build an object file
-ComputerVision/mser.cpp.o:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/mser.cpp.o
-.PHONY : ComputerVision/mser.cpp.o
-
-ComputerVision/mser.i: ComputerVision/mser.cpp.i
-
-.PHONY : ComputerVision/mser.i
-
-# target to preprocess a source file
-ComputerVision/mser.cpp.i:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/mser.cpp.i
-.PHONY : ComputerVision/mser.cpp.i
-
-ComputerVision/mser.s: ComputerVision/mser.cpp.s
-
-.PHONY : ComputerVision/mser.s
+.PHONY : Lothric/other/randomGraph.s
 
 # target to generate assembly for a file
-ComputerVision/mser.cpp.s:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/mser.cpp.s
-.PHONY : ComputerVision/mser.cpp.s
-
-ComputerVision/swtdetect.o: ComputerVision/swtdetect.c.o
-
-.PHONY : ComputerVision/swtdetect.o
-
-# target to build an object file
-ComputerVision/swtdetect.c.o:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/swtdetect.c.o
-.PHONY : ComputerVision/swtdetect.c.o
-
-ComputerVision/swtdetect.i: ComputerVision/swtdetect.c.i
-
-.PHONY : ComputerVision/swtdetect.i
-
-# target to preprocess a source file
-ComputerVision/swtdetect.c.i:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/swtdetect.c.i
-.PHONY : ComputerVision/swtdetect.c.i
-
-ComputerVision/swtdetect.s: ComputerVision/swtdetect.c.s
-
-.PHONY : ComputerVision/swtdetect.s
-
-# target to generate assembly for a file
-ComputerVision/swtdetect.c.s:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/swtdetect.c.s
-.PHONY : ComputerVision/swtdetect.c.s
-
-ComputerVision/textdetection.o: ComputerVision/textdetection.cpp.o
-
-.PHONY : ComputerVision/textdetection.o
-
-# target to build an object file
-ComputerVision/textdetection.cpp.o:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/textdetection.cpp.o
-.PHONY : ComputerVision/textdetection.cpp.o
-
-ComputerVision/textdetection.i: ComputerVision/textdetection.cpp.i
-
-.PHONY : ComputerVision/textdetection.i
-
-# target to preprocess a source file
-ComputerVision/textdetection.cpp.i:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/textdetection.cpp.i
-.PHONY : ComputerVision/textdetection.cpp.i
-
-ComputerVision/textdetection.s: ComputerVision/textdetection.cpp.s
-
-.PHONY : ComputerVision/textdetection.s
-
-# target to generate assembly for a file
-ComputerVision/textdetection.cpp.s:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/textdetection.cpp.s
-.PHONY : ComputerVision/textdetection.cpp.s
+Lothric/other/randomGraph.cpp.s:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/Lothric/other/randomGraph.cpp.s
+.PHONY : Lothric/other/randomGraph.cpp.s
 
 # Help Target
 help:
@@ -294,24 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Thunder"
-	@echo "... ComputerVision/clustering.o"
-	@echo "... ComputerVision/clustering.i"
-	@echo "... ComputerVision/clustering.s"
-	@echo "... ComputerVision/detectText.o"
-	@echo "... ComputerVision/detectText.i"
-	@echo "... ComputerVision/detectText.s"
-	@echo "... ComputerVision/filters.o"
-	@echo "... ComputerVision/filters.i"
-	@echo "... ComputerVision/filters.s"
-	@echo "... ComputerVision/mser.o"
-	@echo "... ComputerVision/mser.i"
-	@echo "... ComputerVision/mser.s"
-	@echo "... ComputerVision/swtdetect.o"
-	@echo "... ComputerVision/swtdetect.i"
-	@echo "... ComputerVision/swtdetect.s"
-	@echo "... ComputerVision/textdetection.o"
-	@echo "... ComputerVision/textdetection.i"
-	@echo "... ComputerVision/textdetection.s"
+	@echo "... Lothric/other/randomGraph.o"
+	@echo "... Lothric/other/randomGraph.i"
+	@echo "... Lothric/other/randomGraph.s"
 .PHONY : help
 
 
