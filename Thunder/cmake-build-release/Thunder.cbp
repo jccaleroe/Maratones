@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\..\usr\local\share\OpenCV\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/juan/Documents/Maratones/Thunder"/>
+				<Option working_dir="/home/juan/Documents/Maratones/Thunder/cmake-build-release"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/juan/Documents/Maratones/Thunder"/>
+				<Option working_dir="/home/juan/Documents/Maratones/Thunder/cmake-build-release"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/juan/Documents/Maratones/Thunder"/>
+				<Option working_dir="/home/juan/Documents/Maratones/Thunder/cmake-build-release"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Thunder">
-				<Option output="/home/juan/Documents/Maratones/Thunder/Thunder" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/juan/Documents/Maratones/Thunder"/>
+				<Option output="/home/juan/Documents/Maratones/Thunder/cmake-build-release/Thunder" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/juan/Documents/Maratones/Thunder/cmake-build-release"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -56,15 +56,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 Thunder"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 Thunder"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Thunder/fast">
-				<Option output="/home/juan/Documents/Maratones/Thunder/Thunder" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/juan/Documents/Maratones/Thunder"/>
+				<Option output="/home/juan/Documents/Maratones/Thunder/cmake-build-release/Thunder" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/juan/Documents/Maratones/Thunder/cmake-build-release"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -81,10 +81,10 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 Thunder/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 Thunder/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/juan/Documents/Maratones/Thunder/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>

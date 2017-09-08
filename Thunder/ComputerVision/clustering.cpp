@@ -14,25 +14,11 @@ vector<Rect> graph;
 double avg;
 double modeWidth, modeHeight, maxIntersec;
 
-//class to keep the distance from a specific node to another
-class Box{
-public:
-    double distance;
-
-    explicit Box(const double &distance){
-        this->distance = distance;
-    }
-
-    bool campareTo(Box Box){
-        return distance > Box.distance;
-    }
-};
-
 //class to be used as a comparator for some ordering algorithm
 class MyComparator{
 public:
-    bool operator()(Box &a, Box &b){
-        return a.campareTo(b);
+    bool operator()(double &a, double &b){
+        return a > b;
     }
 };
 
@@ -67,15 +53,15 @@ vector<Rect> knnClustering(int k, vector<Rect> &bbox){
     double aux;
     int minK;
     for (int i = 0; i < graph.size(); i++) {
-        priority_queue<Box, vector<Box>, MyComparator> pq;
+        priority_queue<double, vector<double>, MyComparator> pq;
         for (int j = 0; j < graph.size(); j++){
             if (j != i && !containsAny(graph[i], graph[j]))
-                pq.push(Box(getDistance(graph[i], graph[j])));
+                pq.push(getDistance(graph[i], graph[j]));
         }
         aux = 0;
         minK = min(k, static_cast<const int &>(pq.size()));
         for (int h = 0; h < minK; h++){
-            aux += pq.top().distance;
+            aux += pq.top();
             pq.pop();
         }
         if (minK > 0)

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int n = 200, m = 500, g = 10;
+int n = 100, m = 500, g = 10;
 
 int main() {
     random_device r;
@@ -25,31 +25,22 @@ int main() {
         } while (s.find(tmp) != s.end());
         s.insert(tmp);
     }
+    int aux;
+    uniform_int_distribution<int> uniform_dist2(1, g);
 
-    freopen("/home/juan/Documents/Maratones/Bending/smallgrouped.json", "w", stdout);
+    freopen("/home/juan/Documents/Maratones/Bending/miserable.json", "w", stdout);
 
     cout << "{\"nodes\":[\n";
-    for (int i = 0; i < n; i++)
-        cout << R"({"name":")" << i << R"(", "width":20, "height":20})" << (i != n - 1 ? ",\n" : "\n");
+    for (int i = 0; i < n; i++) {
+        aux = i/g;
+        cout << R"({"id":")" << i << R"(", "group":)" << aux << (i != n - 1 ? "},\n" : "}\n");
+    }
+
     cout << "],\n\"links\":[\n";
     for (auto &i : s)
-        cout << "{\"source\":" << i.first << ",\"target\":" << i.second << "},\n";
+        cout << R"({"source":")" << i.first << R"(","target":")" << i.second << R"(","value":)" << 1 << "},\n";
     tmp = *s.begin();
-    cout << "{\"source\":" << tmp.first << ",\"target\":" << tmp.second << "}\n";
-    cout << R"(],"groups":[ {"leaves":[0]},)" << endl;
+    cout << R"({"source":")" << tmp.first << R"(","target":")" << tmp.second << R"(","value":)" << 1 << "}\n";
 
-    set<int> s2;
-    int aux, l = n/g;
-    for (int i = 0; i < g; i++) {
-        cout << R"({"leaves":[)";
-        for (int j = 0; j < l; j++) {
-            do {
-                aux = uniform_dist(e1);
-            }while (s2.find(aux) != s2.end());
-            s2.insert(aux);
-            cout << aux << (j != l - 1 ? "," : "");
-        }
-        cout << "]}" << (i != g - 1 ? ",\n" : "\n");
-    }
     cout << "]}";
 }

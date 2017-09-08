@@ -70,8 +70,10 @@ void detectText(const char* file, int f){
     words = mser(img.clone());
     vector<Rect> tmp = cropAndKnnMser(swts, extremals, img);
     words.insert(words.end(), tmp.begin(), tmp.end());
+    words.insert(words.end(), extremals.begin(), extremals.end());
 
     words = filterWords(words, 0.7);
+    words = filterIntersections(words, 0.7, 3);
 
     //writeFile(f);
     showImage(file, "words");
@@ -92,5 +94,5 @@ void icdar(){
 
 int main(int argc, char* argv[]) {
     detectText(argv[1], 1);
-    //icdar();
+    icdar();
 }

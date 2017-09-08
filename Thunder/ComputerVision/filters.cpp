@@ -20,20 +20,12 @@ vector<Rect> greatFilter(vector<Rect> &bbox, int &rows, int &cols, float alpha){
 
 //joins two rects
 Rect join(Rect &a, Rect &b){
-    int x = min(a.x, b.x);
-    int y = min(a.y, b.y);
-    int width = max(a.x + a.width, b.x + b.width) - x;
-    int height = max(a.y + a.height, b.y + b.height) - y;
-    return Rect(x, y, width, height);
+   return a | b;
 }
 
 //return the intersection of two rects
 Rect intersect(Rect &a, Rect &b){
-    int x = max(a.x, b.x);
-    int y = max(a.y, b.y);
-    int width = max(0, min(a.x + a.width, b.x + b.width) - x);
-    int height = max(0, min(a.y + a.height, b.y + b.height) - y);
-    return Rect(x, y, width, height);
+    return a & b;
 }
 
 //return if one rect is contained in another.
