@@ -92,7 +92,18 @@ void icdar(){
     }
 }
 
+void testTest(){
+    freopen("/home/juan/Documents/Maratones/Rogue/src/Woombat/mser1.txt", "r", stdin);
+    int a, b, c, d;
+    while (cin >> a >> b >> c >> d){
+        words.emplace_back(a, b, c, d);
+    }
+    showImage("/home/juan/Documents/Maratones/Rogue/src/Woombat/mser1.jpg", "test");
+    waitKey(0);
+}
+
 int main(int argc, char* argv[]) {
-    detectText(argv[1], 1);
-    icdar();
+    //detectText(argv[1], 1);
+    //icdar();
+    testTest();
 }

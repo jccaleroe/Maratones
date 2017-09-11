@@ -1,6 +1,8 @@
 package Woombat.mser;
 
 import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,9 +17,12 @@ public class TextImage extends JPanel{
     private static int width = gd.getDisplayMode().getWidth();
     private static int height = gd.getDisplayMode().getHeight();
     private static JFrame frame = new JFrame("Text");
-    private int sw, sh, fontStyle, fontSize;
+    private int fontStyle;
+    private int fontSize;
     private static int counter;
     private String fontName;
+    private StringBuilder builder = new StringBuilder();
+    private static TextImage textImage;
 
     private TextImage(String fontName, int fontStyle, int fontSize) {
         this.fontStyle = fontStyle;
@@ -25,43 +30,81 @@ public class TextImage extends JPanel{
         this.fontName = fontName;
     }
 
+    private void appendBuilder(Rectangle rectangle){
+        builder.append(rectangle.x);
+        builder.append(" ");
+        builder.append(rectangle.y);
+        builder.append(" ");
+        builder.append(rectangle.width);
+        builder.append(" ");
+        builder.append(rectangle.height);
+        builder.append("\n");
+    }
+
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
         Font font = new Font(fontName, fontStyle, fontSize);
         g2.setFont(font);
-
-        String text = "Ser o no ser, esa es la cuestión\n. ¿Cuál es más digna acción del ánimo, sufrir los tiros penetrantes de la fortuna injusta, u oponer los brazos a este torrente de calamidades, y darlas fin con atrevida resistencia? Morir es dormir. ¿No más? ¿Y por un sueño, diremos, las aflicciones se acabaron y los dolores sin número, patrimonio de nuestra débil naturaleza?... Este es un término que deberíamos solicitar con ansia. Morir es dormir... y tal vez soñar. Sí, y ved aquí el grande obstáculo, porque el considerar que sueños podrán ocurrir en el silencio del sepulcro, cuando hayamos abandonado este despojo mortal, es razón harto poderosa para detenernos. Esta es la consideración que hace nuestra infelicidad tan larga. ¿Quién, si esto no fuese, aguantaría la lentitud de los tribunales, la insolencia de los empleados, las tropelías que recibe pacífico el mérito de los hombres más indignos, las angustias de un mal pagado amor, las injurias y quebrantos de la edad, la violencia de los tiranos, el desprecio de los soberbios? Cuando el que esto sufre, pudiera procurar su quietud con solo un puñal. ¿Quién podría tolerar tanta opresión, sudando, gimiendo bajo el peso de una vida molesta si no fuese que el temor de que existe alguna cosa más allá de la Muerte (aquel país desconocido de cuyos límites ningún caminante torna) nos embaraza en dudas y nos hace sufrir los males que nos cercan.";
-        sw = g2.getFontMetrics().stringWidth(text);
-        sh = g2.getFontMetrics().getHeight();
-        int pad = 24, w2 = width-(2*pad);
-        int line = sw / w2;
-        int chars = (w2 * text.length()) / sw, a = 0, b = chars, c;
-        for (int i = 0; i <= line; i++){
+        FontRenderContext frc = g2.getFontRenderContext();
+        GlyphVector gv;
+        String punctuations = ".,:;", tmp;
+        String[] words;
+        builder.delete(0, builder.length());
+        String text = "Ser o no ser, esa es la cuestión, que es más indigno para el alma?, sufrir los golpes y dardos de la insultate fortuna, o haciendole frente acabar con ellos, comer domir, nada más, y pensar que con un sueño le damos fin a los interminables dolores del alma y del corazón.";
+        int sw = g2.getFontMetrics().stringWidth(text);
+        int sh = g2.getFontMetrics().getHeight();
+        int pad = 38, w2 = width-(2*pad);
+        int lines = sw / w2;
+        int chars = (w2 * text.length()) / sw, a = 0, b = chars;
+        int h, y, space = g2.getFontMetrics().stringWidth(" "), k;
+        Rectangle rectangle;
+        for (int i = 0; i <= lines; i++){
             String aux = text.substring(a, Math.min(b, text.length()));
             for (int j = aux.length()-1; j >= 0; j--){
-                if (aux.charAt(j) == ' ' || aux.charAt(j) == '.') {
-                    b -= aux.length() - 1 - j;
+                if (Character.isWhitespace(aux.charAt(j)) || a+j+1 == text.length()) {
+                    b -= aux.length() - j - 1;
                     aux = aux.substring(0, j + 1);
                     break;
                 }
             }
             a = b;
             b += chars;
-            g2.drawString(aux, pad/2, (sh)*(i+1));
+            aux = aux.trim();
+            words = aux.split(" ");
+            y = (sh)*(i+1);
+            h = pad;
+            for (String s : words){
+                k = s.length();
+                while (punctuations.indexOf(s.charAt(k-1)) != -1)
+                    k--;
+                tmp = s.substring(0, k);
+                gv = g2.getFont().createGlyphVector(frc, tmp);
+                rectangle = gv.getPixelBounds(null, h, y);
+                h += g2.getFontMetrics().stringWidth(tmp);
+                appendBuilder(rectangle);
+                tmp = s.substring(k, s.length());
+                if (!tmp.isEmpty()) {
+                    gv = g2.getFont().createGlyphVector(frc, tmp);
+                    rectangle = gv.getPixelBounds(null, h, y);
+                    h += g2.getFontMetrics().stringWidth(tmp);
+                    appendBuilder(rectangle);
+                }
+                h += space;
+            }
+            g2.drawString(aux, pad, y);
         }
-        //g2.drawString(text, 0, sh);
+        g2.dispose();
     }
 
     private static void go(String fontName, int fontStyle, int fontSize){
-        TextImage textImage = new TextImage(fontName, fontStyle, fontSize);
+        textImage = new TextImage(fontName, fontStyle, fontSize);
         frame.getContentPane().add(textImage);
         textImage.setVisible(true);
-        //frame.validate();
-        //frame.repaint();
-        //textImage.exportText();
-        //frame.remove(textImage);
+        frame.validate();
+        frame.repaint();
+        textImage.exportText();
+        frame.remove(textImage);
         //frame.validate();
         //frame.repaint();
         //frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -69,18 +112,22 @@ public class TextImage extends JPanel{
 
     private void exportText(){
         try {
-            BufferedImage image = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage image = new BufferedImage(textImage.getWidth(), textImage.getHeight(), BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics2D = image.createGraphics();
-            frame.paint(graphics2D);
-            ImageIO.write(image,"jpeg", new File("/home/juan/Documents/Maratones/Rogue/src/Woombat/mser"+counter+".jpeg"));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("/home/juan/Pictures/mser/"+counter+".txt")));
-            writer.append(Integer.toString(sw)); //width
-            writer.newLine();
-            writer.append(Integer.toString(sh)); //height
-            writer.newLine();
-            writer.append(Integer.toString(width/2 - sw/2)); //x
-            writer.newLine();
-            writer.append(Integer.toString(height/2 - sh/2)); //y
+            textImage.paint(graphics2D);
+            for (int x = 0; x < image.getWidth(); x++) {
+                for (int y = 0; y < image.getHeight(); y++) {
+                    int rgba = image.getRGB(x, y);
+                    Color col = new Color(rgba, true);
+                    col = new Color(255 - col.getRed(),
+                            255 - col.getGreen(),
+                            255 - col.getBlue());
+                    image.setRGB(x, y, col.getRGB());
+                }
+            }
+            ImageIO.write(image,"jpg", new File("/home/juan/Documents/Maratones/Rogue/src/Woombat/mser"+counter+".jpg"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("/home/juan/Documents/Maratones/Rogue/src/Woombat/mser"+counter+".txt")));
+            writer.append(builder);
             writer.close();
         }
         catch(Exception e) {
@@ -92,7 +139,8 @@ public class TextImage extends JPanel{
         frame.setSize(width, height);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        go(Font.SERIF, Font.PLAIN, 30);
-        //frame.dispose();
+        for (counter = 1; counter <= 1; counter++)
+            go(Font.SERIF, Font.PLAIN, 30*counter);
+        frame.dispose();
     }
 }
