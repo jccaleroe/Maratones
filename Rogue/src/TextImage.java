@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,11 +18,12 @@ public class TextImage extends JPanel{
     private static int width = gd.getDisplayMode().getWidth(), height = gd.getDisplayMode().getHeight();
     private static JFrame frame = new JFrame("Text");
     private int fontStyle, fontSize;
-    private static String imgPath, txtPath;
+    private static String imgPath, txtPath, wordsPath;
     private Font font;
     private StringBuilder builder = new StringBuilder();
     private static TextImage textImage;
     private static String text;
+    private static ArrayList<Rectangle> rectangles = new ArrayList<>();
 
     private TextImage(Font font, int fontStyle, int fontSize) {
         this.fontStyle = fontStyle;
@@ -41,6 +43,7 @@ public class TextImage extends JPanel{
     }
 
     public void paint(Graphics g) {
+        rectangles.clear();
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         font = font.deriveFont(fontStyle, fontSize);
@@ -82,12 +85,16 @@ public class TextImage extends JPanel{
                 tmp = s.substring(0, k);
                 gv = g2.getFont().createGlyphVector(frc, tmp);
                 rectangle = gv.getPixelBounds(null, h, y);
+                if (!rectangle.isEmpty()){
+                    appendBuilder(rectangle);
+                    rectangles.add(rectangle);
+                }
                 h += g2.getFontMetrics().stringWidth(tmp);
-                appendBuilder(rectangle);
                 tmp = s.substring(k, s.length());
                 if (!tmp.isEmpty()) {
                     gv = g2.getFont().createGlyphVector(frc, tmp);
                     rectangle = gv.getPixelBounds(null, h, y);
+                    rectangles.add(rectangle);
                     h += g2.getFontMetrics().stringWidth(tmp);
                     appendBuilder(rectangle);
                 }
@@ -145,10 +152,19 @@ public class TextImage extends JPanel{
             graphics2D2.drawImage(coffee, rop, 10, 0);
             graphics2D2.drawImage(splatter, rop, width/6, height/4);
 
+            Rectangle tmp;
+            for (int i = 0; i < rectangles.size(); i++){
+                tmp = rectangles.get(i);
+                System.out.println(tmp);
+                BufferedImage dest = img.getSubimage(tmp.x, tmp.y, tmp.width, tmp.height);
+                ImageIO.write(dest,"jpg", new File(wordsPath+i+".jpg"));
+            }
+
             ImageIO.write(img,"jpg", new File(imgPath));
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(txtPath)));
             writer.append(builder);
             writer.close();
+
         }
         catch(IOException e) {
             e.printStackTrace();
@@ -156,9 +172,9 @@ public class TextImage extends JPanel{
     }
 
     public static void main(String[] args) {
-        if (args.length < 5) {
+        if (args.length < 6) {
             System.out.println("Must specify 5 arguments: Font, FontStyle(0:Plain, 1:Bold, 2:Italic, font size, " +
-                    "text to display, path to save image and path to save ground truth");
+                    "text to display, path to save image, path to save ground truth, and folder to save words");
             return;
         }
         GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -184,6 +200,7 @@ public class TextImage extends JPanel{
         text = args[3];
         imgPath = args[4];
         txtPath = args[5];
+        wordsPath = args[6];
         go(font, Integer.parseInt(args[1]), Integer.parseInt(args[2]));
         frame.dispose();
     }
