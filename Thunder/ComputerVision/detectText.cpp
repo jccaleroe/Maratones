@@ -22,7 +22,7 @@ vector<Rect> words, extremals, swts;
 string a, b, c, d;
 
 //shows an image with bounding boxes of vector words
-void showImage(const char* file, string s){
+void showImage(const char* file, const string &s){
     cout << words.size() << endl;
     Mat img = imread(file, 1);
     for (const auto &a : words)
@@ -70,14 +70,14 @@ void detectText(const char* file, int f){
     words = mser(img.clone());
     vector<Rect> tmp = cropAndKnnMser(swts, extremals, img);
     words.insert(words.end(), tmp.begin(), tmp.end());
-    words.insert(words.end(), extremals.begin(), extremals.end());
+    //words.insert(words.end(), swts.begin(), swts.end());
 
     words = filterWords(words, 0.7);
     words = filterIntersections(words, 0.7, 3);
 
     //writeFile(f);
-    showImage(file, "words");
-    waitKey(0);
+    //showImage(file, "words");
+    //waitKey(0);
 }
 
 void icdar(){
@@ -95,9 +95,11 @@ void icdar(){
 void testTest(){
     freopen("/home/juan/Documents/Maratones/Rogue/src/Woombat/mser1.txt", "r", stdin);
     int a, b, c, d;
-    while (cin >> a >> b >> c >> d){
+    vector<Rect> positives;
+    while (cin >> a >> b >> c >> d)
         words.emplace_back(a, b, c, d);
-    }
+    //detectText("/home/juan/Documents/Maratones/Rogue/src/Woombat/mser1.jpg", 1);
+    //words = getPositives(positives, words, 0.8);
     showImage("/home/juan/Documents/Maratones/Rogue/src/Woombat/mser1.jpg", "test");
     waitKey(0);
 }

@@ -103,7 +103,7 @@ vector<Rect> mser(Mat img){
 
     bbox1 = knnMode(img, 3, true);
 
-    kmser(img, 3);
+    //kmser(img, 3);
 
     regions.insert(regions.end(), bbox1.begin(), bbox1.end());
     regions.insert(regions.end(), bbox2.begin(), bbox2.end());

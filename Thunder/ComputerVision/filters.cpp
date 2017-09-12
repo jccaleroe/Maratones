@@ -86,3 +86,17 @@ vector<Rect> filterWords(vector<Rect> &bbox, double simility){
 
     return tmp_bbox;
 }
+
+vector<Rect> getPositives(vector<Rect> &positives, vector<Rect> &results, double simility){
+    vector<Rect> tmp_bbox;
+    if (positives.empty() || results.empty()) return tmp_bbox;
+
+    vector<bool> tmp (positives.size(), true);
+
+    for (auto &i : positives)
+        for (auto &j : results)
+            if (intersectRatio(i, j) >= simility)
+                tmp_bbox.push_back(j);
+
+    return tmp_bbox;
+}
