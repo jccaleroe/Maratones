@@ -99,7 +99,7 @@ void testTest(){
     while (cin >> a >> b >> c >> d)
         words.emplace_back(a, b, c, d);
     //detectText("/home/juan/Documents/Maratones/Rogue/src/Woombat/mser1.jpg", 1);
-    //words = getPositives(positives, words, 0.8);
+    //words = getPositives(positives, words, 0.9);
     showImage("/home/juan/Documents/Maratones/Rogue/src/Woombat/mser1.jpg", "test");
     waitKey(0);
 }

@@ -101,9 +101,10 @@ vector<Rect> mser(Mat img){
     bbox2.clear();
     cvtColor(img, img, COLOR_BGR2GRAY);
 
-    bbox1 = knnMode(img, 3, true);
+    bbox1 = knnMode(img, 4, true);
 
-    //kmser(img, 3);
+    kmser(img, 3);
+    kmser(img, 2);
 
     regions.insert(regions.end(), bbox1.begin(), bbox1.end());
     regions.insert(regions.end(), bbox2.begin(), bbox2.end());
