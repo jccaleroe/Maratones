@@ -3,24 +3,18 @@ project(Thunder)
 
 set(CMAKE_CXX_STANDARD 11)
 
-find_package(OpenCV REQUIRED)
+#find_package(OpenCV REQUIRED)
 
-link_directories("ComputerVision/ccv/lib")
+#link_directories("ComputerVision/ccv/lib")
 
-include_directories(${OpenCV_INCLUDE_DIRS})
-include_directories("ComputerVision/ccv/lib")
-set(SOURCE_FILES ComputerVision/mser.cpp ComputerVision/swtdetect.c ComputerVision/detectText.cpp
-        ComputerVision/textdetection.cpp ComputerVision/filters.cpp ComputerVision/clustering.cpp)
+#include_directories(${OpenCV_INCLUDE_DIRS})
+#include_directories("ComputerVision/ccv/lib")
+#set(SOURCE_FILES ComputerVision/mser.cpp ComputerVision/swtdetect.c ComputerVision/detectText.cpp
+#        ComputerVision/textdetection.cpp ComputerVision/filters.cpp ComputerVision/clustering.cpp)
 
-#set(SOURCE_FILES Lothric/other/randomGraph.cpp)
+set(SOURCE_FILES Lothric/other/NITExtracter.cpp)
 
-#set(SOURCE_FILES ComputerVision/swtdetect.c)
-#set(SOURCE_FILES ComputerVision/TextRecognition/segmented_word_recognition.cpp)
-#set(SOURCE_FILES ComputerVision/TextRecognition/end_to_end_recognition.cpp)
-#set(SOURCE_FILES ComputerVision/TextRecognition/textdetection.cpp)
-#set(SOURCE_FILES ComputerVision/LearningOpenCV/chap1/smoothImage.cpp)
-
-link_libraries("ccv" "m" "jpeg" "png")
+#link_libraries("ccv" "m" "jpeg" "png")
 
 add_executable(Thunder ${SOURCE_FILES})
 
