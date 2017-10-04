@@ -4,10 +4,9 @@ import java.awt.font.GlyphVector;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -17,32 +16,25 @@ import javax.swing.*;
 public class TextImage extends JPanel{
 
     private static GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-    private static int width = gd.getDisplayMode().getWidth(), height = gd.getDisplayMode().getHeight();
+    private static int width = gd.getDisplayMode().getWidth(), height = gd.getDisplayMode().getHeight(), wordsCount;
     private static JFrame frame = new JFrame("Text");
     private int fontStyle, fontSize;
-    private static String imgPath, txtPath, wordsPath;
+    private static String imgPath, wordsPath = "words", text;
     private Font font;
-    private StringBuilder builder = new StringBuilder();
+    private static StringBuilder builder = new StringBuilder();
     private static TextImage textImage;
-    private static String text, imgFormat;
     private static ArrayList<Rectangle> rectangles = new ArrayList<>();
     private static Boolean isUnderline, isStrikethrough, hasGaussian, hasStains;
+    private static float[] scales = {1f, 1f, 1f, 0.5f}, offsets = new float[4];
+    private static RescaleOp rop = new RescaleOp(scales, offsets, null);
+    private static BufferedImage coffee, ink, splatter;
+    private static Font[] fonts;
 
-    private TextImage(Font font, int fontStyle, int fontSize) {
-        this.fontStyle = fontStyle;
-        this.fontSize = fontSize;
-        this.font = font;
-    }
+    private TextImage(){}
 
-    private void appendBuilder(Rectangle rectangle){
-        builder.append(rectangle.x);
-        builder.append(" ");
-        builder.append(rectangle.y);
-        builder.append(" ");
-        builder.append(rectangle.width);
-        builder.append(" ");
-        builder.append(rectangle.height);
-        builder.append("\n");
+    private static void appendWord(String str, String path){
+        builder.append(wordsCount); builder.append(","); builder.append(str); builder.append(",");
+        builder.append(path); builder.append("\n");
     }
 
     public void paint(Graphics g) {
@@ -60,7 +52,6 @@ public class TextImage extends JPanel{
         GlyphVector gv;
         String tmp;
         String[] words;
-        builder.delete(0, builder.length());
         rectangles.clear();
         int sw = g2.getFontMetrics().stringWidth(text);
         int sh = g2.getFontMetrics().getHeight();
@@ -91,7 +82,7 @@ public class TextImage extends JPanel{
                 gv = g2.getFont().createGlyphVector(frc, tmp);
                 rectangle = gv.getPixelBounds(null, h, y);
                 if (!rectangle.isEmpty()){
-                    appendBuilder(rectangle);
+                    //appendBuilder(rectangle);
                     rectangles.add(rectangle);
                 }
                 h += g2.getFontMetrics().stringWidth(tmp) + space;
@@ -99,16 +90,6 @@ public class TextImage extends JPanel{
             g2.drawString(aux, pad, y);
         }
         g2.dispose();
-    }
-
-    private static void go(Font font, int fontStyle, int fontSize){
-        textImage = new TextImage(font, fontStyle, fontSize);
-        frame.getContentPane().add(textImage);
-        textImage.setVisible(true);
-        frame.validate();
-        frame.repaint();
-        textImage.exportText();
-        frame.remove(textImage);
     }
 
     private static void invert(BufferedImage image){
@@ -129,7 +110,7 @@ public class TextImage extends JPanel{
         }
     }
 
-    private void exportText(){
+    private static void exportText(){
         try {
             BufferedImage text = new BufferedImage(textImage.getWidth(), textImage.getHeight(), BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics2D = text.createGraphics();
@@ -137,84 +118,115 @@ public class TextImage extends JPanel{
             textImage.paint(graphics2D);
             invert(text);
 
-            BufferedImage img = new BufferedImage(textImage.getWidth(), textImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage img = new BufferedImage(textImage.getWidth(), textImage.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
             Graphics2D graphics2D2 = img.createGraphics();
             graphics2D2.drawImage(text, 0, 0, null);
-
             if (hasStains) {
-                float[] scales = {1f, 1f, 1f, 0.5f};
-                float[] offsets = new float[4];
-                RescaleOp rop = new RescaleOp(scales, offsets, null);
-                BufferedImage coffee = ImageIO.read(new File("images/coffee-stain.png"));
-                BufferedImage ink = ImageIO.read(new File("images/black-ink-splatter.png"));
-                BufferedImage splatter = ImageIO.read(new File("images/coffee-splatter.png"));
-                graphics2D2.drawImage(ink, rop, width / 3 + 20, height / 10);
-                graphics2D2.drawImage(coffee, rop, 10, 0);
-                graphics2D2.drawImage(splatter, rop, width / 6, height / 4);
+                graphics2D2.drawImage(ink, rop, -(int)(Math.random()*width / 2), -(int)(Math.random()*height / 3));
+                graphics2D2.drawImage(coffee, rop, -(int)(Math.random()*width), -(int)(Math.random()*height));
+                graphics2D2.drawImage(splatter, rop, -(int)(Math.random()*width / 2), -(int)(Math.random()*height / 3));
             }
 
-            Rectangle tmp;
-            for (int i = 0; i < rectangles.size(); i++){
-                tmp = rectangles.get(i);
-                BufferedImage dest = img.getSubimage(tmp.x, tmp.y, tmp.width, tmp.height);
-                ImageIO.write(dest,imgFormat, new File(wordsPath+i+"." + imgFormat));
+            int aux1, aux2, aux3, aux4;
+            for (Rectangle rectangle : rectangles) {
+                aux1 = Math.max(0,rectangle.x-4);
+                if (aux1 == 0) aux1 = rectangle.x;
+                aux2 = Math.max(0,rectangle.y-4);
+                if (aux2 == 0) aux2 = rectangle.y;
+                aux3 = aux1 != rectangle.x ? Math.min(rectangle.width+8, img.getWidth()) : Math.min(rectangle.width+4, img.getWidth());
+                aux4 = aux2 != rectangle.y ? Math.min(rectangle.height+8, img.getHeight()) : Math.min(rectangle.height+4, img.getHeight());
+                BufferedImage dest = img.getSubimage(aux1, aux2, aux3, aux4);
+                ImageIO.write(dest, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordsCount + ".jpg"));
+                appendWord(TextImage.text, wordsPath + "/" + imgPath + "/" + wordsCount + ".jpg" );
             }
-
-            ImageIO.write(img,imgFormat, new File(imgPath));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(txtPath)));
-            writer.append(builder);
-            writer.close();
-
         }
         catch(IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        if (args.length < 11) {
-            System.out.println("Must specify 9 arguments: Font, FontStyle(0:Plain, 1:Bold, 2:Italic), font size" +
-                    "is inderlined, is striketrhough, has gaussian noise, has stains, text to display, path to save" +
-                    "image, path to save ground truth and folder to save words");
-            return;
-        }
-        GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        Font[] fonts = e.getAllFonts();
+    private static void go(Font font, int fontStyle, int fontSize){
+        textImage.font = font;
+        textImage.fontStyle = fontStyle;
+        textImage.fontSize = fontSize;
+        frame.getContentPane().add(textImage);
+        frame.validate();
+        frame.repaint();
+        exportText();
+        frame.remove(textImage);
+    }
+
+    private static void initialize(String fontName, int size, int bold, int italic, boolean isUnderline,
+                                   boolean isStrikethrough, boolean hasGaussian, boolean hasStains, String text){
         Font font = null;
         boolean flag = false;
         for (Font f : fonts){
-            if (f.getName().equals(args[0])){
+            if (f.getName().equals(fontName)){
                 flag = true;
                 font = f;
                 break;
             }
         }
         if (!flag){
-            System.out.println("That font does not exist on this computer, following are the installed fonts:\n");
+            System.out.println("That font does not exist on this computer, next are the installed fonts:\n");
             for (Font f : fonts)
                 System.out.println(f.getName());
             return;
         }
+        int fontStyle = bold + italic;
         frame.setSize(width, height);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        isUnderline = args[3].equals("1");
-        isStrikethrough = args[4].equals("1");
-        hasGaussian = args[5].equals("1");
-        hasStains = args[6].equals("1");
-        text = args[7];
-        imgPath = args[8];
-        int k = imgPath.length();
-        while (k > 0 && imgPath.charAt(k-1) != '.')
-            k--;
-        if (k == 0){
-            System.out.println("must specify a valid image");
-            return;
+        TextImage.isUnderline =  isUnderline;
+        TextImage.isStrikethrough = isStrikethrough;
+        TextImage.hasGaussian = hasGaussian;
+        TextImage.hasStains = hasStains;
+        TextImage.text = text;
+        go(font, fontStyle, size);
+    }
+
+    private static void quiet(){
+        try {
+            GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            fonts = e.getAllFonts();
+            textImage = new TextImage();
+            coffee = ImageIO.read(new File("images/coffee-stain.png"));
+            ink = ImageIO.read(new File("images/black-ink-splatter.png"));
+            splatter = ImageIO.read(new File("images/coffee-splatter.png"));
+            builder.delete(0, builder.length());
+            wordsCount = 0;
+            int wordsTracker = 0;
+            imgPath = Integer.toString(wordsCount);
+            BufferedReader reader = new BufferedReader(new FileReader(new File("spanish2.txt")));
+            String str;
+            String[] fonts = {"Andale Mono", "Arial", "Arial Black", "Calibri", "Cambria Italic", "Comic Sans MS",
+                    "Courier New", "Tahoma", "Times New Roman", "Verdana", "Georgia", "Impact", "Trebuchet MS", "Candara",
+                    "Palatino Linotype", "Century Schoolbook L Italic", "Lucida Bright Demibold"};
+
+            Files.createDirectories(Paths.get(wordsPath));
+            Files.createDirectories(Paths.get(wordsPath + "/" + imgPath));
+            int fontIndex;
+            while ((str = reader.readLine()) != null) {
+                wordsCount++;
+                if (wordsCount - wordsTracker >= 1000) {
+                    wordsTracker = wordsCount;
+                    imgPath = Integer.toString(wordsCount);
+                    Files.createDirectories(Paths.get(wordsPath + "/" + imgPath));
+                }
+                fontIndex = (int) (Math.random() * fonts.length);
+                initialize(fonts[fontIndex], (int) (Math.random() * 16) + 9, Math.random() <= 0.2 ? 1 : 0,
+                        Math.random() <= 0.2 ? 2 : 0, Math.random() <= 0.2, Math.random() <= 0.2,
+                        Math.random() <= 0.6, Math.random() <= 0.9, str);
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(wordsPath, "words.csv")));
+            writer.append(builder);
+            writer.close();
+        }catch (IOException e){
+            e.printStackTrace();
         }
-        imgFormat = imgPath.substring(k, imgPath.length());
-        txtPath = args[9];
-        wordsPath = args[10];
-        go(font, Integer.parseInt(args[1]), Integer.parseInt(args[2]));
-        frame.dispose();
+    }
+
+    public static void main(String[] args){
+        quiet();
     }
 }
