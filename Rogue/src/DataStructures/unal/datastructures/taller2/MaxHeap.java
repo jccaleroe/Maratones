@@ -176,17 +176,17 @@ public class MaxHeap<T extends Comparable<? super T>>
     public static void main(String[] args) {
         // test constructor and put
         MaxHeap<Integer> h = new MaxHeap<>(4);
-        h.put(new Integer(10));
-        h.put(new Integer(20));
-        h.put(new Integer(5));
+        h.put(10);
+        h.put(20);
+        h.put(5);
 
         // test toString
         System.out.println("Elements in array order are");
         System.out.println(h);
         System.out.println();
 
-        h.put(new Integer(15));
-        h.put(new Integer(30));
+        h.put(15);
+        h.put(30);
 
         System.out.println("Elements in array order are");
         System.out.println(h);
@@ -203,7 +203,7 @@ public class MaxHeap<T extends Comparable<? super T>>
         // test initialize
         Integer[] z = new Integer[10];
         for (int i = 0; i < 10; i++)
-            z[i] = new Integer(i);
+            z[i] = i;
         h.initialize(z);
         System.out.println("Elements in array order are");
         System.out.println(h);

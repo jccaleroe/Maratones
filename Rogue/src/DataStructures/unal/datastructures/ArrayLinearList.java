@@ -181,19 +181,17 @@ public class ArrayLinearList<T> implements LinearList<T>, Iterable<T> {
         else System.out.println("The list is not empty");
 
         // test put
-        x.add(0, new Integer(2));
-        x.add(1, new Integer(6));
-        x.add(0, new Integer(1));
-        x.add(2, new Integer(4));
+        x.add(0, 2);
+        x.add(1, 6);
+        x.add(0, 1);
+        x.add(2, 4);
         System.out.println("List size is " + x.size());
 
         // test toString
         System.out.println("The list is " + x);
 
         // output using an iterator
-        Iterator y = x.iterator();
-        while (y.hasNext())
-            System.out.print(y.next() + " ");
+        for (Object aX : x) System.out.print(aX + " ");
         System.out.println();
 
         // test indexOf

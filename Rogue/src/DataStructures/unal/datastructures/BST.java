@@ -142,10 +142,10 @@ public class BST<K extends Comparable<? super K>, E>
         BST<Integer, Character> y = new BST<>();
 
         // insert a few elements
-        y.put(new Integer(1), new Character('a'));
-        y.put(new Integer(6), new Character('c'));
-        y.put(new Integer(4), new Character('b'));
-        y.put(new Integer(8), new Character('d'));
+        y.put(1, 'a');
+        y.put(6, 'c');
+        y.put(4, 'b');
+        y.put(8, 'd');
 
         System.out.println("Elements in ascending order are");
         y.ascend();

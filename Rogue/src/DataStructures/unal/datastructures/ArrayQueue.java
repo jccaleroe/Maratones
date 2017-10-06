@@ -105,16 +105,16 @@ public class ArrayQueue<T> implements Queue<T> {
     public static void main(String[] args) {
         ArrayQueue<Integer> q = new ArrayQueue<>(3);
         // add a few elements
-        q.put(new Integer(1));
-        q.put(new Integer(2));
-        q.put(new Integer(3));
+        q.put(1);
+        q.put(2);
+        q.put(3);
 
         System.out.print("\n");
         for (Object x : q.queue)
             System.out.print(x + ", ");
         System.out.print("\n");
 
-        q.put(new Integer(4));
+        q.put(4);
 
         System.out.print("\n");
         for (Object x : q.queue)
@@ -124,14 +124,14 @@ public class ArrayQueue<T> implements Queue<T> {
         // remove and add to test wrap around array doubling
         q.remove();
         q.remove();
-        q.put(new Integer(5));
-        q.put(new Integer(6));
-        q.put(new Integer(7));
-        q.put(new Integer(8));
-        q.put(new Integer(9));
-        q.put(new Integer(10));
-        q.put(new Integer(11));
-        q.put(new Integer(12));
+        q.put(5);
+        q.put(6);
+        q.put(7);
+        q.put(8);
+        q.put(9);
+        q.put(10);
+        q.put(11);
+        q.put(12);
 
         // delete all elements
         while (!q.isEmpty()) {

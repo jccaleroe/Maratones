@@ -1,7 +1,10 @@
+import javafx.scene.text.Text;
+
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.font.TextAttribute;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 import java.io.*;
@@ -13,7 +16,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class TextImage extends JPanel implements Runnable{
+public class TextImage extends Canvas implements Runnable{
 
     private static GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
     private static int width = gd.getDisplayMode().getWidth(), height = gd.getDisplayMode().getHeight(), wordsCount,
@@ -25,7 +28,7 @@ public class TextImage extends JPanel implements Runnable{
     private Font font;
     private static StringBuilder builder = new StringBuilder();
     private ArrayList<Rectangle> rectangles = new ArrayList<>();
-    private Boolean isUnderline, isStrikethrough, hasGaussian, hasStains, exporting;
+    private Boolean isUnderline, isStrikethrough, hasGaussian, hasStains;
     private static float[] scales = {1f, 1f, 1f, 0.5f}, offsets = new float[4];
     private static RescaleOp rop = new RescaleOp(scales, offsets, null);
     private static BufferedImage coffee, ink, splatter;
@@ -35,11 +38,75 @@ public class TextImage extends JPanel implements Runnable{
             "Courier New", "Tahoma", "Times New Roman", "Verdana", "Georgia", "Impact", "Trebuchet MS", "Candara",
             "Palatino Linotype", "Century Schoolbook L Italic", "Lucida Bright Demibold"};
 
-    private TextImage(){}
+    private void kill(){ frame.dispose(); }
 
     private static synchronized void appendWord(String wordID, String str, String path){
-        builder.append(wordID); builder.append("\t"); builder.append(str); builder.append(",");
+        builder.append(wordID); builder.append("\t"); builder.append(str); builder.append("\t");
         builder.append(path); builder.append("\n");
+    }
+
+    private static double[][] getZRotation(double theta){
+        double[][] rotation = new double[3][3];
+        rotation[0][0] = Math.cos(theta); rotation[0][1] = -Math.sin(theta); rotation[0][2] = 0;
+        rotation[1][0] = Math.sin(theta); rotation[1][1] = Math.cos(theta); rotation[1][2] = 0;
+        rotation[2][0] = 0; rotation[2][1] = 0; rotation[2][2] = 1;
+        return rotation;
+    }
+
+    private static double[][] getYRotation(double theta){
+        double[][] rotation = new double[3][3];
+        rotation[0][0] = Math.cos(theta); rotation[0][1] = 0; rotation[0][2] = Math.sin(theta);
+        rotation[1][0] = 0; rotation[1][1] = 1; rotation[1][2] = 0;
+        rotation[2][0] = -Math.sin(theta); rotation[2][1] = 0; rotation[2][2] = Math.cos(theta);
+        return rotation;
+    }
+
+    private static double[][] getXRotation(double theta){
+        double[][] rotation = new double[3][3];
+        rotation[0][0] = 1; rotation[0][1] = 0; rotation[0][2] = 0;
+        rotation[1][0] = 0; rotation[1][1] = Math.cos(theta); rotation[1][2] = -Math.sin(theta);
+        rotation[2][0] = 0; rotation[2][1] = Math.sin(theta); rotation[2][2] = Math.cos(theta);
+        return rotation;
+    }
+
+    private double[] getMatrixValue(int[] pos, double[][] rotation){
+        double[] values = new double[rotation.length];
+        double aux;
+        for (int i = 0; i < rotation.length; i++){
+            aux = 0;
+            for (int j = 0; j < rotation.length; j++)
+                aux += rotation[i][j]*pos[j];
+            values[i] = aux;
+        }
+        return values;
+    }
+
+    private int[][][] rotate(double[][] rotation, BufferedImage image){
+        int m = Math.max(image.getHeight(), image.getWidth()) * 3;
+        int [][][] rotated = new int[m][m][m];
+        for (int i = 0; i < rotated.length; i++)
+            for (int j = 0; j < rotated.length; j++)
+                for (int k = 0; k < rotated.length; k++)
+                    rotated[i][j][k] = Color.WHITE.getRGB();
+
+        for (int x = 0; x < image.getWidth(); x++){
+            for (int y = 0; y < image.getHeight(); y++){
+                int[] current = {x, y, 0};
+                double[] pos = getMatrixValue(current, rotation);
+                if (pos[0] >= 0 && pos[1] >= 0 && pos[2] >= 0 && pos[0] <= m && pos[1] <= m && pos[2] <= m)
+                    rotated[(int) pos[1]][(int) pos[0]][(int) pos[2]] = image.getRGB(x, y);
+            }
+        }
+        return rotated;
+    }
+
+    private BufferedImage project(int[][][] matrix){
+        int size = matrix.length;
+        BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_BYTE_GRAY);
+        for (int x = 0; x < size; x++)
+            for (int y = 0; y < size; y++)
+                image.setRGB(x, y, matrix[y][x][0]);
+        return image;
     }
 
     private void invert(BufferedImage image){
@@ -71,13 +138,10 @@ public class TextImage extends JPanel implements Runnable{
             attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
         font = font.deriveFont(attributes);
         g2.setFont(font);
-        FontRenderContext frc = g2.getFontRenderContext();
         GlyphVector gv;
         String tmp;
         String[] words;
-        boolean isExporting = exporting;
-        //if (!isExporting)
-            rectangles.clear();
+        rectangles.clear();
         int sw = g2.getFontMetrics().stringWidth(text);
         int sh = g2.getFontMetrics().getHeight();
         int pad = 40, w2 = width - (3 * pad);
@@ -98,25 +162,31 @@ public class TextImage extends JPanel implements Runnable{
             b += chars;
             aux = aux.trim();
             words = aux.split(" ");
-            y = (sh) * (i + 1);
+            y = (sh) * (i + 5);
             if (sh + y >= height)
                 break;
-            h = pad;
+            h = pad + width/3;
+            //AffineTransform affineTransform= g2.getTransform();
+            //g2.shear(1, 1);
+            //g2.rotate(Math.PI/18);
+            FontRenderContext frc = g2.getFontRenderContext();
             for (String s : words) {
                 tmp = s.substring(0, s.length());
                 gv = g2.getFont().createGlyphVector(frc, tmp);
                 rectangle = gv.getPixelBounds(null, h, y);
                 if (!rectangle.isEmpty())
                     rectangles.add(rectangle);
+
+                g2.drawString(aux, h, y);
                 h += g2.getFontMetrics().stringWidth(tmp) + space;
             }
-            g2.drawString(aux, pad, y);
+            //g2.setTransform(affineTransform);
         }
         g2.dispose();
     }
-
+    private static int lol = 0;
+    private static int lol2 = 0;
     private void exportText(){
-        exporting = true;
         try {
             BufferedImage text = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics2D = text.createGraphics();
@@ -132,23 +202,45 @@ public class TextImage extends JPanel implements Runnable{
                 graphics2D2.drawImage(coffee, rop, -(int)(Math.random()*width), -(int)(Math.random()*height));
                 graphics2D2.drawImage(splatter, rop, -(int)(Math.random()*width / 2), -(int)(Math.random()*height / 3));
             }
-            int aux1, aux2, aux3, aux4;
+            int aux1, aux2, aux3, aux4, augmentation = 4;
+            int c = 5;
             for (Rectangle rectangle : rectangles) {
-                aux1 = Math.max(0,rectangle.x-4);
+                aux1 = Math.max(0,rectangle.x-augmentation);
                 if (aux1 == 0) aux1 = rectangle.x;
-                aux2 = Math.max(0,rectangle.y-4);
+                aux2 = Math.max(0,rectangle.y-augmentation);
                 if (aux2 == 0) aux2 = rectangle.y;
-                aux3 = aux1 != rectangle.x ? Math.min(rectangle.width+8, img.getWidth()) : Math.min(rectangle.width+4, img.getWidth());
-                aux4 = aux2 != rectangle.y ? Math.min(rectangle.height+8, img.getHeight()) : Math.min(rectangle.height+4, img.getHeight());
+                aux3 = aux1 != rectangle.x ? Math.min(rectangle.width+augmentation*2,
+                        img.getWidth()) : Math.min(rectangle.width+augmentation, img.getWidth());
+                aux4 = aux2 != rectangle.y ? Math.min(rectangle.height+augmentation*2,
+                        img.getHeight()) : Math.min(rectangle.height+augmentation, img.getHeight());
                 BufferedImage dest = img.getSubimage(aux1, aux2, aux3, aux4);
-                ImageIO.write(dest, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
-                appendWord(wordID, this.text, wordsPath + "/" + imgPath + "/" + wordID + ".jpg");
+                int[][][] rot = rotate(getXRotation(0.17), dest);
+                BufferedImage dest2 = project(rot);
+                /*if (Math.random() <= 0.6) {
+                    lol++;
+                    javaxt.io.Image image = new javaxt.io.Image(dest);
+                    int w = image.getWidth();
+                    int h = image.getHeight();
+                    try {
+                        image.setCorners((int) (Math.random()*c)*2-c, (int) (Math.random()*c)*2-c,
+                                w + (int) (Math.random()*c)*2-c, (int) (Math.random()*c)*2-c,
+                                w + (int) (Math.random()*c)*2-c, h + (int) (Math.random()*c)*2-c,
+                                (int) (Math.random()*c)*2-c, h + (int) (Math.random()*c)*2-c);
+                        System.out.println(wordID);
+                        //image.crop(c, c, w - c, h - c);
+                        ImageIO.write(image.getBufferedImage(), "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        lol2++;
+                        ImageIO.write(dest, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
+                    }
+                }
+                else*/
+                    ImageIO.write(dest2, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
             }
         }
         catch(Exception e) {
             e.printStackTrace();
         }
-        exporting = false;
     }
 
     private void go(){
@@ -156,6 +248,7 @@ public class TextImage extends JPanel implements Runnable{
         frame.validate();
         frame.repaint();
         exportText();
+        appendWord(wordID, this.text, wordsPath + "/" + imgPath + "/" + wordID + ".jpg");
         frame.remove(this);
     }
 
@@ -211,36 +304,20 @@ public class TextImage extends JPanel implements Runnable{
 
     @Override
     public void run() {
-        while (wordsCount < wordsNum) {
-            if (develop()) {
-                //System.out.println(Thread.currentThread().getName() + " with word " + wordID);
-                initialize(fontNames[(int) (Math.random() * fontNames.length)], (int) (Math.random() * 16) + 9, Math.random() <= 0.2 ? 1 : 0,
-                        Math.random() <= 0.2 ? 2 : 0, Math.random() <= 0.2, Math.random() <= 0.2,
-                        Math.random() <= 0.6, Math.random() <= 0.9);
-            }
-        }
+        while (wordsCount < wordsNum)
+            if (develop())
+                initialize(fontNames[(int) (Math.random() * fontNames.length)], (int) (Math.random() * 16) + 10,
+                        Math.random() <= 0.2 ? 1 : 0, Math.random() <= 0.2 ? 2 : 0, Math.random() <= 0.2,
+                        Math.random() <= 0.2, Math.random() <= 0.6, Math.random() <= 0.9);
+        kill();
     }
 
     private static void quiet(){
         try {
             String str;
-            BufferedReader reader = new BufferedReader(new FileReader(new File("/home/juan/Desktop/spanish.txt")));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("spanish.txt")));
-            String[] openenig = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'", "+",
-                "[", "{", "¿", "¡", "<", "("};
-            String[] ending = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'", "+",
-                "]", "}", "?", "!", ">", ")"};
-
-            while ((str = reader.readLine()) != null) {
-                //words.add(str);
-                if (Math.random() <= 0.2)
-                    str = openenig[(int) (Math.random() * openenig.length)] + str;
-                if (Math.random() <= 0.2)
-                    str = str + ending[(int) (Math.random() * ending.length)];
-                writer.append(str);
-                writer.append("\n");
-            }
-            /*
+            BufferedReader reader = new BufferedReader(new FileReader(new File("spanish2.txt")));
+            while ((str = reader.readLine()) != null)
+                words.add(str);
             wordsNum = words.size();
             reader.close();
 
@@ -257,10 +334,9 @@ public class TextImage extends JPanel implements Runnable{
             Files.createDirectories(Paths.get(wordsPath));
             Files.createDirectories(Paths.get(wordsPath + "/" + imgPath));
 
-            TextImage textImage = new TextImage();
             ArrayList<Thread> threads = new ArrayList<>();
             for (int i = 0; i < 4; i++) {
-                threads.add(new Thread(textImage));
+                threads.add(new Thread(new TextImage()));
                 threads.get(i).setName(Integer.toString(i));
             }
             for (Thread thread : threads)
@@ -271,11 +347,10 @@ public class TextImage extends JPanel implements Runnable{
             }catch (InterruptedException interrupted){
                 interrupted.printStackTrace();
             }
-
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(wordsPath, "words.csv")));
             writer.append(builder);
+            writer.flush();
             writer.close();
-*/
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -283,5 +358,7 @@ public class TextImage extends JPanel implements Runnable{
 
     public static void main(String[] args){
         quiet();
+        //System.out.println(lol);
+        //System.out.println(lol2);
     }
 }

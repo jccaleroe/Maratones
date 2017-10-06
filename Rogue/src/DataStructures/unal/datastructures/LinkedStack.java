@@ -59,10 +59,10 @@ public class LinkedStack<T> implements Stack<T> {
         LinkedStack<Integer> s = new LinkedStack<>();
 
         // add a few elements
-        s.push(new Integer(1));
-        s.push(new Integer(2));
-        s.push(new Integer(3));
-        s.push(new Integer(4));
+        s.push(1);
+        s.push(2);
+        s.push(3);
+        s.push(4);
 
         // delete all elements
         while (!s.isEmpty()) {

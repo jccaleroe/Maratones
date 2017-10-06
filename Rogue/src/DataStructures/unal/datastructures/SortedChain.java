@@ -224,15 +224,15 @@ public class SortedChain<K extends Comparable<? super K>, E>
         SortedChain<Integer, Integer> x = new SortedChain<>();
 
         // test put
-        x.put(new Integer(2), new Integer(12));
+        x.put(2, 12);
         System.out.println("The list is " + x);
-        x.put(new Integer(6), new Integer(16));
+        x.put(6, 16);
         System.out.println("The list is " + x);
-        x.put(new Integer(1), new Integer(11));
+        x.put(1, 11);
         System.out.println("The list is " + x);
-        x.put(new Integer(4), new Integer(14));
+        x.put(4, 14);
         System.out.println("The list is " + x);
-        x.put(new Integer(6), new Integer(26));
+        x.put(6, 26);
         System.out.println("The list is " + x);
 
         // test iterator
@@ -240,21 +240,21 @@ public class SortedChain<K extends Comparable<? super K>, E>
 
         // test get
         System.out.println("element " +
-                x.get(new Integer(2)) + " has key 2");
+                x.get(2) + " has key 2");
         System.out.println("element " +
-                x.get(new Integer(1)) + " has key 1");
+                x.get(1) + " has key 1");
         System.out.println("element " +
-                x.get(new Integer(6)) + " has key 6");
+                x.get(6) + " has key 6");
 
         // test remove
         System.out.println("removed element " +
-                x.remove(new Integer(2)) + " with key 2");
+                x.remove(2) + " with key 2");
         System.out.println("The list is " + x);
         System.out.println("removed element " +
-                x.remove(new Integer(1)) + " with key 1");
+                x.remove(1) + " with key 1");
         System.out.println("The list is " + x);
         System.out.println("removed element " +
-                x.remove(new Integer(6)) + " with key 6");
+                x.remove(6) + " with key 6");
         System.out.println("The list is " + x);
     }
 }

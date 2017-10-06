@@ -22,16 +22,7 @@ public class HeapSort {
      * test program
      */
     public static void main(String[] args) {
-        Integer[] a = {new Integer(3),
-                new Integer(2),
-                new Integer(4),
-                new Integer(1),
-                new Integer(6),
-                new Integer(9),
-                new Integer(8),
-                new Integer(7),
-                new Integer(5),
-                new Integer(0)};
+        Integer[] a = {3, 2, 4, 1, 6, 9, 8, 7,5,0};
 
         // output elements to be sorted
         System.out.println("The elements are");

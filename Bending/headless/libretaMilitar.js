@@ -10,7 +10,8 @@ const page = await browser.newPage();
 
 const responses = [];
 var i = 'hola';
-//page.on('requestfinished', resp => {
+
+page.on('request', resp => {
     //let head = resp.headers;
     /*if (resp.headers['content-type'].includes('application/pdf')){
         //const b = resp.buffer();
@@ -37,9 +38,9 @@ await page.goto('https://www.libretamilitar.mil.co/Modules/Consult/MilitaryCardC
     await page.type('1020761735');
     await page.click('#ctl00_MainContent_btnGenerate');
     await page.waitForNavigation({waitUntil: 'networkidle'});
-    //await page.pdf({path: 'screenshot.pdf', format: 'A4'});
     await page.click('#ctl00_MainContent_imgBtnSeeCertificate');
-    await page.waitForNavigation({waitUntil: 'networkidle'});
+    await page.waitForNavigation({waitUntil: 'networkidle'}); 
+    await page.pdf({path: 'screenshot.pdf', format: 'A4'});
     //const buffer = await resp.buffer();
     //console.log('response buffer', buffer);
     await browser.close();
