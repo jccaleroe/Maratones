@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 11)
 #set(SOURCE_FILES ComputerVision/mser.cpp ComputerVision/swtdetect.c ComputerVision/detectText.cpp
 #        ComputerVision/textdetection.cpp ComputerVision/filters.cpp ComputerVision/clustering.cpp)
 
-set(SOURCE_FILES ComputerVision/LearningOpenCV/perspproj.cpp)
+set(SOURCE_FILES Lothric/other/NITExtracter.cpp)
 
 #link_libraries("ccv" "m" "jpeg" "png")
 

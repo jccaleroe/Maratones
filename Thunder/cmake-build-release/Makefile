@@ -123,32 +123,32 @@ Thunder/fast:
 	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/build
 .PHONY : Thunder/fast
 
-ComputerVision/LearningOpenCV/perspproj.o: ComputerVision/LearningOpenCV/perspproj.cpp.o
+Lothric/other/NITExtracter.o: Lothric/other/NITExtracter.cpp.o
 
-.PHONY : ComputerVision/LearningOpenCV/perspproj.o
+.PHONY : Lothric/other/NITExtracter.o
 
 # target to build an object file
-ComputerVision/LearningOpenCV/perspproj.cpp.o:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/LearningOpenCV/perspproj.cpp.o
-.PHONY : ComputerVision/LearningOpenCV/perspproj.cpp.o
+Lothric/other/NITExtracter.cpp.o:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/Lothric/other/NITExtracter.cpp.o
+.PHONY : Lothric/other/NITExtracter.cpp.o
 
-ComputerVision/LearningOpenCV/perspproj.i: ComputerVision/LearningOpenCV/perspproj.cpp.i
+Lothric/other/NITExtracter.i: Lothric/other/NITExtracter.cpp.i
 
-.PHONY : ComputerVision/LearningOpenCV/perspproj.i
+.PHONY : Lothric/other/NITExtracter.i
 
 # target to preprocess a source file
-ComputerVision/LearningOpenCV/perspproj.cpp.i:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/LearningOpenCV/perspproj.cpp.i
-.PHONY : ComputerVision/LearningOpenCV/perspproj.cpp.i
+Lothric/other/NITExtracter.cpp.i:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/Lothric/other/NITExtracter.cpp.i
+.PHONY : Lothric/other/NITExtracter.cpp.i
 
-ComputerVision/LearningOpenCV/perspproj.s: ComputerVision/LearningOpenCV/perspproj.cpp.s
+Lothric/other/NITExtracter.s: Lothric/other/NITExtracter.cpp.s
 
-.PHONY : ComputerVision/LearningOpenCV/perspproj.s
+.PHONY : Lothric/other/NITExtracter.s
 
 # target to generate assembly for a file
-ComputerVision/LearningOpenCV/perspproj.cpp.s:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/LearningOpenCV/perspproj.cpp.s
-.PHONY : ComputerVision/LearningOpenCV/perspproj.cpp.s
+Lothric/other/NITExtracter.cpp.s:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/Lothric/other/NITExtracter.cpp.s
+.PHONY : Lothric/other/NITExtracter.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Thunder"
-	@echo "... ComputerVision/LearningOpenCV/perspproj.o"
-	@echo "... ComputerVision/LearningOpenCV/perspproj.i"
-	@echo "... ComputerVision/LearningOpenCV/perspproj.s"
+	@echo "... Lothric/other/NITExtracter.o"
+	@echo "... Lothric/other/NITExtracter.i"
+	@echo "... Lothric/other/NITExtracter.s"
 .PHONY : help
 
 

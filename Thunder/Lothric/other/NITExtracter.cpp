@@ -41,7 +41,7 @@ vector<int> convertToArray(string& s){
 }
 
 int main(){
-    freopen("/home/juan/Documents/Maratones/Thunder/tabula-Boletin90.csv", "r", stdin);
+    freopen("tabula-Boletin90.csv", "r", stdin);
     string s;
     int aux = 4;
     long long ll;

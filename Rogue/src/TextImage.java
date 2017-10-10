@@ -9,16 +9,19 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+/**
+ * Created by juan on 04/10/17.
+ */
 public class TextImage extends JPanel implements Runnable{
 
-    private static GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-    private static int width = gd.getDisplayMode().getWidth()/2, height = gd.getDisplayMode().getHeight()/2, w2 = width / 2,
-            h2 = height/2, wordsCount, wordsTracker, wordsNum;
+    private static int width = 1366/2, height = 768/2, w2 = width / 2 + 48,
+            h2 = height/2 + 48, wordsCount, wordsTracker, wordsNum;
     private JFrame frame = new JFrame("Text");
     private int fontStyle, fontSize, ne;
     private double d, dd;
@@ -33,9 +36,15 @@ public class TextImage extends JPanel implements Runnable{
     private static BufferedImage coffee, ink, splatter;
     private static ArrayList<Font> fonts = new ArrayList<>();
     private static ArrayList<String> words = new ArrayList<>();
-    private static String[] fontNames = {"Andale Mono", "Arial", "Arial Black", "Calibri", "Cambria Italic", "Comic Sans MS",
-            "Courier New", "Tahoma", "Times New Roman", "Verdana", "Georgia", "Impact", "Trebuchet MS", "Candara",
-            "Palatino Linotype", "Century Schoolbook L Italic", "Lucida Bright Demibold"};
+    private static String[] fontNames = {"Andale Mono", "Arial", "Arial Black", "Calibri", "Cambria Italic",
+            "Comic Sans MS", "Courier New", "Tahoma", "Times New Roman", "Verdana", "Georgia", "Impact", "Trebuchet MS",
+            "Candara", "Palatino Linotype", "Century Schoolbook L Italic", "Lucida Bright Demibold"},
+            openenig = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*",
+                    "'", "+", "[", "{", "¿", "¡", "<", "(", ",", ",", ",", ".", "."},
+            ending = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'",
+                    "+", "]", "}", "?", "!", ">", ")", ",", ",", ",", ".", "."},
+            symbols = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'",
+                    "+", "]", "}", "?", "!", ">", ")", ",", ".", "[", "{", "¿", "¡", "<", "(", ",", "."};
 
     private void kill(){ frame.dispose();}
 
@@ -229,26 +238,26 @@ public class TextImage extends JPanel implements Runnable{
         if (d >= 0.5)
             if (ne == -1)
                 d = -0.5;
-            else if (d > 0.8)
-                d = 0.7 * ne;
+            else if (d > 0.7)
+                d = 0.6 * ne;
             else
                 d = d * ne;
         else
             d = d * ne;
-        shearing = Math.random() <= 2.2;
+        shearing = Math.random() <= 0.12;
 
         dd = Math.random();
         ne = Math.random() <= 0.5 ? 1 : -1;
-        if (dd >= 0.28)
+        if (dd >= 0.24)
             if (ne == -1)
-                dd = -0.28;
-            else if (dd > 0.36)
-                dd = 0.3 * ne;
+                dd = -0.24;
+            else if (dd > 0.32)
+                dd = 0.28 * ne;
             else
                 dd = dd * ne;
         else
             dd = dd * ne;
-        hasZRotation = Math.random() <= 2.2;
+        hasZRotation = Math.random() <= 0.12;
 
         int fontStyle = bold + italic;
         this.isUnderline =  isUnderline;
@@ -286,16 +295,38 @@ public class TextImage extends JPanel implements Runnable{
             if (develop())
                 initialize(fonts.get((int) (Math.random() * fonts.size())), (int) (Math.random() * 16) + 10,
                         Math.random() <= 0.2 ? 1 : 0, Math.random() <= 0.2 ? 2 : 0, Math.random() <= 0.2,
-                        Math.random() <= 0.2, Math.random() <= 0.24, Math.random() <= 0.8);
+                        Math.random() <= 0.2, Math.random() <= 0.24, Math.random() <= 0.64);
         kill();
     }
 
     private static void quiet(){
         try {
-            String str;
+            int times = 2, nums = 12, sym = 2;
+            long maxNum = 999999999999999999L;
+            int f1 = 99999999, f2 = 999999999;
+            String str, tmp;
             BufferedReader reader = new BufferedReader(new FileReader(new File("spanish2.txt")));
-            while ((str = reader.readLine()) != null && !str.isEmpty())
-                words.add(str);
+            while ((str = reader.readLine()) != null && !str.isEmpty()) {
+                for (int i = 0; i < times; i++) {
+                    tmp = str;
+                    if (Math.random() <= 0.12)
+                        tmp = openenig[(int) (Math.random() * openenig.length)] + tmp;
+                    if (Math.random() <= 0.12)
+                        tmp = tmp + ending[(int) (Math.random() * ending.length)];
+                    words.add(tmp);
+                }
+            }
+            for (int i = 0; i <= 9; i++)
+                words.add(Integer.toString(i));
+            for (int i = 0; i < sym; i++)
+                words.addAll(Arrays.asList(symbols));
+            long k;
+            for (int i = 0; i < nums/3; i++){
+                k = (long)(Math.random() * maxNum);
+                words.add(Long.toString(k));
+                words.add((int)(Math.random()*f1) + "." + (int)(Math.random()*f2));
+                words.add((int)(Math.random()*f1) + "," + (int)(Math.random()*f2));
+            }
             wordsNum = words.size();
             reader.close();
 
