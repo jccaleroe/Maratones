@@ -55,10 +55,10 @@ public class DerivedLinkedStack<T> extends Chain<T> implements Stack<T> {
         DerivedLinkedStack<Integer> s = new DerivedLinkedStack<>();
 
         // add a few elements
-        s.push(new Integer(1));
-        s.push(new Integer(2));
-        s.push(new Integer(3));
-        s.push(new Integer(4));
+        s.push(1);
+        s.push(2);
+        s.push(3);
+        s.push(4);
 
         // delete all elements
         while (!s.isEmpty()) {

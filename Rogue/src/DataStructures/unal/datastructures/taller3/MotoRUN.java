@@ -332,10 +332,10 @@ public class MotoRUN {
         motoRun.stations.put("TM", new Station("TM", "Taller de motos", "En patios de Mecanica", 10));
         motoRun.stations.put("ET", new Station("ET", "En transito", "Todo Unal =D", 80));
 
-        motoRun.motos.put(new Long(312450066), new Moto(312450066, "C45", "AKT", "UID-123", "DI", 10000000));
-        motoRun.motos.put(new Long(312450067), new Moto(312450067, "C45", "AKT", "UID-124", "DI", 10000000));
-        motoRun.motos.put(new Long(312450068), new Moto(312450068, "C26", "AKT", "UID-125", "DI", 10000000));
-        motoRun.motos.put(new Long(312450069), new Moto(312450069, "AGR", "AKT", "UID-126", "DI", 10000000));
+        motoRun.motos.put(312450066L, new Moto(312450066, "C45", "AKT", "UID-123", "DI", 10000000));
+        motoRun.motos.put(312450067L, new Moto(312450067, "C45", "AKT", "UID-124", "DI", 10000000));
+        motoRun.motos.put(312450068L, new Moto(312450068, "C26", "AKT", "UID-125", "DI", 10000000));
+        motoRun.motos.put(312450069L, new Moto(312450069, "AGR", "AKT", "UID-126", "DI", 10000000));
 
         Calendar cal = Calendar.getInstance();
         cal.set(2014, 10, 14, 15, 40);

@@ -13,7 +13,6 @@ public class Template {
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File("spanish.txt")));
             String[] openenig = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'", "+",
                     "[", "{", "¿", "¡", "<", "(", ",", ",", ",", ".", "."};
-
             String[] ending = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'", "+",
                     "]", "}", "?", "!", ">", ")", ",", ",", ",", ".", "."};
             while ((str = reader.readLine()) != null) {

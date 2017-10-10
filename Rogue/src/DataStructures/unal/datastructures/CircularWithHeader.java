@@ -167,7 +167,7 @@ public class CircularWithHeader<T> implements LinearList<T> {
         CircularWithHeader<Integer> x = new CircularWithHeader<>();
 
         for (int i = 0; i < 10; i++)
-            x.add(i, new Integer(i));
+            x.add(i, i);
         System.out.println("List=" + x);
 
         for (int i = 0; i < 5; i++)
@@ -176,6 +176,6 @@ public class CircularWithHeader<T> implements LinearList<T> {
 
         for (int i = 0; i < 10; i++)
             System.out.println(i + " is element " +
-                    x.indexOf(new Integer(i)));
+                    x.indexOf(i));
     }
 }

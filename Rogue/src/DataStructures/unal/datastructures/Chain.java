@@ -229,7 +229,7 @@ public class Chain<T> implements LinearList<T>, Iterable<T> {
         System.out.println(x);
         System.out.println(x.firstNode);
         // test put
-        x.add(0, new Integer(2));
+        x.add(0, 2);
         System.out.println(x.firstNode);
         System.out.println(x.firstNode.next);
     }

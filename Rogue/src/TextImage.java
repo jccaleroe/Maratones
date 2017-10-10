@@ -1,5 +1,3 @@
-import javafx.scene.text.Text;
-
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
@@ -16,41 +14,41 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class TextImage extends Canvas implements Runnable{
+public class TextImage extends JPanel implements Runnable{
 
     private static GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-    private static int width = gd.getDisplayMode().getWidth(), height = gd.getDisplayMode().getHeight(), wordsCount,
-            wordsTracker, wordsNum;
+    private static int width = gd.getDisplayMode().getWidth()/2, height = gd.getDisplayMode().getHeight()/2, w2 = width / 2,
+            h2 = height/2, wordsCount, wordsTracker, wordsNum;
     private JFrame frame = new JFrame("Text");
-    private int fontStyle, fontSize;
+    private int fontStyle, fontSize, ne;
+    private double d, dd;
     private static String wordsPath = "words", imgPath;
     private String text, wordID;
     private Font font;
     private static StringBuilder builder = new StringBuilder();
     private ArrayList<Rectangle> rectangles = new ArrayList<>();
-    private Boolean isUnderline, isStrikethrough, hasGaussian, hasStains;
+    private Boolean isUnderline, isStrikethrough, hasGaussian, hasStains, shearing, hasZRotation;
     private static float[] scales = {1f, 1f, 1f, 0.5f}, offsets = new float[4];
     private static RescaleOp rop = new RescaleOp(scales, offsets, null);
     private static BufferedImage coffee, ink, splatter;
-    private static Font[] fonts;
+    private static ArrayList<Font> fonts = new ArrayList<>();
     private static ArrayList<String> words = new ArrayList<>();
     private static String[] fontNames = {"Andale Mono", "Arial", "Arial Black", "Calibri", "Cambria Italic", "Comic Sans MS",
             "Courier New", "Tahoma", "Times New Roman", "Verdana", "Georgia", "Impact", "Trebuchet MS", "Candara",
             "Palatino Linotype", "Century Schoolbook L Italic", "Lucida Bright Demibold"};
 
-    private void kill(){ frame.dispose(); }
+    private void kill(){ frame.dispose();}
+
+    private TextImage (){
+        frame.setLocation(width-width/2, height-height/2);
+        frame.setSize(width, height);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
 
     private static synchronized void appendWord(String wordID, String str, String path){
         builder.append(wordID); builder.append("\t"); builder.append(str); builder.append("\t");
         builder.append(path); builder.append("\n");
-    }
-
-    private static double[][] getZRotation(double theta){
-        double[][] rotation = new double[3][3];
-        rotation[0][0] = Math.cos(theta); rotation[0][1] = -Math.sin(theta); rotation[0][2] = 0;
-        rotation[1][0] = Math.sin(theta); rotation[1][1] = Math.cos(theta); rotation[1][2] = 0;
-        rotation[2][0] = 0; rotation[2][1] = 0; rotation[2][2] = 1;
-        return rotation;
     }
 
     private static double[][] getYRotation(double theta){
@@ -69,43 +67,39 @@ public class TextImage extends Canvas implements Runnable{
         return rotation;
     }
 
-    private double[] getMatrixValue(int[] pos, double[][] rotation){
-        double[] values = new double[rotation.length];
+    private double[] getMatrixValue(double[] pos, double[][] rotation){
+        double[] values = new double[3];
         double aux;
-        for (int i = 0; i < rotation.length; i++){
+        for (int i = 0; i < 3; i++){
             aux = 0;
-            for (int j = 0; j < rotation.length; j++)
+            for (int j = 0; j < 3; j++)
                 aux += rotation[i][j]*pos[j];
             values[i] = aux;
         }
         return values;
     }
 
-    private int[][][] rotate(double[][] rotation, BufferedImage image){
-        int m = Math.max(image.getHeight(), image.getWidth()) * 3;
-        int [][][] rotated = new int[m][m][m];
-        for (int i = 0; i < rotated.length; i++)
-            for (int j = 0; j < rotated.length; j++)
-                for (int k = 0; k < rotated.length; k++)
-                    rotated[i][j][k] = Color.WHITE.getRGB();
-
-        for (int x = 0; x < image.getWidth(); x++){
-            for (int y = 0; y < image.getHeight(); y++){
-                int[] current = {x, y, 0};
-                double[] pos = getMatrixValue(current, rotation);
-                if (pos[0] >= 0 && pos[1] >= 0 && pos[2] >= 0 && pos[0] <= m && pos[1] <= m && pos[2] <= m)
-                    rotated[(int) pos[1]][(int) pos[0]][(int) pos[2]] = image.getRGB(x, y);
-            }
+    private ArrayList<double[]> rotate(double[][] rotation, ArrayList<double[]> points){
+        ArrayList<double[]> list = new ArrayList<>();
+        for (double[] a : points){
+            double[] pos = getMatrixValue(a, rotation);
+            list.add(new double[]{pos[0], pos[1], pos[2], a[3]});
         }
-        return rotated;
+        return list;
     }
 
-    private BufferedImage project(int[][][] matrix){
-        int size = matrix.length;
-        BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_BYTE_GRAY);
-        for (int x = 0; x < size; x++)
-            for (int y = 0; y < size; y++)
-                image.setRGB(x, y, matrix[y][x][0]);
+    private BufferedImage project(ArrayList<double[]> list, int width, int height){
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+        for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
+                image.setRGB(x, y, Color.WHITE.getRGB());
+        double x, y;
+        for (double[] a : list){
+            x = a[0]; y = a[1];
+            if (x >= 0 && y >= 0 && x < width && y < height)
+                image.setRGB((int)a[0], (int)a[1], (int)a[3]);
+        }
+
         return image;
     }
 
@@ -117,7 +111,7 @@ public class TextImage extends Canvas implements Runnable{
                 int rgba = image.getRGB(x, y);
                 Color col = new Color(rgba, true);
                 if (hasGaussian) {
-                    noise = Math.abs(r.nextGaussian() * Math.sqrt(0.05) + 0.92);
+                    noise = Math.abs(r.nextGaussian() * Math.sqrt(0.05) + 0.98);
                     noise = noise > 1.0 ? 1.0 : noise;
                 }
                 col = new Color((int)((255 - col.getRed()) * noise), (int)((255 - col.getGreen()) * noise),
@@ -139,58 +133,28 @@ public class TextImage extends Canvas implements Runnable{
         font = font.deriveFont(attributes);
         g2.setFont(font);
         GlyphVector gv;
-        String tmp;
-        String[] words;
         rectangles.clear();
         int sw = g2.getFontMetrics().stringWidth(text);
         int sh = g2.getFontMetrics().getHeight();
-        int pad = 40, w2 = width - (3 * pad);
-        int lines = sw / w2;
-        int chars = (w2 * text.length()) / sw, a = 0, b = chars;
-        int h, y, space = g2.getFontMetrics().stringWidth(" ");
+        int w = w2 - sw/2, h = h2 - sh/2 - 10;
         Rectangle rectangle;
-        for (int i = 0; i <= lines; i++) {
-            String aux = text.substring(a, Math.min(b, text.length()));
-            for (int j = aux.length() - 1; j >= 0; j--) {
-                if (Character.isWhitespace(aux.charAt(j)) || a + j + 1 == text.length()) {
-                    b -= aux.length() - j - 1;
-                    aux = aux.substring(0, j + 1);
-                    break;
-                }
-            }
-            a = b;
-            b += chars;
-            aux = aux.trim();
-            words = aux.split(" ");
-            y = (sh) * (i + 5);
-            if (sh + y >= height)
-                break;
-            h = pad + width/3;
-            //AffineTransform affineTransform= g2.getTransform();
-            //g2.shear(1, 1);
-            //g2.rotate(Math.PI/18);
-            FontRenderContext frc = g2.getFontRenderContext();
-            for (String s : words) {
-                tmp = s.substring(0, s.length());
-                gv = g2.getFont().createGlyphVector(frc, tmp);
-                rectangle = gv.getPixelBounds(null, h, y);
-                if (!rectangle.isEmpty())
-                    rectangles.add(rectangle);
-
-                g2.drawString(aux, h, y);
-                h += g2.getFontMetrics().stringWidth(tmp) + space;
-            }
-            //g2.setTransform(affineTransform);
-        }
+        AffineTransform affineTransform = g2.getTransform();
+        if (shearing) g2.shear(d, 0);
+        if (hasZRotation) g2.rotate(dd);
+        FontRenderContext frc = g2.getFontRenderContext();
+        gv = g2.getFont().createGlyphVector(frc, text);
+        rectangle = gv.getPixelBounds(null, w, h);
+        g2.drawString(text, w, h);
+        if (!rectangle.isEmpty())
+            rectangles.add(rectangle);
+        g2.setTransform(affineTransform);
         g2.dispose();
     }
-    private static int lol = 0;
-    private static int lol2 = 0;
+
     private void exportText(){
         try {
             BufferedImage text = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics2D = text.createGraphics();
-
             this.paint(graphics2D);
             invert(text);
 
@@ -203,7 +167,6 @@ public class TextImage extends Canvas implements Runnable{
                 graphics2D2.drawImage(splatter, rop, -(int)(Math.random()*width / 2), -(int)(Math.random()*height / 3));
             }
             int aux1, aux2, aux3, aux4, augmentation = 4;
-            int c = 5;
             for (Rectangle rectangle : rectangles) {
                 aux1 = Math.max(0,rectangle.x-augmentation);
                 if (aux1 == 0) aux1 = rectangle.x;
@@ -214,28 +177,35 @@ public class TextImage extends Canvas implements Runnable{
                 aux4 = aux2 != rectangle.y ? Math.min(rectangle.height+augmentation*2,
                         img.getHeight()) : Math.min(rectangle.height+augmentation, img.getHeight());
                 BufferedImage dest = img.getSubimage(aux1, aux2, aux3, aux4);
-                int[][][] rot = rotate(getXRotation(0.17), dest);
-                BufferedImage dest2 = project(rot);
-                /*if (Math.random() <= 0.6) {
-                    lol++;
-                    javaxt.io.Image image = new javaxt.io.Image(dest);
-                    int w = image.getWidth();
-                    int h = image.getHeight();
-                    try {
-                        image.setCorners((int) (Math.random()*c)*2-c, (int) (Math.random()*c)*2-c,
-                                w + (int) (Math.random()*c)*2-c, (int) (Math.random()*c)*2-c,
-                                w + (int) (Math.random()*c)*2-c, h + (int) (Math.random()*c)*2-c,
-                                (int) (Math.random()*c)*2-c, h + (int) (Math.random()*c)*2-c);
-                        System.out.println(wordID);
-                        //image.crop(c, c, w - c, h - c);
-                        ImageIO.write(image.getBufferedImage(), "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        lol2++;
-                        ImageIO.write(dest, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
-                    }
+                ArrayList<double[]> list = new ArrayList<>();
+                for (int x = 0; x < dest.getWidth(); x++)
+                    for (int y = 0; y < dest.getHeight(); y++)
+                        if (dest.getRGB(x, y) != Color.WHITE.getRGB())
+                            list.add(new double[]{x, y, 0, dest.getRGB(x, y)});
+                double w = dest.getWidth(), h = dest.getHeight();
+                boolean flag = false;
+                if (Math.random() <= 0.08){
+                    flag = true;
+                    d = Math.random();
+                    ne = Math.random() <= 0.5 ? 1 : -1;
+                    d = d > 0.7 ? 0.6 * ne : d * ne;
+                    h = h - Math.abs(d) * 10;
+                    list = rotate(getXRotation(d), list);
                 }
-                else*/
+                if (Math.random() <= 0.08){
+                    flag = true;
+                    d = Math.random();
+                    ne = Math.random() <= 0.5 ? 1 : -1;
+                    d = d > 0.7 ? 0.6 * ne : d * ne;
+                    w = w - Math.abs(d) * 10;
+                    list = rotate(getYRotation(d), list);
+                }
+                if (flag) {
+                    BufferedImage dest2 = project(list, (int) w, (int) h);
                     ImageIO.write(dest2, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
+                }
+                else
+                    ImageIO.write(dest, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
             }
         }
         catch(Exception e) {
@@ -252,27 +222,35 @@ public class TextImage extends Canvas implements Runnable{
         frame.remove(this);
     }
 
-    private void initialize(String fontName, int fontSize, int bold, int italic, boolean isUnderline,
+    private void initialize(Font font, int fontSize, int bold, int italic, boolean isUnderline,
                                    boolean isStrikethrough, boolean hasGaussian, boolean hasStains){
-        Font font = null;
-        boolean flag = false;
-        for (Font f : fonts){
-            if (f.getName().equals(fontName)){
-                flag = true;
-                font = f;
-                break;
-            }
-        }
-        if (!flag){
-            System.out.println("That font does not exist on this computer, next are the installed fonts:\n");
-            for (Font f : fonts)
-                System.out.println(f.getName());
-            return;
-        }
+        d = Math.random();
+        ne = Math.random() <= 0.5 ? 1 : -1;
+        if (d >= 0.5)
+            if (ne == -1)
+                d = -0.5;
+            else if (d > 0.8)
+                d = 0.7 * ne;
+            else
+                d = d * ne;
+        else
+            d = d * ne;
+        shearing = Math.random() <= 2.2;
+
+        dd = Math.random();
+        ne = Math.random() <= 0.5 ? 1 : -1;
+        if (dd >= 0.28)
+            if (ne == -1)
+                dd = -0.28;
+            else if (dd > 0.36)
+                dd = 0.3 * ne;
+            else
+                dd = dd * ne;
+        else
+            dd = dd * ne;
+        hasZRotation = Math.random() <= 2.2;
+
         int fontStyle = bold + italic;
-        frame.setSize(width, height);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.isUnderline =  isUnderline;
         this.isStrikethrough = isStrikethrough;
         this.hasGaussian = hasGaussian;
@@ -306,9 +284,9 @@ public class TextImage extends Canvas implements Runnable{
     public void run() {
         while (wordsCount < wordsNum)
             if (develop())
-                initialize(fontNames[(int) (Math.random() * fontNames.length)], (int) (Math.random() * 16) + 10,
+                initialize(fonts.get((int) (Math.random() * fonts.size())), (int) (Math.random() * 16) + 10,
                         Math.random() <= 0.2 ? 1 : 0, Math.random() <= 0.2 ? 2 : 0, Math.random() <= 0.2,
-                        Math.random() <= 0.2, Math.random() <= 0.6, Math.random() <= 0.9);
+                        Math.random() <= 0.2, Math.random() <= 0.24, Math.random() <= 0.8);
         kill();
     }
 
@@ -316,13 +294,30 @@ public class TextImage extends Canvas implements Runnable{
         try {
             String str;
             BufferedReader reader = new BufferedReader(new FileReader(new File("spanish2.txt")));
-            while ((str = reader.readLine()) != null)
+            while ((str = reader.readLine()) != null && !str.isEmpty())
                 words.add(str);
             wordsNum = words.size();
             reader.close();
 
             GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            fonts = e.getAllFonts();
+            Font[] fontsTmp = e.getAllFonts();
+
+            for (String a : fontNames){
+                boolean flag = false;
+                for (Font f : fontsTmp){
+                    if (f.getName().equals(a)){
+                        flag = true;
+                        fonts.add(f);
+                        break;
+                    }
+                }
+                if (!flag){
+                    System.out.println("That font does not exist on this computer, next are the installed fonts:\n");
+                    for (Font f : fonts)
+                        System.out.println(f.getName());
+                    System.out.println("Or install: " + a);
+                }
+            }
             coffee = ImageIO.read(new File("images/coffee-stain.png"));
             ink = ImageIO.read(new File("images/black-ink-splatter.png"));
             splatter = ImageIO.read(new File("images/coffee-splatter.png"));
@@ -347,7 +342,7 @@ public class TextImage extends Canvas implements Runnable{
             }catch (InterruptedException interrupted){
                 interrupted.printStackTrace();
             }
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(wordsPath, "words.csv")));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(wordsPath, "words.tsv")));
             writer.append(builder);
             writer.flush();
             writer.close();
@@ -358,7 +353,5 @@ public class TextImage extends Canvas implements Runnable{
 
     public static void main(String[] args){
         quiet();
-        //System.out.println(lol);
-        //System.out.println(lol2);
     }
 }

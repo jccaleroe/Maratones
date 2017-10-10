@@ -74,10 +74,10 @@ public class LinkedQueue<T> implements Queue<T> {
         LinkedQueue<Integer> q = new LinkedQueue<>();
 
         // add a few elements
-        q.put(new Integer(1));
-        q.put(new Integer(2));
-        q.put(new Integer(3));
-        q.put(new Integer(4));
+        q.put(1);
+        q.put(2);
+        q.put(3);
+        q.put(4);
 
         // delete all elements
         while (!q.isEmpty()) {

@@ -195,12 +195,12 @@ public class ArrayLinearList<T> implements LinearList<T>, Iterable<T> {
         System.out.println();
 
         // test indexOf
-        int index = x.indexOf(new Integer(4));
+        int index = x.indexOf(4);
         if (index < 0)
             System.out.println("4 not found");
         else System.out.println("The index of 4 is " + index);
 
-        index = x.indexOf(new Integer(3));
+        index = x.indexOf(3);
         if (index < 0)
             System.out.println("3 not found");
         else System.out.println("The index of 3 is " + index);

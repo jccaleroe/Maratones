@@ -153,28 +153,28 @@ public class BST<K extends Comparable<? super K>, E>
 
         // remove an element
         System.out.println("Removed element " +
-                y.remove(new Integer(4)) + " with key 4");
+                y.remove(4) + " with key 4");
         System.out.println("Elements in ascending order are");
         y.ascend();
         System.out.println();
 
         // remove another element
         System.out.println("Removed element " +
-                y.remove(new Integer(8)) + " with key 8");
+                y.remove(8) + " with key 8");
         System.out.println("Elements in ascending order are");
         y.ascend();
         System.out.println();
 
         // remove yet another element
         System.out.println("Removed element " +
-                y.remove(new Integer(6)) + " with key 6");
+                y.remove(6) + " with key 6");
         System.out.println("Elements in ascending order are");
         y.ascend();
         System.out.println();
 
         // try to remove a nonexistent element
         System.out.println("Removed element " +
-                y.remove(new Integer(6)) + " with key 6");
+                y.remove(6) + " with key 6");
         System.out.println("Elements in ascending order are");
         y.ascend();
         System.out.println();
