@@ -25,11 +25,11 @@ public class TextImage extends JPanel implements Runnable{
     private JFrame frame = new JFrame("Text");
     private int fontStyle, fontSize, ne;
     private double d, dd;
-    private static String wordsPath = "words", imgPath;
+    private static String wordsPath = "words", imgPath, prefix = "";
     private String text, wordID;
     private Font font;
     private static StringBuilder builder = new StringBuilder();
-    private ArrayList<Rectangle> rectangles = new ArrayList<>();
+    private Rectangle rectangle;
     private Boolean isUnderline, isStrikethrough, hasGaussian, hasStains, shearing, hasZRotation;
     private static float[] scales = {1f, 1f, 1f, 0.5f}, offsets = new float[4];
     private static RescaleOp rop = new RescaleOp(scales, offsets, null);
@@ -142,11 +142,9 @@ public class TextImage extends JPanel implements Runnable{
         font = font.deriveFont(attributes);
         g2.setFont(font);
         GlyphVector gv;
-        rectangles.clear();
         int sw = g2.getFontMetrics().stringWidth(text);
         int sh = g2.getFontMetrics().getHeight();
-        int w = w2 - sw/2, h = h2 - sh/2 - 10;
-        Rectangle rectangle;
+        int w = w2 - sw/2 - 40, h = h2 - sh/2 - 50;
         AffineTransform affineTransform = g2.getTransform();
         if (shearing) g2.shear(d, 0);
         if (hasZRotation) g2.rotate(dd);
@@ -154,8 +152,6 @@ public class TextImage extends JPanel implements Runnable{
         gv = g2.getFont().createGlyphVector(frc, text);
         rectangle = gv.getPixelBounds(null, w, h);
         g2.drawString(text, w, h);
-        if (!rectangle.isEmpty())
-            rectangles.add(rectangle);
         g2.setTransform(affineTransform);
         g2.dispose();
     }
@@ -175,50 +171,53 @@ public class TextImage extends JPanel implements Runnable{
                 graphics2D2.drawImage(coffee, rop, -(int)(Math.random()*width), -(int)(Math.random()*height));
                 graphics2D2.drawImage(splatter, rop, -(int)(Math.random()*width / 2), -(int)(Math.random()*height / 3));
             }
+            if (rectangle == null)
+                return;
+            Rectangle rectangle = new Rectangle(this.rectangle);
             int aux1, aux2, aux3, aux4, augmentation = 4;
-            for (Rectangle rectangle : rectangles) {
-                aux1 = Math.max(0,rectangle.x-augmentation);
-                if (aux1 == 0) aux1 = rectangle.x;
-                aux2 = Math.max(0,rectangle.y-augmentation);
-                if (aux2 == 0) aux2 = rectangle.y;
-                aux3 = aux1 != rectangle.x ? Math.min(rectangle.width+augmentation*2,
-                        img.getWidth()) : Math.min(rectangle.width+augmentation, img.getWidth());
-                aux4 = aux2 != rectangle.y ? Math.min(rectangle.height+augmentation*2,
-                        img.getHeight()) : Math.min(rectangle.height+augmentation, img.getHeight());
-                BufferedImage dest = img.getSubimage(aux1, aux2, aux3, aux4);
-                ArrayList<double[]> list = new ArrayList<>();
-                for (int x = 0; x < dest.getWidth(); x++)
-                    for (int y = 0; y < dest.getHeight(); y++)
-                        if (dest.getRGB(x, y) != Color.WHITE.getRGB())
-                            list.add(new double[]{x, y, 0, dest.getRGB(x, y)});
-                double w = dest.getWidth(), h = dest.getHeight();
-                boolean flag = false;
-                if (Math.random() <= 0.08){
-                    flag = true;
-                    d = Math.random();
-                    ne = Math.random() <= 0.5 ? 1 : -1;
-                    d = d > 0.7 ? 0.6 * ne : d * ne;
-                    h = h - Math.abs(d) * 10;
-                    list = rotate(getXRotation(d), list);
-                }
-                if (Math.random() <= 0.08){
-                    flag = true;
-                    d = Math.random();
-                    ne = Math.random() <= 0.5 ? 1 : -1;
-                    d = d > 0.7 ? 0.6 * ne : d * ne;
-                    w = w - Math.abs(d) * 10;
-                    list = rotate(getYRotation(d), list);
-                }
-                if (flag) {
-                    BufferedImage dest2 = project(list, (int) w, (int) h);
-                    ImageIO.write(dest2, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
-                }
-                else
-                    ImageIO.write(dest, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
+            aux1 = Math.max(0,rectangle.x-augmentation);
+            if (aux1 == 0) aux1 = rectangle.x;
+            aux2 = Math.max(0,rectangle.y-augmentation);
+            if (aux2 == 0) aux2 = rectangle.y;
+            aux3 = aux1 != rectangle.x ? Math.min(rectangle.width+augmentation*2,
+                    img.getWidth()) : Math.min(rectangle.width+augmentation, img.getWidth());
+            aux4 = aux2 != rectangle.y ? Math.min(rectangle.height+augmentation*2,
+                    img.getHeight()) : Math.min(rectangle.height+augmentation, img.getHeight());
+            BufferedImage dest = img.getSubimage(aux1, aux2, aux3, aux4);
+            ArrayList<double[]> list = new ArrayList<>();
+            for (int x = 0; x < dest.getWidth(); x++)
+                for (int y = 0; y < dest.getHeight(); y++)
+                    if (dest.getRGB(x, y) != Color.WHITE.getRGB())
+                        list.add(new double[]{x, y, 0, dest.getRGB(x, y)});
+            double w = dest.getWidth(), h = dest.getHeight();
+            boolean flag = false;
+            if (Math.random() <= 0.08){
+                flag = true;
+                d = Math.random();
+                ne = Math.random() <= 0.5 ? 1 : -1;
+                d = d > 0.7 ? 0.6 * ne : d * ne;
+                h = h - Math.abs(d) * 10;
+                list = rotate(getXRotation(d), list);
             }
+            if (Math.random() <= 0.08){
+                flag = true;
+                d = Math.random();
+                ne = Math.random() <= 0.5 ? 1 : -1;
+                d = d > 0.7 ? 0.6 * ne : d * ne;
+                w = w - Math.abs(d) * 10;
+                list = rotate(getYRotation(d), list);
+            }
+            if (flag) {
+                BufferedImage dest2 = project(list, (int) w, (int) h);
+                ImageIO.write(dest2, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
+            }
+            else
+                ImageIO.write(dest, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
         }
         catch(Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("Restarting " + text + " " + wordID);
+            exportText();
         }
     }
 
@@ -235,29 +234,29 @@ public class TextImage extends JPanel implements Runnable{
                                    boolean isStrikethrough, boolean hasGaussian, boolean hasStains){
         d = Math.random();
         ne = Math.random() <= 0.5 ? 1 : -1;
-        if (d >= 0.5)
+        if (d >= 0.4)
             if (ne == -1)
-                d = -0.5;
-            else if (d > 0.7)
-                d = 0.6 * ne;
+                d = -0.4;
+            else if (d > 0.5)
+                d = 0.48 * ne;
             else
                 d = d * ne;
         else
             d = d * ne;
-        shearing = Math.random() <= 0.12;
+        shearing = Math.random() <= 0.08;
 
         dd = Math.random();
         ne = Math.random() <= 0.5 ? 1 : -1;
         if (dd >= 0.24)
             if (ne == -1)
                 dd = -0.24;
-            else if (dd > 0.32)
+            else if (dd > 0.3)
                 dd = 0.28 * ne;
             else
                 dd = dd * ne;
         else
             dd = dd * ne;
-        hasZRotation = Math.random() <= 0.12;
+        hasZRotation = Math.random() <= 0.08;
 
         int fontStyle = bold + italic;
         this.isUnderline =  isUnderline;
@@ -273,7 +272,7 @@ public class TextImage extends JPanel implements Runnable{
     private synchronized boolean develop(){
         if (wordsCount >= wordsNum)
             return false;
-        wordID = Integer.toString(wordsCount);
+        wordID = Integer.toString(wordsCount) + prefix;
         text = words.get(wordsCount);
         wordsCount++;
         if (wordsCount - wordsTracker >= 1000) {
@@ -293,19 +292,19 @@ public class TextImage extends JPanel implements Runnable{
     public void run() {
         while (wordsCount < wordsNum)
             if (develop())
-                initialize(fonts.get((int) (Math.random() * fonts.size())), (int) (Math.random() * 16) + 10,
-                        Math.random() <= 0.2 ? 1 : 0, Math.random() <= 0.2 ? 2 : 0, Math.random() <= 0.2,
-                        Math.random() <= 0.2, Math.random() <= 0.24, Math.random() <= 0.64);
+                initialize(fonts.get((int) (Math.random() * fonts.size())), (int) (Math.random() * 18) + 9,
+                        Math.random() <= 0.16 ? 1 : 0, Math.random() <= 0.16 ? 2 : 0, Math.random() <= 0.12,
+                        Math.random() <= 0.08, Math.random() <= 0.08, Math.random() <= 0.16);
         kill();
     }
 
     private static void quiet(){
         try {
-            int times = 2, nums = 12, sym = 2;
-            long maxNum = 999999999999999999L;
+            int times = 200, nums = 0, sym = 0;
+            long maxNum = Long.MAX_VALUE;
             int f1 = 99999999, f2 = 999999999;
             String str, tmp;
-            BufferedReader reader = new BufferedReader(new FileReader(new File("spanish2.txt")));
+            BufferedReader reader = new BufferedReader(new FileReader(new File("spanishTest.txt")));
             while ((str = reader.readLine()) != null && !str.isEmpty()) {
                 for (int i = 0; i < times; i++) {
                     tmp = str;
@@ -347,6 +346,7 @@ public class TextImage extends JPanel implements Runnable{
                     for (Font f : fonts)
                         System.out.println(f.getName());
                     System.out.println("Or install: " + a);
+                    return;
                 }
             }
             coffee = ImageIO.read(new File("images/coffee-stain.png"));
@@ -383,6 +383,7 @@ public class TextImage extends JPanel implements Runnable{
     }
 
     public static void main(String[] args){
+        if (args.length > 0) prefix = args[0];
         quiet();
     }
 }
