@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
@@ -12,25 +13,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
 /**
  * Created by juan on 04/10/17.
  */
-public class TextImage extends JPanel implements Runnable{
+public class TextImage implements Runnable{
 
     private static int width = 1366/2, height = 768/2, w2 = width / 2 + 48,
-            h2 = height/2 + 48, wordsCount, wordsTracker, wordsNum;
-    private JFrame frame = new JFrame("Text");
-    private int fontStyle, fontSize, ne;
-    private double d, dd;
-    private static String wordsPath = "words", imgPath, prefix = "";
+            h2 = height/2 + 48, wordsCount, wordsTracker, wordsNum, threadsNum = 4;
+    private BufferedImage frame;
+    private int fontStyle, fontSize;
+    private static String wordsPath = "words", imgPath, prefix = "", spanish = "spanishTest.txt";
     private String text, wordID;
     private Font font;
     private static StringBuilder builder = new StringBuilder();
     private Rectangle rectangle;
-    private Boolean isUnderline, isStrikethrough, hasGaussian, hasStains, shearing, hasZRotation;
+    private Boolean isUnderline, isStrikethrough, hasGaussian, hasStains;
     private static float[] scales = {1f, 1f, 1f, 0.5f}, offsets = new float[4];
     private static RescaleOp rop = new RescaleOp(scales, offsets, null);
     private static BufferedImage coffee, ink, splatter;
@@ -45,15 +42,6 @@ public class TextImage extends JPanel implements Runnable{
                     "+", "]", "}", "?", "!", ">", ")", ",", ",", ",", ".", "."},
             symbols = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'",
                     "+", "]", "}", "?", "!", ">", ")", ",", ".", "[", "{", "¿", "¡", "<", "(", ",", "."};
-
-    private void kill(){ frame.dispose();}
-
-    private TextImage (){
-        frame.setLocation(width-width/2, height-height/2);
-        frame.setSize(width, height);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }
 
     private static synchronized void appendWord(String wordID, String str, String path){
         builder.append(wordID); builder.append("\t"); builder.append(str); builder.append("\t");
@@ -108,7 +96,6 @@ public class TextImage extends JPanel implements Runnable{
             if (x >= 0 && y >= 0 && x < width && y < height)
                 image.setRGB((int)a[0], (int)a[1], (int)a[3]);
         }
-
         return image;
     }
 
@@ -130,8 +117,7 @@ public class TextImage extends JPanel implements Runnable{
         }
     }
 
-    public void paint(Graphics g) {
-        Graphics2D g2 = (Graphics2D)g;
+    private void paint(Graphics2D g2) {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         font = font.deriveFont(fontStyle, fontSize);
         Map attributes = font.getAttributes();
@@ -146,8 +132,32 @@ public class TextImage extends JPanel implements Runnable{
         int sh = g2.getFontMetrics().getHeight();
         int w = w2 - sw/2 - 40, h = h2 - sh/2 - 50;
         AffineTransform affineTransform = g2.getTransform();
-        if (shearing) g2.shear(d, 0);
-        if (hasZRotation) g2.rotate(dd);
+        if (Math.random() <= 0.08) {
+            double d = Math.random();
+            int ne = Math.random() <= 0.5 ? 1 : -1;
+            if (d >= 0.4) {
+                if (ne == -1)
+                    d = -0.4;
+                else if (d > 0.48)
+                    d = 0.48 * ne;
+            }
+            else
+                d *= ne;
+            g2.shear(d, 0);
+        }
+        if (Math.random() <= 0.08) {
+            double d = Math.random();
+            int ne = Math.random() <= 0.5 ? 1 : -1;
+            if (d >= 0.24) {
+                if (ne == -1)
+                    d = -0.24;
+                else if (d > 0.28)
+                    d = 0.28 * ne;
+            }
+            else
+                d *= ne;
+            g2.rotate(d);
+        }
         FontRenderContext frc = g2.getFontRenderContext();
         gv = g2.getFont().createGlyphVector(frc, text);
         rectangle = gv.getPixelBounds(null, w, h);
@@ -158,22 +168,15 @@ public class TextImage extends JPanel implements Runnable{
 
     private void exportText(){
         try {
-            BufferedImage text = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
-            Graphics2D graphics2D = text.createGraphics();
-            this.paint(graphics2D);
-            invert(text);
-
-            BufferedImage img = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
+            invert(frame);
+            BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
             Graphics2D graphics2D2 = img.createGraphics();
-            graphics2D2.drawImage(text, 0, 0, null);
+            graphics2D2.drawImage(frame, 0, 0, null);
             if (hasStains) {
                 graphics2D2.drawImage(ink, rop, -(int)(Math.random()*width / 2), -(int)(Math.random()*height / 3));
                 graphics2D2.drawImage(coffee, rop, -(int)(Math.random()*width), -(int)(Math.random()*height));
                 graphics2D2.drawImage(splatter, rop, -(int)(Math.random()*width / 2), -(int)(Math.random()*height / 3));
             }
-            if (rectangle == null)
-                return;
-            Rectangle rectangle = new Rectangle(this.rectangle);
             int aux1, aux2, aux3, aux4, augmentation = 4;
             aux1 = Math.max(0,rectangle.x-augmentation);
             if (aux1 == 0) aux1 = rectangle.x;
@@ -193,17 +196,17 @@ public class TextImage extends JPanel implements Runnable{
             boolean flag = false;
             if (Math.random() <= 0.08){
                 flag = true;
-                d = Math.random();
-                ne = Math.random() <= 0.5 ? 1 : -1;
-                d = d > 0.7 ? 0.6 * ne : d * ne;
+                double d = Math.random();
+                int ne = Math.random() <= 0.5 ? 1 : -1;
+                d = d > 0.4 ? 0.4 * ne : d * ne;
                 h = h - Math.abs(d) * 10;
                 list = rotate(getXRotation(d), list);
             }
             if (Math.random() <= 0.08){
                 flag = true;
-                d = Math.random();
-                ne = Math.random() <= 0.5 ? 1 : -1;
-                d = d > 0.7 ? 0.6 * ne : d * ne;
+                double d = Math.random();
+                int ne = Math.random() <= 0.5 ? 1 : -1;
+                d = d > 0.4 ? 0.4 * ne : d * ne;
                 w = w - Math.abs(d) * 10;
                 list = rotate(getYRotation(d), list);
             }
@@ -215,49 +218,20 @@ public class TextImage extends JPanel implements Runnable{
                 ImageIO.write(dest, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
         }
         catch(Exception e) {
-            //e.printStackTrace();
-            System.out.println("Restarting " + text + " " + wordID);
+            System.out.println("Restarting word " + text + " with ID " + wordID);
             exportText();
         }
     }
 
     private void go(){
-        frame.getContentPane().add(this);
-        frame.validate();
-        frame.repaint();
+        frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        paint(frame.createGraphics());
         exportText();
         appendWord(wordID, this.text, wordsPath + "/" + imgPath + "/" + wordID + ".jpg");
-        frame.remove(this);
     }
 
     private void initialize(Font font, int fontSize, int bold, int italic, boolean isUnderline,
                                    boolean isStrikethrough, boolean hasGaussian, boolean hasStains){
-        d = Math.random();
-        ne = Math.random() <= 0.5 ? 1 : -1;
-        if (d >= 0.4)
-            if (ne == -1)
-                d = -0.4;
-            else if (d > 0.5)
-                d = 0.48 * ne;
-            else
-                d = d * ne;
-        else
-            d = d * ne;
-        shearing = Math.random() <= 0.08;
-
-        dd = Math.random();
-        ne = Math.random() <= 0.5 ? 1 : -1;
-        if (dd >= 0.24)
-            if (ne == -1)
-                dd = -0.24;
-            else if (dd > 0.3)
-                dd = 0.28 * ne;
-            else
-                dd = dd * ne;
-        else
-            dd = dd * ne;
-        hasZRotation = Math.random() <= 0.08;
-
         int fontStyle = bold + italic;
         this.isUnderline =  isUnderline;
         this.isStrikethrough = isStrikethrough;
@@ -270,8 +244,7 @@ public class TextImage extends JPanel implements Runnable{
     }
 
     private synchronized boolean develop(){
-        if (wordsCount >= wordsNum)
-            return false;
+        if (wordsCount >= wordsNum) return false;
         wordID = Integer.toString(wordsCount) + prefix;
         text = words.get(wordsCount);
         wordsCount++;
@@ -295,16 +268,15 @@ public class TextImage extends JPanel implements Runnable{
                 initialize(fonts.get((int) (Math.random() * fonts.size())), (int) (Math.random() * 18) + 9,
                         Math.random() <= 0.16 ? 1 : 0, Math.random() <= 0.16 ? 2 : 0, Math.random() <= 0.12,
                         Math.random() <= 0.08, Math.random() <= 0.08, Math.random() <= 0.16);
-        kill();
     }
 
     private static void quiet(){
         try {
-            int times = 200, nums = 0, sym = 0;
+            int times = 52, nums = 8100, sym = 112, digits = 200;
             long maxNum = Long.MAX_VALUE;
             int f1 = 99999999, f2 = 999999999;
             String str, tmp;
-            BufferedReader reader = new BufferedReader(new FileReader(new File("spanishTest.txt")));
+            BufferedReader reader = new BufferedReader(new FileReader(new File(spanish)));
             while ((str = reader.readLine()) != null && !str.isEmpty()) {
                 for (int i = 0; i < times; i++) {
                     tmp = str;
@@ -315,8 +287,9 @@ public class TextImage extends JPanel implements Runnable{
                     words.add(tmp);
                 }
             }
-            for (int i = 0; i <= 9; i++)
-                words.add(Integer.toString(i));
+            for (int j = 0; j < digits; j++)
+                for (int i = 0; i <= 9; i++)
+                    words.add(Integer.toString(i));
             for (int i = 0; i < sym; i++)
                 words.addAll(Arrays.asList(symbols));
             long k;
@@ -326,8 +299,9 @@ public class TextImage extends JPanel implements Runnable{
                 words.add((int)(Math.random()*f1) + "." + (int)(Math.random()*f2));
                 words.add((int)(Math.random()*f1) + "," + (int)(Math.random()*f2));
             }
-            wordsNum = words.size();
             reader.close();
+            wordsNum = words.size();
+            System.out.println(wordsNum + " words will be generated");
 
             GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
             Font[] fontsTmp = e.getAllFonts();
@@ -361,13 +335,15 @@ public class TextImage extends JPanel implements Runnable{
             Files.createDirectories(Paths.get(wordsPath + "/" + imgPath));
 
             ArrayList<Thread> threads = new ArrayList<>();
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < threadsNum; i++) {
                 threads.add(new Thread(new TextImage()));
                 threads.get(i).setName(Integer.toString(i));
             }
-            for (Thread thread : threads)
-                thread.start();
             try {
+                for (Thread thread : threads) {
+                    thread.start();
+                    Thread.sleep(100);
+                }
                 for (Thread thread : threads)
                     thread.join();
             }catch (InterruptedException interrupted){
@@ -383,7 +359,11 @@ public class TextImage extends JPanel implements Runnable{
     }
 
     public static void main(String[] args){
-        if (args.length > 0) prefix = args[0];
+        if (args.length >= 3){
+            prefix = args[0];
+            spanish = args[1];
+            threadsNum = Integer.parseInt(args[2]);
+        }
         quiet();
     }
 }

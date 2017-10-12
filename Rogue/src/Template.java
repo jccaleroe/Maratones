@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.HashSet;
 
 /**
  * Created by juan on 18/04/17.
@@ -7,21 +8,23 @@ import java.io.*;
 public class Template {
 
     private static void quiet(){
+        String b = "";
+        HashSet<String> hashSet = new HashSet<>();
         try {
             String str;
-            BufferedReader reader = new BufferedReader(new FileReader(new File("spanishback.txt")));
-            //BufferedWriter writer = new BufferedWriter(new FileWriter(new File("spanishlol.txt")));
-            int max = 0;
-            String b = "null";
+            BufferedReader reader = new BufferedReader(new FileReader(new File("/home/juan/Desktop/words/words.tsv")));
             while ((str = reader.readLine()) != null) {
-                if (str.length() > max){
-                    max= str.length();
-                    b = str;
-                }
+                b = str.split("\\t")[2];
+                if (!hashSet.add(b))
+                    System.out.println(b);
+                b = "/home/juan/Desktop/" + b;
+                File file = new File(b);
+                if (!file.exists())
+                    System.out.println(file.getAbsolutePath());
             }
             reader.close();
-            System.out.println(b);
         }catch (IOException e){
+            System.out.println("Openeing " + b);
             e.printStackTrace();
         }
     }
