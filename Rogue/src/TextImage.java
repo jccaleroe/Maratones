@@ -20,22 +20,16 @@ public class TextImage implements Runnable{
 
     private static int width = 1366/2, height = 768/2, w2 = width / 2 + 48,
             h2 = height/2 + 48, wordsCount, wordsTracker, wordsNum, threadsNum = 4;
-    private BufferedImage frame;
-    private int fontStyle, fontSize;
     private static String wordsPath = "words", imgPath, prefix = "", spanish = "spanishTest.txt";
-    private String text, wordID;
-    private Font font;
     private static StringBuilder builder = new StringBuilder();
-    private Rectangle rectangle;
-    private Boolean isUnderline, isStrikethrough, hasGaussian, hasStains;
     private static float[] scales = {1f, 1f, 1f, 0.5f}, offsets = new float[4];
     private static RescaleOp rop = new RescaleOp(scales, offsets, null);
     private static BufferedImage coffee, ink, splatter;
     private static ArrayList<Font> fonts = new ArrayList<>();
     private static ArrayList<String> words = new ArrayList<>();
-    private static String[] fontNames = {"Andale Mono", "Arial", "Arial Black", "Calibri", "Cambria Italic",
-            "Comic Sans MS", "Courier New", "Tahoma", "Times New Roman", "Verdana", "Georgia", "Impact", "Trebuchet MS",
-            "Candara", "Palatino Linotype", "Century Schoolbook L Italic", "Lucida Bright Demibold"},
+    private static String[] fontNames = {"Andale_Mono.ttf", "Arial.ttf", "cambriai.ttf", "comic.ttf", "Georgia.ttf",
+            "LucidaBrightDemibold.ttf", "tahoma.ttf", "trebuc.ttf", "Arial_Black.ttf", "calibri.ttf", "Candara.ttf",
+            "Courier_New.ttf", "Impact.ttf", "pala.ttf", "Times_New_Roman.ttf", "Verdana.ttf"},
             openenig = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*",
                     "'", "+", "[", "{", "¿", "¡", "<", "(", ",", ",", ",", ".", "."},
             ending = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'",
@@ -99,7 +93,7 @@ public class TextImage implements Runnable{
         return image;
     }
 
-    private void invert(BufferedImage image){
+    private void invert(BufferedImage image, boolean hasGaussian){
         java.util.Random r = new java.util.Random();
         double noise = 1;
         for (int x = 0; x < image.getWidth(); x++) {
@@ -117,15 +111,8 @@ public class TextImage implements Runnable{
         }
     }
 
-    private void paint(Graphics2D g2) {
+    private Rectangle paint(Graphics2D g2, Font font, String text) {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        font = font.deriveFont(fontStyle, fontSize);
-        Map attributes = font.getAttributes();
-        if (isUnderline)
-            attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        if (isStrikethrough)
-            attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
-        font = font.deriveFont(attributes);
         g2.setFont(font);
         GlyphVector gv;
         int sw = g2.getFontMetrics().stringWidth(text);
@@ -160,15 +147,17 @@ public class TextImage implements Runnable{
         }
         FontRenderContext frc = g2.getFontRenderContext();
         gv = g2.getFont().createGlyphVector(frc, text);
-        rectangle = gv.getPixelBounds(null, w, h);
+        Rectangle rectangle = gv.getPixelBounds(null, w, h);
         g2.drawString(text, w, h);
         g2.setTransform(affineTransform);
         g2.dispose();
+        return rectangle;
     }
 
-    private void exportText(){
+    private boolean exportText(BufferedImage frame, Rectangle rectangle, boolean hasGaussian, boolean hasStains,
+                               String wordID, String text){
         try {
-            invert(frame);
+            invert(frame, hasGaussian);
             BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
             Graphics2D graphics2D2 = img.createGraphics();
             graphics2D2.drawImage(frame, 0, 0, null);
@@ -198,7 +187,7 @@ public class TextImage implements Runnable{
                 flag = true;
                 double d = Math.random();
                 int ne = Math.random() <= 0.5 ? 1 : -1;
-                d = d > 0.4 ? 0.4 * ne : d * ne;
+                d = d > 0.32 ? 0.32 * ne : d * ne;
                 h = h - Math.abs(d) * 10;
                 list = rotate(getXRotation(d), list);
             }
@@ -206,68 +195,75 @@ public class TextImage implements Runnable{
                 flag = true;
                 double d = Math.random();
                 int ne = Math.random() <= 0.5 ? 1 : -1;
-                d = d > 0.4 ? 0.4 * ne : d * ne;
+                d = d > 0.32 ? 0.32 * ne : d * ne;
                 w = w - Math.abs(d) * 10;
                 list = rotate(getYRotation(d), list);
             }
             if (flag) {
                 BufferedImage dest2 = project(list, (int) w, (int) h);
                 ImageIO.write(dest2, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
+                return true;
             }
-            else
+            else {
                 ImageIO.write(dest, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
+                return true;
+            }
         }
         catch(Exception e) {
-            System.out.println("Restarting word " + text + " with ID " + wordID);
-            exportText();
+            System.out.println("Restaring word " + text + " with id: "+ wordID);
+            words.add(text);
+            wordsNum++;
+            return false;
         }
     }
 
-    private void go(){
-        frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        paint(frame.createGraphics());
-        exportText();
-        appendWord(wordID, this.text, wordsPath + "/" + imgPath + "/" + wordID + ".jpg");
+    private void go(Font font, boolean hasGaussian, boolean hasStains, String wordID, String text){
+        BufferedImage frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        if (exportText(frame, paint(frame.createGraphics(), font, text), hasGaussian, hasStains, wordID, text))
+            appendWord(wordID, text, wordsPath + "/" + imgPath + "/" + wordID + ".jpg");
     }
 
-    private void initialize(Font font, int fontSize, int bold, int italic, boolean isUnderline,
-                                   boolean isStrikethrough, boolean hasGaussian, boolean hasStains){
+    private void initialize(Font font, int fontSize, int bold, int italic, boolean isUnderline, boolean isStrikethrough,
+                            boolean hasGaussian, boolean hasStains, String wordID, String text){
         int fontStyle = bold + italic;
-        this.isUnderline =  isUnderline;
-        this.isStrikethrough = isStrikethrough;
-        this.hasGaussian = hasGaussian;
-        this.hasStains = hasStains;
-        this.font = font;
-        this.fontStyle = fontStyle;
-        this.fontSize = fontSize;
-        go();
+        font = font.deriveFont(fontStyle, fontSize);
+        Map attributes = font.getAttributes();
+        if (isUnderline)
+            attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        if (isStrikethrough)
+            attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+        font = font.deriveFont(attributes);
+        go(font, hasGaussian, hasStains, wordID, text);
     }
 
-    private synchronized boolean develop(){
-        if (wordsCount >= wordsNum) return false;
-        wordID = Integer.toString(wordsCount) + prefix;
-        text = words.get(wordsCount);
+    private synchronized String[] develop(){
+        if (wordsCount >= wordsNum) return null;
+        String wordID = Integer.toString(wordsCount) + prefix;
+        String text = words.get(wordsCount);
         wordsCount++;
         if (wordsCount - wordsTracker >= 1000) {
-            wordsTracker = wordsCount;
-            imgPath = wordID;
             try {
-                Files.createDirectories(Paths.get(wordsPath + "/" + imgPath));
+                Files.createDirectories(Paths.get(wordsPath + "/" + wordID));
             } catch (IOException e) {
-                e.printStackTrace();
-                return false;
+                wordsCount--;
+                return null;
             }
+            imgPath = wordID;
+            wordsTracker = wordsCount;
         }
-        return true;
+        return new String[]{wordID, text};
     }
 
     @Override
     public void run() {
-        while (wordsCount < wordsNum)
-            if (develop())
+        while (wordsCount < wordsNum) {
+            String[] tmp = develop();
+            if (tmp != null)
                 initialize(fonts.get((int) (Math.random() * fonts.size())), (int) (Math.random() * 18) + 9,
                         Math.random() <= 0.16 ? 1 : 0, Math.random() <= 0.16 ? 2 : 0, Math.random() <= 0.12,
-                        Math.random() <= 0.08, Math.random() <= 0.08, Math.random() <= 0.16);
+                        Math.random() <= 0.08, Math.random() <= 0.08,
+                        Math.random() <= 0.16, tmp[0], tmp[1]);
+        }
     }
 
     private static void quiet(){
@@ -303,26 +299,10 @@ public class TextImage implements Runnable{
             wordsNum = words.size();
             System.out.println(wordsNum + " words will be generated");
 
-            GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            Font[] fontsTmp = e.getAllFonts();
+            for (String a : fontNames)
+                fonts.add(Font.createFont(Font.TRUETYPE_FONT, new File("fonts/"+a)));
+            fonts.add(Font.createFont(Font.TYPE1_FONT, new File("fonts/CenturySchoolbookLItalic.pfb")));
 
-            for (String a : fontNames){
-                boolean flag = false;
-                for (Font f : fontsTmp){
-                    if (f.getName().equals(a)){
-                        flag = true;
-                        fonts.add(f);
-                        break;
-                    }
-                }
-                if (!flag){
-                    System.out.println("That font does not exist on this computer, next are the installed fonts:\n");
-                    for (Font f : fonts)
-                        System.out.println(f.getName());
-                    System.out.println("Or install: " + a);
-                    return;
-                }
-            }
             coffee = ImageIO.read(new File("images/coffee-stain.png"));
             ink = ImageIO.read(new File("images/black-ink-splatter.png"));
             splatter = ImageIO.read(new File("images/coffee-splatter.png"));
@@ -335,32 +315,35 @@ public class TextImage implements Runnable{
             Files.createDirectories(Paths.get(wordsPath + "/" + imgPath));
 
             ArrayList<Thread> threads = new ArrayList<>();
+            TextImage textImage = new TextImage();
             for (int i = 0; i < threadsNum; i++) {
-                threads.add(new Thread(new TextImage()));
+                threads.add(new Thread(textImage));
                 threads.get(i).setName(Integer.toString(i));
             }
-            try {
-                for (Thread thread : threads) {
-                    thread.start();
-                    Thread.sleep(100);
-                }
-                for (Thread thread : threads)
-                    thread.join();
-            }catch (InterruptedException interrupted){
-                interrupted.printStackTrace();
-            }
+            for (Thread thread : threads)
+                thread.start();
+            for (Thread thread : threads)
+                thread.join();
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(wordsPath, "words.tsv")));
             writer.append(builder);
             writer.flush();
             writer.close();
         }catch (IOException e){
             e.printStackTrace();
+        } catch (FontFormatException e) {
+            System.out.println("Failed to open a font");
+            e.printStackTrace();
+        }
+        catch (InterruptedException interrupted){
+            System.out.println("Fail joinig threads");
+            interrupted.printStackTrace();
         }
     }
 
     public static void main(String[] args){
         if (args.length >= 3){
             prefix = args[0];
+            wordsPath = wordsPath + prefix.toUpperCase();
             spanish = args[1];
             threadsNum = Integer.parseInt(args[2]);
         }
