@@ -34,7 +34,8 @@ public class TextImage implements Runnable{
                     "'", "+", "[", "{", "¿", "¡", "<", "(", ",", ",", ",", ".", "."},
             ending = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'",
                     "+", "]", "}", "?", "!", ">", ")", ",", ",", ",", ".", "."},
-            symbols = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'",
+
+    symbols = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'",
                     "+", "]", "}", "?", "!", ">", ")", ",", ".", "[", "{", "¿", "¡", "<", "(", ",", "."};
 
     private static synchronized void appendWord(String wordID, String str, String path){
@@ -120,29 +121,15 @@ public class TextImage implements Runnable{
         int w = w2 - sw/2 - 40, h = h2 - sh/2 - 50;
         AffineTransform affineTransform = g2.getTransform();
         if (Math.random() <= 0.08) {
-            double d = Math.random();
+            double d = Math.random() / 2.8;
             int ne = Math.random() <= 0.5 ? 1 : -1;
-            if (d >= 0.4) {
-                if (ne == -1)
-                    d = -0.4;
-                else if (d > 0.48)
-                    d = 0.48 * ne;
-            }
-            else
-                d *= ne;
+            d *= ne;
             g2.shear(d, 0);
         }
-        if (Math.random() <= 0.08) {
-            double d = Math.random();
+        if (Math.random() <= 1.08) {
+            double d = Math.random() / 5;
             int ne = Math.random() <= 0.5 ? 1 : -1;
-            if (d >= 0.24) {
-                if (ne == -1)
-                    d = -0.24;
-                else if (d > 0.28)
-                    d = 0.28 * ne;
-            }
-            else
-                d *= ne;
+            d *= ne;
             g2.rotate(d);
         }
         FontRenderContext frc = g2.getFontRenderContext();
@@ -185,17 +172,17 @@ public class TextImage implements Runnable{
             boolean flag = false;
             if (Math.random() <= 0.08){
                 flag = true;
-                double d = Math.random();
+                double d = Math.random() / 4;
                 int ne = Math.random() <= 0.5 ? 1 : -1;
-                d = d > 0.32 ? 0.32 * ne : d * ne;
+                d *= ne;
                 h = h - Math.abs(d) * 10;
                 list = rotate(getXRotation(d), list);
             }
             if (Math.random() <= 0.08){
                 flag = true;
-                double d = Math.random();
+                double d = Math.random() / 4;
                 int ne = Math.random() <= 0.5 ? 1 : -1;
-                d = d > 0.32 ? 0.32 * ne : d * ne;
+                d *= ne;
                 w = w - Math.abs(d) * 10;
                 list = rotate(getYRotation(d), list);
             }
@@ -268,7 +255,7 @@ public class TextImage implements Runnable{
 
     private static void quiet(){
         try {
-            int times = 52, nums = 8100, sym = 112, digits = 200;
+            int times = 56, nums = 8100, sym = 112, digits = 200;
             long maxNum = Long.MAX_VALUE;
             int f1 = 99999999, f2 = 999999999;
             String str, tmp;
@@ -276,6 +263,13 @@ public class TextImage implements Runnable{
             while ((str = reader.readLine()) != null && !str.isEmpty()) {
                 for (int i = 0; i < times; i++) {
                     tmp = str;
+                    double d = Math.random();
+                    if (d >= 0.75){
+                        if (d >= 0.9)
+                            tmp = tmp.toUpperCase();
+                        else
+                            tmp = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
+                    }
                     if (Math.random() <= 0.12)
                         tmp = openenig[(int) (Math.random() * openenig.length)] + tmp;
                     if (Math.random() <= 0.12)
