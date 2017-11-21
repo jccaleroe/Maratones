@@ -38,9 +38,8 @@ public class TextImage implements Runnable{
     symbols = {"@", "#", "-", "_", ".", ";", ",", "\"", "$",  "%", "&", "/", "\\", "~", "|", "¬", "°", "*", "'",
                     "+", "]", "}", "?", "!", ">", ")", ",", ".", "[", "{", "¿", "¡", "<", "(", ",", "."};
 
-    private static synchronized void appendWord(String wordID, String str, String path){
-        builder.append(wordID); builder.append("\t"); builder.append(str); builder.append("\t");
-        builder.append(path); builder.append("\n");
+    private static synchronized void appendWord(String text){
+        builder.append(text);
     }
 
     private static double[][] getYRotation(double theta){
@@ -112,7 +111,7 @@ public class TextImage implements Runnable{
         }
     }
 
-    private Rectangle paint(Graphics2D g2, Font font, String text) {
+    private Rectangle paint(Graphics2D g2, Font font, String text, double shearing, double zRotation) {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setFont(font);
         GlyphVector gv;
@@ -120,21 +119,21 @@ public class TextImage implements Runnable{
         int sh = g2.getFontMetrics().getHeight();
         int w = w2 - sw/2 - 40, h = h2 - sh/2 - 50;
         AffineTransform affineTransform = g2.getTransform();
-        if (Math.random() <= 0.08) {
-            double d = Math.random() / 2.8;
-            int ne = Math.random() <= 0.5 ? 1 : -1;
-            d *= ne;
-            g2.shear(d, 0);
-        }
-        if (Math.random() <= 1.08) {
-            double d = Math.random() / 5;
-            int ne = Math.random() <= 0.5 ? 1 : -1;
-            d *= ne;
-            g2.rotate(d);
-        }
+        if (shearing != 0) g2.shear(shearing, 0);
+        if (zRotation != 0) g2.rotate(zRotation);
         FontRenderContext frc = g2.getFontRenderContext();
         gv = g2.getFont().createGlyphVector(frc, text);
         Rectangle rectangle = gv.getPixelBounds(null, w, h);
+        if (rectangle.height < 28) {
+            int a = 28 - rectangle.height;
+            rectangle.y -= (a/2 + 2);
+            rectangle.height += a/2 + 12;
+        }
+        if (rectangle.width < 16) {
+            int a = 16 - rectangle.width;
+            rectangle.x -= (a/2 + 2);
+            rectangle.width += a/2 + 6;
+        }
         g2.drawString(text, w, h);
         g2.setTransform(affineTransform);
         g2.dispose();
@@ -142,7 +141,7 @@ public class TextImage implements Runnable{
     }
 
     private boolean exportText(BufferedImage frame, Rectangle rectangle, boolean hasGaussian, boolean hasStains,
-                               String wordID, String text){
+                               String wordID, String text, String path, double xRotation, double yRotation){
         try {
             invert(frame, hasGaussian);
             BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
@@ -169,30 +168,21 @@ public class TextImage implements Runnable{
                     if (dest.getRGB(x, y) != Color.WHITE.getRGB())
                         list.add(new double[]{x, y, 0, dest.getRGB(x, y)});
             double w = dest.getWidth(), h = dest.getHeight();
-            boolean flag = false;
-            if (Math.random() <= 0.08){
-                flag = true;
-                double d = Math.random() / 4;
-                int ne = Math.random() <= 0.5 ? 1 : -1;
-                d *= ne;
-                h = h - Math.abs(d) * 10;
-                list = rotate(getXRotation(d), list);
-            }
-            if (Math.random() <= 0.08){
-                flag = true;
-                double d = Math.random() / 4;
-                int ne = Math.random() <= 0.5 ? 1 : -1;
-                d *= ne;
-                w = w - Math.abs(d) * 10;
-                list = rotate(getYRotation(d), list);
-            }
-            if (flag) {
+            if (xRotation != 0 || yRotation != 0) {
+                if (xRotation != 0) {
+                    h = h - Math.abs(xRotation) * 10;
+                    list = rotate(getXRotation(xRotation), list);
+                }
+                if (yRotation != 0) {
+                    w = w - Math.abs(yRotation) * 10;
+                    list = rotate(getYRotation(yRotation), list);
+                }
                 BufferedImage dest2 = project(list, (int) w, (int) h);
-                ImageIO.write(dest2, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
+                ImageIO.write(dest2, "jpg", new File(wordsPath + "/" + path + "/" + wordID + ".jpg"));
                 return true;
             }
             else {
-                ImageIO.write(dest, "jpg", new File(wordsPath + "/" + imgPath + "/" + wordID + ".jpg"));
+                ImageIO.write(dest, "jpg", new File(wordsPath + "/" + path + "/" + wordID + ".jpg"));
                 return true;
             }
         }
@@ -204,29 +194,51 @@ public class TextImage implements Runnable{
         }
     }
 
-    private void go(Font font, boolean hasGaussian, boolean hasStains, String wordID, String text){
-        BufferedImage frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        if (exportText(frame, paint(frame.createGraphics(), font, text), hasGaussian, hasStains, wordID, text))
-            appendWord(wordID, text, wordsPath + "/" + imgPath + "/" + wordID + ".jpg");
-    }
-
-    private void initialize(Font font, int fontSize, int bold, int italic, boolean isUnderline, boolean isStrikethrough,
-                            boolean hasGaussian, boolean hasStains, String wordID, String text){
+    private void go(Font font, int fontSize, int bold, int italic, boolean isUnderline, boolean isStrikethrough,
+                    boolean hasGaussian, boolean hasStains, String wordID, String text, String path){
         int fontStyle = bold + italic;
         font = font.deriveFont(fontStyle, fontSize);
         Map attributes = font.getAttributes();
-        if (isUnderline)
-            attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        if (isStrikethrough)
-            attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+        if (isUnderline) attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        if (isStrikethrough) attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
         font = font.deriveFont(attributes);
-        go(font, hasGaussian, hasStains, wordID, text);
+        double shearing = 0, zRotation = 0;
+        if (Math.random() <= 0.08) {
+            double d = Math.random() / 2.8;
+            int ne = Math.random() <= 0.5 ? 1 : -1;
+            shearing = ne * d;
+        }
+        if (Math.random() <= 0.08) {
+            double d = Math.random() / 5;
+            int ne = Math.random() <= 0.5 ? 1 : -1;
+            zRotation = ne * d;
+        }
+        double xRotation = 0, yRotation = 0;
+        if (Math.random() <= 0.08){
+            double d = Math.random() / 4;
+            int ne = Math.random() <= 0.5 ? 1 : -1;
+            xRotation = ne * d;
+        }
+        if (Math.random() <= 0.08){
+            double d = Math.random() / 4;
+            int ne = Math.random() <= 0.5 ? 1 : -1;
+            yRotation = ne * d;
+        }
+        BufferedImage frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        if (exportText(frame, paint(frame.createGraphics(), font, text, shearing, zRotation), hasGaussian, hasStains,
+                wordID, text, path, xRotation, yRotation)) {
+            appendWord(wordID + "\t" + text + "\t" + wordsPath + "/" + path + "/" + wordID + ".jpg" + "\t" +
+                    font.getName() + "\t" + fontSize + "\t" + fontStyle + "\t" + isStrikethrough + "\t" + isUnderline
+                    + "\t" + hasGaussian + "\t" + hasStains + "\t" + shearing + "\t" + xRotation + "\t" +
+                    yRotation + "\t" + zRotation + "\n");
+        }
     }
 
     private synchronized String[] develop(){
         if (wordsCount >= wordsNum) return null;
         String wordID = Integer.toString(wordsCount) + prefix;
         String text = words.get(wordsCount);
+        String path = imgPath;
         wordsCount++;
         if (wordsCount - wordsTracker >= 1000) {
             try {
@@ -236,9 +248,10 @@ public class TextImage implements Runnable{
                 return null;
             }
             imgPath = wordID;
+            path = imgPath;
             wordsTracker = wordsCount;
         }
-        return new String[]{wordID, text};
+        return new String[]{wordID, text, path};
     }
 
     @Override
@@ -246,15 +259,16 @@ public class TextImage implements Runnable{
         while (wordsCount < wordsNum) {
             String[] tmp = develop();
             if (tmp != null)
-                initialize(fonts.get((int) (Math.random() * fonts.size())), (int) (Math.random() * 18) + 9,
+                go(fonts.get((int) (Math.random() * fonts.size())), (int) (Math.random() * 18) + 9,
                         Math.random() <= 0.16 ? 1 : 0, Math.random() <= 0.16 ? 2 : 0, Math.random() <= 0.12,
                         Math.random() <= 0.08, Math.random() <= 0.08,
-                        Math.random() <= 0.16, tmp[0], tmp[1]);
+                        Math.random() <= 0.16, tmp[0], tmp[1], tmp[2]);
         }
     }
 
     private static void quiet(){
         try {
+            //int times = 0, nums = 0, sym = 10, digits = 0;
             int times = 56, nums = 8100, sym = 112, digits = 200;
             long maxNum = Long.MAX_VALUE;
             int f1 = 99999999, f2 = 999999999;
@@ -301,8 +315,7 @@ public class TextImage implements Runnable{
             ink = ImageIO.read(new File("images/black-ink-splatter.png"));
             splatter = ImageIO.read(new File("images/coffee-splatter.png"));
             builder.delete(0, builder.length());
-            wordsCount = 0;
-            wordsTracker = 0;
+            wordsCount = 0; wordsTracker = 0;
             imgPath = Integer.toString(wordsCount);
 
             Files.createDirectories(Paths.get(wordsPath));

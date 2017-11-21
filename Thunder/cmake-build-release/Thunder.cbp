@@ -84,7 +84,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/juan/Documents/Maratones/Thunder/Lothric/other/NITExtracter.cpp">
+		<Unit filename="/home/juan/Documents/Maratones/Thunder/ComputerVision/clustering.cpp">
+			<Option target="Thunder"/>
+		</Unit>
+		<Unit filename="/home/juan/Documents/Maratones/Thunder/ComputerVision/clustering.h">
 			<Option target="Thunder"/>
 		</Unit>
 		<Unit filename="/home/juan/Documents/Maratones/Thunder/CMakeLists.txt">

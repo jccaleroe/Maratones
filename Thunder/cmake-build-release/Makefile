@@ -123,32 +123,32 @@ Thunder/fast:
 	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/build
 .PHONY : Thunder/fast
 
-Lothric/other/NITExtracter.o: Lothric/other/NITExtracter.cpp.o
+ComputerVision/clustering.o: ComputerVision/clustering.cpp.o
 
-.PHONY : Lothric/other/NITExtracter.o
+.PHONY : ComputerVision/clustering.o
 
 # target to build an object file
-Lothric/other/NITExtracter.cpp.o:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/Lothric/other/NITExtracter.cpp.o
-.PHONY : Lothric/other/NITExtracter.cpp.o
+ComputerVision/clustering.cpp.o:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/clustering.cpp.o
+.PHONY : ComputerVision/clustering.cpp.o
 
-Lothric/other/NITExtracter.i: Lothric/other/NITExtracter.cpp.i
+ComputerVision/clustering.i: ComputerVision/clustering.cpp.i
 
-.PHONY : Lothric/other/NITExtracter.i
+.PHONY : ComputerVision/clustering.i
 
 # target to preprocess a source file
-Lothric/other/NITExtracter.cpp.i:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/Lothric/other/NITExtracter.cpp.i
-.PHONY : Lothric/other/NITExtracter.cpp.i
+ComputerVision/clustering.cpp.i:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/clustering.cpp.i
+.PHONY : ComputerVision/clustering.cpp.i
 
-Lothric/other/NITExtracter.s: Lothric/other/NITExtracter.cpp.s
+ComputerVision/clustering.s: ComputerVision/clustering.cpp.s
 
-.PHONY : Lothric/other/NITExtracter.s
+.PHONY : ComputerVision/clustering.s
 
 # target to generate assembly for a file
-Lothric/other/NITExtracter.cpp.s:
-	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/Lothric/other/NITExtracter.cpp.s
-.PHONY : Lothric/other/NITExtracter.cpp.s
+ComputerVision/clustering.cpp.s:
+	$(MAKE) -f CMakeFiles/Thunder.dir/build.make CMakeFiles/Thunder.dir/ComputerVision/clustering.cpp.s
+.PHONY : ComputerVision/clustering.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Thunder"
-	@echo "... Lothric/other/NITExtracter.o"
-	@echo "... Lothric/other/NITExtracter.i"
-	@echo "... Lothric/other/NITExtracter.s"
+	@echo "... ComputerVision/clustering.o"
+	@echo "... ComputerVision/clustering.i"
+	@echo "... ComputerVision/clustering.s"
 .PHONY : help
 
 

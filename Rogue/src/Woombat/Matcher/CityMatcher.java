@@ -13,7 +13,7 @@ public class CityMatcher {
 
     private static ArrayList<String> a = new ArrayList<>();
     private static ArrayList<String> b = new ArrayList<>();
-    private static String[] cities = {"Abejorral","Zipaquirá","Zona Bananera (PRADO - SEVILLA)","Ábrego","Íquira","Úmbita"};
+    private static String[] cities = {"Abejorral","Zzzipaquirá","Zona Bananera (PRADO - SEVILLA)","Ábrego","Íquira","Úmbita"};
     private static String[] igac = {"EL COCUY","OCAMONTE","SAN ANDRES","SIMACOTA","CONCEPCION","MATANZA","CHARTA","SILOS"};
     private static HashMap<String, String> matches;
 
@@ -31,7 +31,6 @@ public class CityMatcher {
         int[][] cost = new int[n][n];
         String aux;
 
-
         for (int i = 0; i < n; i++){
             aux = a.get(i).toLowerCase();
             for (int j = 0; j < n; j++){
@@ -46,7 +45,6 @@ public class CityMatcher {
     }
 
     public static void loadFiles() {
-
         a.clear();
         b.clear();
         Collections.addAll(a, cities);
