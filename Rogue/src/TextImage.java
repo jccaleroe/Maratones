@@ -98,13 +98,8 @@ public class TextImage implements Runnable{
                 image.setRGB(x, y, Color.WHITE.getRGB());
 
         int aux1 = trueW / 2, aux2 = trueH / 2;
-        Comparator<? super double[]> comparator = new Comparator<double[]>() {
-            @Override
-            public int compare(double[] doubles, double[] t1) {
-                return -Double.compare(doubles[2], t1[2]);
-            }
-        };
-        Collections.sort(list, comparator);
+        Comparator<? super double[]> comparator = (Comparator<double[]>) (doubles, t1) -> -Double.compare(doubles[2], t1[2]);
+        list.sort(comparator);
         for (double[] a : list){
             long x = Math.round(a[0] + aux1), y = Math.round(a[1] + aux2);
             if (x >= 0 && y >= 0 && x < width && y < height)
@@ -140,7 +135,6 @@ public class TextImage implements Runnable{
 
         int w = w2 - sw/2 , h = h2 - sh/2;
 
-        //double w = sw*Math.abs(Math.cos(yRotation)), h = sh*Math.abs(Math.cos(xRotation)) ;
         AffineTransform affineTransform = g2.getTransform();
 
         FontRenderContext frc = g2.getFontRenderContext();
@@ -155,12 +149,9 @@ public class TextImage implements Runnable{
     }
 
     private boolean exportText(BufferedImage frame, Rectangle rectangle, boolean hasGaussian, boolean hasStains,
-                               String wordID, String text, String path,  double shearingX, double shearingY,
-                               double xRotation, double yRotation, double zRotation){
+                               String wordID, String text, String path, double xRotation,
+                               double yRotation, double zRotation){
         try {
-
-
-
             List<Integer> order = new ArrayList<>(3);
             order.add(0);
             order.add(1);
@@ -210,42 +201,23 @@ public class TextImage implements Runnable{
             double wd = Math.round(wd1);
             double hd = Math.round(hd1);
 
-            BufferedImage dest2 = project(list, (int)wd, (int)hd, (int)wd, (int)hd);
-            /*BufferedImage dest3 = new BufferedImage(dest2.getWidth(), dest2.getHeight(), dest2.getType());
-            if (shearingX != 0 || shearingY != 0) {
-                AffineTransform tx = new AffineTransform();
-                tx.translate(dest2.getWidth() / 2, dest2.getHeight() / 2);
-                tx.shear(shearingX, shearingY);
-                tx.translate(-dest2.getWidth() / 2, -dest2.getHeight() / 2);
+            BufferedImage dest2 = project(list, (int) wd, (int) hd, (int) wd, (int) hd);
 
-                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-                op.filter(dest2, dest3);
-                ImageIO.write(dest3, "jpg", new File(wordsPath + "/" + path + "/" + wordID + ".jpg"));
-                return false;
-            }*/
             if(hd>14) {
                 dest2 = erode(dest2);
                 dest2 = dilate(dest2);
             }
+
             ImageIO.write(dest2, "jpg", new File(wordsPath + "/" + path + "/" + wordID + ".jpg"));
             return true;
         }
         catch(Exception e) {
-            //e.printStackTrace();
             System.out.println("Restaring word " + text + " with id: "+ wordID);
             words.add(text);
             wordsNum++;
 
         }
         return false;
-    }
-
-    private BufferedImage dilate(BufferedImage image, int k) {
-        BufferedImage newImage = dilate(image);
-        for(int i = 0; i < k - 1; i++) {
-            newImage = dilate(newImage);
-        }
-        return newImage;
     }
 
     private BufferedImage dilate (BufferedImage image) {
@@ -304,18 +276,6 @@ public class TextImage implements Runnable{
         if (isUnderline) attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         if (isStrikethrough) attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
         font = font.deriveFont(attributes);
-        double shearingX = 0, shearingY = 0;
-        /*if (Math.random() < 0.0) {
-            double d = Math.random() / 2;
-            int ne = Math.random() <= 0.5 ? 1 : -1;
-            shearingX = ne * d;
-        }
-        if (Math.random() < 0.0) {
-            double d = Math.random() * Math.PI * (4.0 / 18.0);
-            int ne = Math.random() <= 0.5 ? 1 : -1;
-            shearingY = ne * d;
-        }*/
-
         double xRotation = 0, yRotation = 0, zRotation = 0;
         if (Math.random() <= 0.25){
             double d = Math.random() * Math.PI * (3.2 / 18.0);
@@ -335,11 +295,11 @@ public class TextImage implements Runnable{
 
         BufferedImage frame = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         if (exportText(frame, paint(frame.createGraphics(), font, text), hasGaussian, hasStains,
-                wordID, text, path, shearingX, shearingY, xRotation, yRotation,zRotation)) {
+                wordID, text, path, xRotation, yRotation,zRotation)) {
             appendWord(wordID + "\t" + text + "\t" + wordsPath + "/" + path + "/" + wordID + ".jpg" + "\t" +
                     font.getName() + "\t" + fontSize + "\t" + fontStyle + "\t" + isStrikethrough + "\t" + isUnderline
-                    + "\t" + hasGaussian + "\t" + hasStains + "\t" + shearingX + "\t" + shearingY + "\t"
-                    + xRotation + "\t" + yRotation + "\t" + zRotation +"\n");
+                    + "\t" + hasGaussian + "\t" + hasStains + "\t" + xRotation +
+                    "\t" + yRotation + "\t" + zRotation +"\n");
         }
     }
 
