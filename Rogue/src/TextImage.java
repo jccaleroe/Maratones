@@ -337,8 +337,8 @@ public class TextImage implements Runnable{
 
     private static void quiet(){
         try {
-            int times = 56, nums = 12000, sym = 112, digits = 200;
-            //int times = 1, nums = 0, sym = 0, digits = 0;
+            //int times = 56, nums = 12000, sym = 112, digits = 200;
+            int times = 1, nums = 0, sym = 0, digits = 0;
             long maxNum = Long.MAX_VALUE;
             int f1 = 99999999, f2 = 999999999;
             String str, tmp;
