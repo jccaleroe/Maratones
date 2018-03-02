@@ -1,13 +1,9 @@
-import sun.awt.Graphics2Delegate;
-import sun.java2d.loops.GraphicsPrimitive;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.font.TextAttribute;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 import java.io.*;
@@ -24,7 +20,7 @@ public class TextImage implements Runnable{
 
     private static int width = 1366/2, height = 768/2, w2 = width / 2 + 48,
             h2 = height/2 + 48, wordsCount, wordsTracker, wordsNum, threadsNum = 4;
-    private static String wordsPath = "words", imgPath, prefix = "", spanish = "spanishTest1.txt";
+    private static String wordsPath = "words", imgPath, prefix = "", spanish = "spanishTest.txt";
     private static StringBuilder builder = new StringBuilder();
     private static float[] scales = {1f, 1f, 1f, 0.5f}, offsets = new float[4];
     private static RescaleOp rop = new RescaleOp(scales, offsets, null);

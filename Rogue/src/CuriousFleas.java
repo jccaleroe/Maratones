@@ -158,7 +158,7 @@ public class CuriousFleas implements Comparable<CuriousFleas> {
         //BufferedReader br = new BufferedReader ( new InputStreamReader ( System.in ) );
         BufferedReader br = new BufferedReader( new FileReader(
               new File( "/home/juan/Documents/Maratones/Rogue/src/input.txt" ) ) );
-        int T = Integer.parseInt( br.readLine() );
+        int T = Integer.parseInt(br.readLine());
         br.readLine();
         char[][] map = new char[4][4];
         ArrayList<Integer> fleas = new ArrayList<>(6);

@@ -12,13 +12,13 @@ set(CMAKE_CXX_STANDARD 11)
 #set(SOURCE_FILES ComputerVision/mser.cpp ComputerVision/swtdetect.c ComputerVision/detectText.cpp
 #        ComputerVision/textdetection.cpp ComputerVision/filters.cpp ComputerVision/clustering.cpp)
 
-set(SOURCE_FILES ComputerVision/clustering.cpp)
+set(SOURCE_FILES Lothric/template.cpp)
 
 #link_libraries("ccv" "m" "jpeg" "png")
 
 add_executable(Thunder ${SOURCE_FILES})
 
-target_link_libraries(Thunder ${OpenCV_LIBS})
+#target_link_libraries(Thunder ${OpenCV_LIBS})
 
 #link_directories("/home/cluster/opencv/include")
 #include_directories("/home/cluster/opencv/include")
