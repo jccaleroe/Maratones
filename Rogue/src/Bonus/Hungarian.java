@@ -1,4 +1,4 @@
-package Woombat.Matcher;
+package Bonus;
 
 import java.util.Arrays;
 
